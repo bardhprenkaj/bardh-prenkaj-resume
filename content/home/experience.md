@@ -32,7 +32,9 @@ subtitle: null
 design:
   columns: "2"
 ---
-experience:
+headless: true  # This file represents a page section.
+date_format: Jan 2006
+
   - title: 'CEO'
     company: 'Sapienza'
     company_url: ''
