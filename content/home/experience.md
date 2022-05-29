@@ -36,7 +36,7 @@ design:
 
 ```yaml
 - title: 'CEO'
-    company: 'GenCoin'
+    company: 'sAPIENZA'
     company_url: ''
     location: 'California'
     date_start: '2017-01-01'
