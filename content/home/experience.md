@@ -35,6 +35,7 @@ design:
 headless: true  # This file represents a page section.
 date_format: Jan 2006
 
+experience:
   - title: 'CEO'
     company: 'Sapienza'
     company_url: ''
