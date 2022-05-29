@@ -22,7 +22,7 @@ experience:
     location: Rome
     date_start: 2020-09-01
     date_end: 2021-03-31
-    description: | -2
+    description: |-2
       * Designed a Node JS back-end on Firebase to deploy APIs that expose standard and technical information of electric vehicles to the front-end.
       * Standardised the upload of vehicle images to Amazon S3 after consulting HITACHI proprietary data stores via a crawler deployed on an Amazon EC2 instance.
       * Strengthened the data storage on an Amazon instance by relying on a MongoDB database fully updatable with new information from the stakeholders.
@@ -35,7 +35,7 @@ experience:
     location: Rome
     date_start: 2017-02-01
     date_end: 2019-02-28
-    description: | -2
+    description: |-2
       * Adapted to the changes brought by COVID-19 to the education system and obtained 80% more participation in classes than in a traditional classroom environment.
       * Persuaded senior professors to adopt new trends of teaching surpassing the challenge of constant communication and high student dropout rate.
       * Led a 5-month project to detect shifting trends in AI topics to build a model with 93% of prediction accuracy.
