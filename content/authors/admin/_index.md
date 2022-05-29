@@ -1,77 +1,46 @@
 ---
-# Display name
-title: Nelson Bighetti
-
-# Is this the primary user of the site?
-superuser: true
-
-# Role/position/tagline
-role: Professor of Artificial Intelligence
-
-# Organizations/Affiliations to show in About widget
-organizations:
-  - name: Stanford University
-    url: https://www.stanford.edu/
-
-# Short bio (displayed in user profile at end of posts)
-bio: My research interests include distributed robotics, mobile computing and programmable matter.
-
-# Interests to show in About widget
+title: Bardh Prenkaj
+role: Machine Learning Researcher
+avatar_filename: 1541509482974.jpg
+bio: My research interests include anomaly detection, time series analysis,
+  educational data mining.
 interests:
-  - Artificial Intelligence
-  - Computational Linguistics
-  - Information Retrieval
-
-# Education to show in About widget
-education:
-  courses:
-    - course: PhD in Artificial Intelligence
-      institution: Stanford University
-      year: 2012
-    - course: MEng in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2009
-    - course: BSc in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2008
-
-# Social/Academic Networking
-# For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
-#   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
-#   form "mailto:your-email@example.com" or "/#contact" for contact widget.
+  - Anomaly Detection
+  - Machine Learning
+  - Data Mining
 social:
   - icon: envelope
     icon_pack: fas
-    link: '/#contact'
-  - icon: twitter
-    icon_pack: fab
-    link: https://twitter.com/GeorgeCushen
-  - icon: graduation-cap # Alternatively, use `google-scholar` icon from `ai` icon pack
+    link: /#contact
+  - icon: graduation-cap
     icon_pack: fas
-    link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+    link: https://scholar.google.com/citations?user=ORwkZE0AAAAJ
   - icon: github
     icon_pack: fab
-    link: https://github.com/gcushen
+    link: https://github.com/bardhprenkaj
   - icon: linkedin
     icon_pack: fab
-    link: https://www.linkedin.com/
-
-# Link to a PDF of your resume/CV.
-# To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
-# and uncomment the lines below.
-# - icon: cv
-#   icon_pack: ai
-#   link: uploads/resume.pdf
-
-# Enter email to display Gravatar (if Gravatar enabled in Config)
-email: ''
-
-# Highlight the author in author lists? (true/false)
+    link: https://www.linkedin.com/in/prenkaj-bardh/
+organizations:
+  - name: Sapienza University of Rome
+    url: https://phd.uniroma1.it/web/COMPUTER-SCIENCE_nD3507_EN.aspx
+education:
+  courses:
+    - course: PhD in Student Dropout Prediction in Educational Behavioural Time Series
+      institution: Sapienza University of Rome
+      year: 2022
+    - course: MSc in Computer Science (Grade 110/110 with honors; GPA 4.00)
+      institution: Sapienza University of Rome
+      year: 2018
+    - course: BSc in Computer Science (Grade 110/110; GPA 4.00)
+      institution: Sapienza University of Rome
+      year: 2016
+email: ""
+superuser: true
 highlight_name: true
 ---
+Bardh Prenkaj completed his PhD in February 2022 at Sapienza University of Rome in time-series analysis and anomaly detection. From 2019 onward, he has been a Researcher in the IIM research group of Computer Science Department at Sapienza.
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+His research interests are across three areas: Anomaly Detection (AD), Educational Data Mining (EDM), and Time Series Prediction (TSP). More in detail, his studies include investigations on Student Dropout Prediction, Anomaly Detection on Symbolic Behavioural Patterns, Drift Anomaly Detection.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
