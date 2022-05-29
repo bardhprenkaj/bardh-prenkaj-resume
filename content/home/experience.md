@@ -35,8 +35,9 @@ design:
 <!--StartFragment-->
 
 ```yaml
-- title: 'CEO'
-    company: 'sAPIENZA'
+experience:
+  - title: 'CEO'
+    company: 'Sapienza'
     company_url: ''
     location: 'California'
     date_start: '2017-01-01'
