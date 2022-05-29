@@ -8,7 +8,7 @@ experience:
     company_url: "https://www.pwc.com/it/it/"
     company_logo: PwC-logo
     location: Rome
-    date_start: 2021-01-12
+    date_start: 2021-12-01
     date_end: ""
     description: |-2        
         * Optimised API response time by a factor of two relying on a distributed hash map deployed in GCP to efficiently retrieve objects.
@@ -28,6 +28,19 @@ experience:
       * Strengthened the data storage on an Amazon instance by relying on a MongoDB database fully updatable with new information from the stakeholders.
       * Assisted the project manager to assess the implementation effort of technical software functionalities.
       * Led a team of 3 junior cloud software developers in building complex frameworks of APIs to provide a continuous service to the stakeholders.
+  - title: Machine Learning Scientist (PhD experience)
+    company: Sapienza University of Rome
+    company_url: ""
+    company_logo: sapienza-logo
+    location: Rome
+    date_start: 2018-11-01
+    date_end: 2022-02-22
+    description: |-2
+      * Managed a team of 5 junior and 1 senior researcher in cutting-edge research in trajectory prediction of the novel coronavirus infectious trend.
+      * Developed GRU-AE, a novel machine learning model to tackle student dropout prediction in online courses/degrees.
+      * Assisted a team of 20, both academicians and members of enterprises, in developing an intelligent system capable of predicting anomalies in behavioural patterns in the elderly. 
+      * Monitored a fully-funded regional project that exploits automatic and intelligent models to cope with the self-isolation problems of older patients in retirement homes in Lazio, Italy.
+      * Implemented solutions of data analytics and data visualisation to aid healthcare personnel in identifying time-periods of anomalies in patient behavioural time-series.    
   - title: Assistant Lecturer
     company: Sapienza University of Rome
     company_url: ""
@@ -36,6 +49,7 @@ experience:
     date_start: 2017-02-01
     date_end: 2019-02-28
     description: |-2
+      * Teaching assistant for "Web and Social Information Extraction" and "Social and Behavioural Networks" courses.
       * Adapted to the changes brought by COVID-19 to the education system and obtained 80% more participation in classes than in a traditional classroom environment.
       * Persuaded senior professors to adopt new trends of teaching surpassing the challenge of constant communication and high student dropout rate.
       * Led a 5-month project to detect shifting trends in AI topics to build a model with 93% of prediction accuracy.
