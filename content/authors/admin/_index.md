@@ -8,6 +8,7 @@ interests:
   - Anomaly Detection
   - Machine Learning
   - Data Mining
+  - Time Series Prediction
 social:
   - icon: envelope
     icon_pack: fas
