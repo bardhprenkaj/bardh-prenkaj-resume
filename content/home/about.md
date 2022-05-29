@@ -1,21 +1,14 @@
 ---
-# An instance of the About widget.
-# Documentation: https://wowchemy.com/docs/page-builder/
 widget: about
-
-# Activate this widget? true/false
-active: true
-
-# This file represents a page section.
+widget_id: bibliography
 headless: true
-
-# Order that this section appears on the page.
 weight: 20
-
 title: Biography
-
-# Choose the user profile to display
-# This should be the username (folder name) of a profile in your `content/authors/` folder.
-# See https://wowchemy.com/docs/get-started/#introduce-yourself
+active: true
 author: admin
 ---
+<!--StartFragment-->
+
+Bardh Prenkaj completed his PhD in February 2022 at Sapienza University of Rome in time-series analysis and anomaly detection. From 2019 onward, he has been a Researcher in the IIM research group of Sapienza University of Rome. His research interests are across three areas: Anomaly Detection (AD), Educational Data Mining (EDM), and Time Series Prediction (TSP). More in detail, his studies include investigations on Student Dropout Prediction, Anomaly Detection on Symbolic Behavioural Patterns, Drift Anomaly Detection.
+
+<!--EndFragment-->
