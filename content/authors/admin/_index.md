@@ -1,6 +1,6 @@
 ---
 title: Bardh Prenkaj
-role: Machine Learning Researcher
+role: Computer Scientist, PhD
 avatar_filename: 1541509482974.jpg
 bio: My research interests include anomaly detection, time series analysis,
   educational data mining.
