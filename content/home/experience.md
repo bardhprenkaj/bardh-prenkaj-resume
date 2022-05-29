@@ -46,9 +46,4 @@ weight: 40
 title: Experience
 subtitle: null
 design:
-<<<<<<< HEAD
   columns: "2"
-=======
-  columns: "2"
----
->>>>>>> 5bda1975b180db3966a5616810ba3be0534658a5
