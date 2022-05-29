@@ -32,8 +32,6 @@ subtitle: null
 design:
   columns: "2"
 ---
-<!--StartFragment-->
-
 ```yaml
 experience:
   - title: 'CEO'
@@ -57,5 +55,3 @@ experience:
     date_end: '2016-12-31'
     description: 'Taught electronic engineering and researched semiconductor physics.'
 ```
-
-<!--EndFragment-->
