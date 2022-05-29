@@ -48,7 +48,7 @@ url_video: ''
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
+  caption: 'Detailed view of a single CoRoNNa block with a simple RNN component (a) and an LSTM cell (b). h-CNN and x-CNN are convolutional neural networks that operate, respectively, on the previous hidden state $h_{t-1}$ and current time-series $x_t$. The shaded areas depict the convolutional kernel that extrapolates structural information from the input. The internal dot product and summation operations follow the same flow as that of a simple RNN (LSTM).'
   focal_point: ''
   preview_only: false
 
