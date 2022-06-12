@@ -29,6 +29,8 @@ content:
       tag: '*'
     - name: Anomaly detection
       tag: Anomaly detection
+    - name: E-health
+    - tag: E-health
     - name: Other
       tag: Other
 
