@@ -9,7 +9,7 @@ experience:
     company_logo: heimerer
     location: Pristina (remote)
     date_start: 2022-07-01
-    date_end: 2024-07-01
+    date_end: ""
     description: |-2        
         * to be updated
   - title: Software Engineer
