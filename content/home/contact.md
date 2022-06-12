@@ -25,32 +25,35 @@ content:
       captcha: false
 
   # Contact details (edit or remove options as required)
-  email: test@example.org
-  phone: 888 888 88 88
+  email: bardhprenkaj95@gmail.com
+  phone: +39 348 246 9706
   address:
-    street: 450 Serra Mall
-    city: Stanford
-    region: CA
-    postcode: '94305'
-    country: United States
-    country_code: US
+    street: Via Salaria 113
+    city: Rome
+    region: Lazio
+    postcode: '00185'
+    country: Italy
+    country_code: IT
   coordinates:
-    latitude: '37.4275'
-    longitude: '-122.1697'
-  directions: Enter Building 1 and take the stairs to Office 200 on Floor 2
+    latitude: '41.914110'
+    longitude: '12.497350'
+  directions: Enter the Faculty Building and take the lift to Office 333 on Floor 3
   office_hours:
-    - 'Monday 10:00 to 13:00'
-    - 'Wednesday 09:00 to 10:00'
+    - 'Monday 09:00 to 17:30'
+    - 'Tuesday 09:00 to 17:30'
+    - 'Wednesday 09:00 to 17:30'
+    - 'Thursday 09:00 to 17:30'
+    - 'Friday 09:00 to 17:30'
   appointment_url: 'https://calendly.com'
   contact_links:
-    - icon: twitter
+    - icon: linkedin
       icon_pack: fab
       name: DM Me
-      link: 'https://twitter.com/Twitter'
-    - icon: video
+      link: 'https://www.linkedin.com/in/prenkaj-bardh/'
+    - icon: mail
       icon_pack: fas
-      name: Zoom Me
-      link: 'https://zoom.com'
+      name: Email Me
+      link: 'mailto:bardhprenkaj95@gmail.com?Subject=Hello%20Bardh&cc=prenkaj@di.uniroma1.it'
 
 design:
   columns: '2'
