@@ -26,7 +26,6 @@ content:
 
   # Contact details (edit or remove options as required)
   email: bardhprenkaj95@gmail.com
-  phone: +39 348 246 9706
   address:
     street: Via Salaria 113
     city: Rome
@@ -44,7 +43,7 @@ content:
     - 'Wednesday 09:00 to 17:30'
     - 'Thursday 09:00 to 17:30'
     - 'Friday 09:00 to 17:30'
-  appointment_url: 'https://calendly.com'
+  appointment_url: 'https://calendly.com/bardhprenkaj/15min'
   contact_links:
     - icon: linkedin
       icon_pack: fab
