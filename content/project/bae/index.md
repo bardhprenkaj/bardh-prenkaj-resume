@@ -8,10 +8,6 @@ date: '2019-01-01T00:00:00Z'
 # Optional external URL for project (replaces project detail page).
 external_link: ''
 
-image:
-  caption: How does BAE work?
-  focal_point: Smart
-
 links:
 url_code: 'https://gitlab.com/bardhp95/bae' # change to github
 url_pdf: ''

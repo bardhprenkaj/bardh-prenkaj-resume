@@ -1,6 +1,6 @@
 ---
-title: Universal Crawler - Concurrent Distributed and Highly Configurable and Flexible Next Generation Crawler
-summary: Universal crawler
+title: uCrawler
+summary: Universal Crawler, a concurrent Distributed and Highly Configurable and Flexible Next Generation Crawler.
 tags:
   - Web crawling
   - Web scraping
