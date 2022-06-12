@@ -24,7 +24,7 @@ social:
     link: https://www.linkedin.com/in/prenkaj-bardh/
 organizations:
   - name: Sapienza University of Rome
-    url: https://phd.uniroma1.it/web/COMPUTER-SCIENCE_nD3507_EN.aspx
+    url: https://www.uniroma1.it/en
 education:
   courses:
     - course: PhD in Student Dropout Prediction in Educational Behavioural Time Series
