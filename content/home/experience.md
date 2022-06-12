@@ -3,13 +3,22 @@ widget: experience
 active: true
 date_format: Jan 2006
 experience:
+  - title: Associate Professor
+    company: Heimerer College
+    company_url: "https://kolegji-heimerer.eu/en/"
+    company_logo: heimerer
+    location: Pristina (remote)
+    date_start: 2022-07-01
+    date_end: 2024-07-01
+    description: |-2        
+        * to be updated
   - title: Software Engineer
     company: Pricewaterhouse Coopers
     company_url: "https://www.pwc.com/it/it/"
     company_logo: PwC-logo
     location: Rome
     date_start: 2021-12-01
-    date_end: ""
+    date_end: 2022-07-01
     description: |-2        
         * Optimised API response time by a factor of two relying on a distributed hash map deployed in GCP to efficiently retrieve objects.
         * Automatised document approval on a large-scale Italian public service on eco-friendly home restorations.
