@@ -18,7 +18,7 @@ experience:
     company_logo: PwC-logo
     location: Rome
     date_start: 2021-12-01
-    date_end: 2022-07-01
+    date_end: 2022-06-12
     description: |-2        
         * Optimised API response time by a factor of two relying on a distributed hash map deployed in GCP to efficiently retrieve objects.
         * Automatised document approval on a large-scale Italian public service on eco-friendly home restorations.
