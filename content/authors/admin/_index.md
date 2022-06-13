@@ -44,6 +44,5 @@ Bardh Prenkaj completed his PhD in February 2022 at Sapienza University of Rome 
 
 His research interests are across three areas: Anomaly Detection (AD), Educational Data Mining (EDM), and Time Series Prediction (TSP). More in detail, his studies include investigations on Student Dropout Prediction, Anomaly Detection on Symbolic Behavioural Patterns, Drift Anomaly Detection.
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume_bardh_prenkaj_eng.pdf" "newtab" >}}resumé{{< /staticref >}}.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj_eng.pdf" "newtab" >}}curriculum vitee{{< /staticref >}}.
