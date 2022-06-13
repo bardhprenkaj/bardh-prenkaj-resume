@@ -49,7 +49,7 @@ content:
       icon_pack: fab
       name: DM Me
       link: 'https://www.linkedin.com/in/prenkaj-bardh/'
-    - icon: mail
+    - icon: envelope
       icon_pack: fas
       name: Email Me
       link: 'mailto:bardhprenkaj95@gmail.com?Subject=Hello%20Bardh&cc=prenkaj@di.uniroma1.it'
