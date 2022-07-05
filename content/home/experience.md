@@ -19,11 +19,10 @@ experience:
     location: Rome
     date_start: 2021-12-01
     date_end: 2022-06-12
-    description: |-2        
-        * Optimised API response time by a factor of two relying on a distributed hash map deployed in GCP to efficiently retrieve objects.
-        * Automatised document approval on a large-scale Italian public service on eco-friendly home restorations.
-        *	Developed bug-free functionalities to satisfy the stakeholder requirements on three unicorn projects within the company.
-        *	Guided senior managers in making decisions on development time-frames based on technical complexities and allocated human resources.
+    description: |-2    
+        * Worked closely with developers, project managers and business users to create meaningful solutions that improve the lives of our employees and customers.
+        * Wrote clean, maintainable, and scalable code for the company’s flagship product, which saw an x2 decrease in response time and a 20% increase in throughput.
+        * Implemented a caching strategy that resulted in an x5 performance increase on the company’s largest and most trafficked page.
   - title: Senior Software Consultant
     company: E Software Solutions
     company_url: "https://www.esoftwaresolutions.it/"
@@ -35,7 +34,6 @@ experience:
       * Designed a Node JS back-end on Firebase to deploy APIs that expose standard and technical information of electric vehicles to the front-end.
       * Standardised the upload of vehicle images to Amazon S3 after consulting HITACHI proprietary data stores via a crawler deployed on an Amazon EC2 instance.
       * Strengthened the data storage on an Amazon instance by relying on a MongoDB database fully updatable with new information from the stakeholders.
-      * Assisted the project manager to assess the implementation effort of technical software functionalities.
       * Led a team of 3 junior cloud software developers in building complex frameworks of APIs to provide a continuous service to the stakeholders.
   - title: Machine Learning Scientist (PhD experience)
     company: Sapienza University of Rome
