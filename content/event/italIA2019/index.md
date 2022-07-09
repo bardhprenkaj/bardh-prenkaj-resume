@@ -10,8 +10,7 @@ address:
   city: Rome
   country: Italy
 
-summary: An Italian presentation about the current research projects of the lab. As research project for the “AI for Education" workshop, I presented the state-of-the-art in EDM, and proposed to solve the student dropout problem
-with Hierarchical Attention Networks (HANs).
+summary: An Italian presentation about the current research projects of the lab. As research project for the "AI for Education" workshop, I presented the state-of-the-art in EDM, and proposed to solve the student dropout problem with Hierarchical Attention Networks (HANs).
 abstract: The Intelligent Information Mining research lab is part of CINI in Rome. The lab works in the research fields of AI for Education.
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
