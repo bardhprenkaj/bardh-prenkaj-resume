@@ -11,7 +11,7 @@ experience:
     date_start: 2022-07-01
     date_end: ""
     description: |-2        
-        Areas: AI for e-Health, anomaly detection, deep learning.
+        Areas: *AI for e-Health, anomaly detection, deep learning*.
   - title: Senior Research Fellow
     company: Sapienza University of Rome
     company_url: ""
@@ -24,7 +24,7 @@ experience:
         Fundings: Avviso Pubblico “Emergenza Coronavirus e oltre”, Domanda prot. n. A0376-2020-070051,
         CUP: F84E21000000006
 
-        Areas: Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning.
+        Areas: *Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning*.
   - title: Teaching Assistant
     company: Sapienza University of Rome
     company_url: ""
@@ -36,14 +36,14 @@ experience:
         As a TA, I tutor students, plan and evaluate final exams, manage and update teaching material, and give supplementary seminars.
 
         The courses I currently hold are the following:
-        - Machine Learning (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
+        - *Machine Learning* (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
 
         The courses I've held are the following:
-        - Web and Social Information Extraction (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
-        - Social and Behavioural Networks (16h, Laboratory classes), M.Sc. in Data Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
+        - *Web and Social Information Extraction* (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
+        - *Social and Behavioural Networks* (16h, Laboratory classes), M.Sc. in Data Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
         
-        
-        Areas: Machine learning, information retrieval, graph, web crawling and scraping.
+
+        Areas: *Machine learning, information retrieval, graph, web crawling and scraping*.
   - title: Software Engineer
     company: Pricewaterhouse Coopers
     company_url: "https://www.pwc.com/it/it/"
@@ -54,7 +54,7 @@ experience:
     description: |-2    
         As a member of the Digital Innovation development team, I focused on software prototyping and development activities. In particular, I optimised back-end services and developed highly-maintainable and efficient API services.
 
-        Skills: full-stack development, API development, data processing, Azure DevOps.
+        Skills: *full-stack development, API development, data processing, Azure DevOps*.
   - title: Senior Software Consultant
     company: E Software Solutions
     company_url: "https://www.esoftwaresolutions.it/"
@@ -65,7 +65,7 @@ experience:
     description: |-2
       I designed and maintained the CMS for electric vehicle leasing in the UK (https://gridserve.com/)
 
-      Skills: WordPress, software documentation, full-stack development, API development.
+      Skills: *WordPress, software documentation, full-stack development, API development*.
 widget_id: recent-experience
 headless: true
 weight: 40
