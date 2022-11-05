@@ -10,8 +10,6 @@ location: Online
 summary: In this short paper, we explored the challenges and solutions of considering a specific plot as (non)significative from a perceptual point-of-view.
 abstract: Visualization recommendation is a novel and challenging field of study, whose aim is to provide non-expert users with automatic tools for insight discovery from data. Advances in this research area are hindered by the absence of reliable datasets on which to train the recommender systems. To the best of our knowledge, Plotly corpus is the only publicly available dataset, but as complained by many authors and discussed in this article, it contains many labeling errors, which greatly limits its usefulness. We release an improved version of the original dataset, named Plotly.plus, which we obtained through  an automated procedure with minimal post-editing. In addition to a manual validation by a group of data science students, we demonstrate that when training two state-of-the-art abstract image classifiers on Plotly.plus, systems' performance improves more than twice as much as when the original dataset is used,  showing that Plotly.plus facilitates the discovery of significant perceptual patterns.
 
-{{% staticref "uploads/CIKM2022_poster.pdf" "newtab" %}}Download the poster{{% /staticref %}}
-
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
 date: '2022-10-16T18:00:00Z'
@@ -35,7 +33,7 @@ image:
 #     name: Follow
 #     url: https://twitter.com/georgecushen
 url_code: ''
-url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3511808.3557669'
+url_pdf: '{{% staticref "uploads/CIKM2022_poster.pdf" "newtab" %}}Download the poster{{% /staticref %}}'
 url_slides: 'https://www.canva.com/design/DAFLolYPE4U/Dkb07e1Rh5mDvnB4ax-K2w/view'
 url_video: 'https://files.atypon.com/acm/22258c8949c3a7a9f885261c838eeada'
 # Markdown Slides (optional).
