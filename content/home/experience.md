@@ -23,6 +23,7 @@ experience:
         Coordinated the research and implementative component of innovative deep learning algorithms to predict anomalous events in patient behavioural time series.
         Fundings: Avviso Pubblico “Emergenza Coronavirus e oltre”, Domanda prot. n. A0376-2020-070051,
         CUP: F84E21000000006
+
         Areas: Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning.
   - title: Teaching Assistant
     company: Sapienza University of Rome
@@ -40,6 +41,7 @@ experience:
         The courses I've held are the following:
         - Web and Social Information Extraction (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
         - Social and Behavioural Networks (16h, Laboratory classes), M.Sc. in Data Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
+        
         
         Areas: Machine learning, information retrieval, graph, web crawling and scraping.
   - title: Software Engineer

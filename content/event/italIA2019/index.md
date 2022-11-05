@@ -4,7 +4,7 @@ title: AI for Education, Intelligent Information Mining - Research Group
 event: Ital-IA 2019
 event_url: http://www.ital-ia.it/2019/workshop/ai-for-education
 
-location: Centro Congressi Auditorium dellat Tecnica
+location: Centro Congressi Auditorium della Tecnica
 address:
   street: Viale dell'Astronomia 30
   city: Rome
