@@ -25,7 +25,7 @@ content:
       captcha: false
 
   # Contact details (edit or remove options as required)
-  email: bardhprenkaj95@gmail.com
+  email: prenkaj[AT]di[dot]uniroma1[dot]it
   address:
     street: Via Salaria 113
     city: Rome
@@ -36,7 +36,7 @@ content:
   coordinates:
     latitude: '41.914110'
     longitude: '12.497350'
-  directions: Enter the Faculty Building and take the lift to Office 333 on Floor 3
+  directions: Enter the Faculty Building and take the lift to Office 316 on Floor 3
   office_hours:
     - 'Monday 09:00 to 17:30'
     - 'Tuesday 09:00 to 17:30'
@@ -49,10 +49,6 @@ content:
       icon_pack: fab
       name: DM Me
       link: 'https://www.linkedin.com/in/prenkaj-bardh/'
-    - icon: envelope
-      icon_pack: fas
-      name: Email Me
-      link: 'mailto:bardhprenkaj95@gmail.com?Subject=Hello%20Bardh&cc=prenkaj@di.uniroma1.it'
 
 design:
   columns: '2'
