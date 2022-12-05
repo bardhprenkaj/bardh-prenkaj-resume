@@ -27,7 +27,7 @@ abstract: Online courses and e-degrees, although present since the mid-1990, hav
 tags: ['student dropout prediction', 'educational data mining', 'learning analytics', 'deep learning', 'input modelling', 'time series prediction']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:
