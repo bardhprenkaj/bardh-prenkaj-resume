@@ -4,14 +4,14 @@ active: true
 date_format: Jan 2006
 experience:
   - title: Post-doctoral Research Fellow
-      company: Sapienza University of Rome College
-      company_url: ""
-      company_logo: sapienza-logo
-      location: Rome, Italy
-      date_start: 2022-10-01
-      date_end: 2023-09-30
-      description: |-2        
-          Areas: *Anomaly detection, explainable AI, time series, graph learning*.
+    company: Sapienza University of Rome College
+    company_url: ""
+    company_logo: sapienza-logo
+    location: Rome, Italy
+    date_start: 2022-10-01
+    date_end: 2023-09-30
+    description: |-2        
+        Areas: *Anomaly detection, explainable AI, time series, graph learning*.
   - title: Assistant Professor
     company: Heimerer College
     company_url: "https://kolegji-heimerer.eu/en/"
