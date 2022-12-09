@@ -1,5 +1,5 @@
 ---
-title: Machine Learning course 2022/23
+title: Machine Learning 2022/23 (18h laboratory classes)
 summary: Machine learning explores the study and construction of algorithms that can learn from and make predictions on data. Such algorithms operate by building a model from data in order to make data-driven predictions or decisions, rather than following "strictly static" program instructions. Machine learning algorithms can be applied to virtually any scientific and non-scientific field (health, security and cyber-security, management, finance, automation, robotics, marketing)
 tags:
   - Machine Learning
