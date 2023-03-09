@@ -30,7 +30,7 @@ abstract: In recent years, Graph Neural Networks have reported outstanding perfo
 tags: ['explainable AI', 'counterfactual explanation', 'ensemble', 'machine learning']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

@@ -25,10 +25,10 @@ publication: In *Future Generation Computer Systems*, Special Issue on Advances 
 abstract: Online learning environments (OLEs) have seen a continuous increase over the past decade and a sudden surge in the last year, due to the coronavirus outbreak. The widespread use of OLEs has led to an increasing number of enrolments, even from students who had previously left education systems, but it also resulted in a much higher dropout rate than in traditional classrooms. This is a crucial problem since online courses have rapidly expanded from individual MOOCs to entire study programmes, also due to the pandemic. Early detection of students in difficulty is a challenging problem that can be mitigated with the support of state-of-the-art methods for data analytics and machine learning. In this study, we propose a novel strategy that exploits both hidden space information and time-related data from student trajectories and copes with unbalanced data and time-series sparsity issues to solve the student dropout prediction problem. The proposed approach outperforms state-of-the-art methods, particularly in the complex case of full-length curricula (such as online degrees), a scenario that was thought to be less common before the pandemic, but is now particularly relevant.
 
 
-tags: ['autoencoders', 'deep learning', 'trajectory prediction', 'online education', 'online learning environments', 'student dropout prediction']
+tags: ['anomaly detection', 'deep learning', 'trajectory prediction', 'online education', 'online learning environments', 'student dropout prediction']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

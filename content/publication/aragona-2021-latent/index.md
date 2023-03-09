@@ -25,7 +25,7 @@ publication: In *ACM SIGAPP Applied Computing Review*
 abstract: In this paper we present CoRoNNa a deep sequential framework for epidemic prediction that leverages a flexible combination of sequential and convolutional components to analyse the transmission of COVID-19 and, perhaps, other undiscovered viruses. Importantly, our methodology is generic and may be tailored to specific analysis goals. We exploit CoRoNNa to analyse the impact of various mobility containment policies on the pandemic using cumulative viral dissemination statistics with local demographic and movement data from several nations. Our experiments show that data on mobility has a significant, but delayed, impact on viral propagation. When compared to alternative frameworks that combine multivariate lagged predictors and basic LSTM models, CoRoNNa outperforms them. On the contrary, no technique based solely on lagged viral dissemination statistics can forecast daily cases.
 
 
-tags: ['predictive epidemiology', 'COVID-19', 'time series prediction', 'deep learning' ,'deep sequential learning']
+tags: ['time series prediction', 'deep learning']
 
 # Display this page in the Featured widget?
 featured: false
