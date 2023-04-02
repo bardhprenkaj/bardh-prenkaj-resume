@@ -36,7 +36,7 @@ experience:
         Areas: *Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning*.
   - title: Visiting Researcher
     company: George Mason University
-    company_url: ""
+    company_url: "https://cec.gmu.edu/"
     company_logo: george-mason
     location: Fairfax, Virginia, USA
     date_start: 2021-04-01
@@ -47,7 +47,7 @@ experience:
         Areas: *Anomaly detection, deep learning*.
   - title: Visiting Researcher
     company: George Mason University
-    company_url: ""
+    company_url: "https://cec.gmu.edu/"
     company_logo: george-mason
     location: Fairfax, Virginia, USA
     date_start: 2020-03-01
