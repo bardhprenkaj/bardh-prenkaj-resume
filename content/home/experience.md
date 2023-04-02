@@ -45,7 +45,7 @@ experience:
         Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
         
         Areas: *Anomaly detection, deep learning*.
-   - title: Visiting Researcher
+  - title: Visiting Researcher
     company: George Mason University
     company_url: ""
     company_logo: george-mason
