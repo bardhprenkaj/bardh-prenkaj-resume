@@ -34,6 +34,30 @@ experience:
         CUP: F84E21000000006
 
         Areas: *Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning*.
+  - title: Visiting Researcher
+    company: George Mason University
+    company_url: ""
+    company_logo: george-mason
+    location: Fairfax, Virginia, USA
+    date_start: 2021-04-01
+    date_end: 2021-06-30
+    description: |-2        
+        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
+
+        Areas: *Anomaly detection, deep learning*.
+   - title: Visiting Researcher
+    company: George Mason University
+    company_url: ""
+    company_logo: george-mason
+    location: Fairfax, Virginia, USA
+    date_start: 2020-03-01
+    date_end: 2020-12-31
+    description: |-2        
+        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group. Our collaboration resulted in a paper at the Pacific-Asia Conference on Knowledge Discovery and Data Mining in 2021.
+
+        Codebase: https://gitlab.com/bardhp95/bae
+
+        Areas: *Anomaly detection, deep learning*.
   - title: Teaching Assistant
     company: Sapienza University of Rome
     company_url: ""
