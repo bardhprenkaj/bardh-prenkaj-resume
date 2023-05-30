@@ -42,41 +42,11 @@ experience:
     date_start: 2021-04-01
     date_end: 2021-06-30
     description: |-2        
-        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
-        
-        Areas: *Anomaly detection, deep learning*.
-  - title: Visiting Researcher
-    company: George Mason University
-    company_url: "https://cec.gmu.edu/"
-    company_logo: george-mason
-    location: Fairfax, Virginia, USA
-    date_start: 2020-03-01
-    date_end: 2020-12-31
-    description: |-2        
         Visiting period at the Data Mining laboratory and prof. Domeniconi's research group. Our collaboration resulted in a paper at the Pacific-Asia Conference on Knowledge Discovery and Data Mining in 2021.
 
         Codebase: https://gitlab.com/bardhp95/bae
 
         Areas: *Anomaly detection, deep learning*.
-  - title: Teaching Assistant
-    company: Sapienza University of Rome
-    company_url: ""
-    company_logo: sapienza-logo
-    location: Rome
-    date_start: 2018-11-01
-    date_end: ""
-    description: |-2        
-        As a TA, I tutor students, plan and evaluate final exams, manage and update teaching material, and give supplementary seminars.
-
-        The courses I currently hold are the following:
-        - *Machine Learning* (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
-
-        The courses I've held are the following:
-        - *Web and Social Information Extraction* (16h, Laboratory classes), M.Sc. in Computer Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
-        - *Social and Behavioural Networks* (16h, Laboratory classes), M.Sc. in Data Science, Faculty of Information Engineering, Informatics and Statistics, Sapienza University of Rome, Italy.
-        
-
-        Areas: *Machine learning, information retrieval, graph, web crawling and scraping*.
   - title: Software Engineer
     company: Pricewaterhouse Coopers
     company_url: "https://www.pwc.com/it/it/"

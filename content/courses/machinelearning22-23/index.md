@@ -1,9 +1,10 @@
 ---
-title: Machine Learning 2022/23 (18h laboratory classes)
-summary: Machine learning explores the study and construction of algorithms that can learn from and make predictions on data. Such algorithms operate by building a model from data in order to make data-driven predictions or decisions, rather than following "strictly static" program instructions. Machine learning algorithms can be applied to virtually any scientific and non-scientific field (health, security and cyber-security, management, finance, automation, robotics, marketing)
+title: Machine Learning 2022/23 (24h, 6 ECTS, Laboratory classes)
+summary: M.Sc. in Computer Science, Faculty of Information Engineering, Computer Science and Statistics, Sapienza University of Rome
 tags:
   - Machine Learning
   - E-health
+  - Sapienza
 date: '2022-12-05T16:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

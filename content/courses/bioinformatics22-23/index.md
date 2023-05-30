@@ -1,9 +1,10 @@
 ---
-title: Bioinformatics 2022/23 (6 ECTS)
-summary: The complexity and amount of biomolecular and genomic data available today requires the use of computational methods both for their management and above all for the extraction of biological and functional information. Bioinformatics is the discipline that deals with the analysis and attribution of biological meaning to the amount of molecular data available to date and represents an essential tool in the field of biochemical, biological-molecular, biomedical and biotechnological activities.
+title: Bioinformatics 2022/23 (30h, 6 ECTS)
+summary: M.Sc. in Medical Laboratory Sciences, Faculty of Health Sciences and Nursing, Heimerer College, Kosovo
 tags:
   - Bioinformatics
   - E-health
+  - Sapienza
 date: '2022-11-16T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

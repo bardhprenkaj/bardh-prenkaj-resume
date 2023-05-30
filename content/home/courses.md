@@ -27,12 +27,12 @@ content:
   filter_button:
     - name: All
       tag: '*'
-    - name: Bioinformatics
-      tag: Bioinformatics
-    - name: E-health
-      tag: E-health
-    - name: Machine Learning
-      tag: Machine Learning
+    - name: Sapienza
+      tag: Sapienza
+    - name: Luiss
+      tag: Luiss
+    - name: Heimerer
+      tag: Heimerer
 
 design:
   # Choose how many columns the section has. Valid values: '1' or '2'.
