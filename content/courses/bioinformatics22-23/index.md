@@ -4,7 +4,7 @@ summary: M.Sc. in Medical Laboratory Sciences, Faculty of Health Sciences and Nu
 tags:
   - Bioinformatics
   - E-health
-  - Sapienza
+  - Heimerer
 date: '2022-11-16T00:00:00Z'
 
 # Optional external URL for project (replaces project detail page).

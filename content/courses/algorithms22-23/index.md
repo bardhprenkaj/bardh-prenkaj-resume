@@ -28,14 +28,31 @@ slides: ""
 
 🡢 First release of the Group Software Project. Here you can find the full description of the first part.
 
+{{< icon name="download" pack="fas" >}} Download {{< staticref "uploads/courses/2022_23/algorithms/1/slides.pdf" "newtab" >}}slides{{< /staticref >}}.
+
+{{< icon name="download" pack="fas" >}} Download project {{< staticref "uploads/courses/2022_23/algorithms/1/other.pdf" "newtab" >}}part 1{{< /staticref >}} description.
+
+
 **Lecture 2 - Lab Fibonacci**
 
 🡢 Folder content: Slides, jupyter notebook and solutions. The jupyter notebook contains extra exercises.
 
+{{< icon name="download" pack="fas" >}} Download {{< staticref "uploads/courses/2022_23/algorithms/2/slides.pdf" "newtab" >}}slides{{< /staticref >}}.
+
+{{< icon name="download" pack="fas" >}} Download the {{< staticref "uploads/courses/2022_23/algorithms/2/code.ipnyb" "newtab" >}}code{{< /staticref >}}.
+
 **Lecture 3 - slides and exercises**
 
-🡢 Here you can find the slides of the mystery function that we saw today, and the Jupyter notebook file that gives you the skeleton on what you need to implement and evaluate the execution time of each version of the mystery function.
-Notice that the base case in the mystery function is if x = 1 then return 2, instead of going until x = 0. The base case x = 1 is equivalent to x = 0 as a stopping criterion for calculating 2x . Notice however, that for x = 1 we return 2 (because 21 = 2) and for x = 0 we return 1 (because 20 = 1). This simple change in the base case, makes your execution time (on the non-improved mystery function) 2x-1 instead of 2x. You may think "oh cool" my algorithm is more efficient and faster since you've got rid of an entire layer of recursion in the tree of recursive calls. Well, you'll soon learn (this Thursday) that, theoretically, both algorithms have the same execution time. Big O notation coming towards you :-)
+🡢 Here you can find the slides of the **mystery** function that we saw today, and the Jupyter notebook file that gives you the skeleton on what you need to implement and evaluate the execution time of each version of the mystery function.
+Notice that the base case in the mystery function is if *x = 1 then return 2*, instead of going until *x = 0*. The base case *x = 1* is equivalent to *x = 0* as a stopping criterion for calculating *2^x*. Notice however, that for *x = 1* we return 2 (because 2^1 = 2) and for *x = 0* we return 1 (because 2^0 = 1).
+
+**This simple change in the base case, makes your execution time (on the non-improved mystery function) 2^{x-1} instead of 2^x.** 
+
+You may think "oh cool" my algorithm is more efficient and faster since you've got rid of an entire layer of recursion in the tree of recursive calls. Well, you'll soon learn (this Thursday) that, theoretically, both algorithms have the same execution time. Big O notation coming towards you 😂
+
+{{< icon name="download" pack="fas" >}} Download {{< staticref "uploads/courses/2022_23/algorithms/3/slides.pdf" "newtab" >}}slides{{< /staticref >}}.
+
+{{< icon name="download" pack="fas" >}} Download the {{< staticref "uploads/courses/2022_23/algorithms/3/code.ipnyb" "newtab" >}}code{{< /staticref >}}.
 
 **Lecture 4 - Lab Bubble Sort**
 
