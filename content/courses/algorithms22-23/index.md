@@ -10,10 +10,10 @@ date: '2023-05-06T00:00:00Z'
 external_link: ''
 
 links:
-url_code: '' # change to github
-url_pdf: ''
-url_slides: ''
-url_video: ''
+url_code: 'https://github.com/flaat/Algorithms-2022-2023-Project' # change to github
+url_pdf: 'https://docs.google.com/viewer?a=v&pid=sites&srcid=ZGVmYXVsdGRvbWFpbnxhbGdvcml0aG1zaWNzMzUzfGd4OjI3ZjYxZjM3MmI1NGNhNmU'
+url_slides: 'http://jeffe.cs.illinois.edu/teaching/algorithms/'
+url_video: 'https://www.youtube.com/watch?v=ZA-tUyM_y7s&list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY'
 
 # Slides (optional).
 #   Associate this project with Markdown slides.
