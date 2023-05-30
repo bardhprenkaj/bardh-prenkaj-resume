@@ -33,7 +33,7 @@ image:
 #     name: Follow
 #     url: https://twitter.com/georgecushen
 url_code: ''
-url_pdf: '../../../uploads/CIKM2022_poster.pdf'
+url_pdf: '../../../uploads/posters/CIKM2022_poster.pdf'
 url_slides: 'https://www.canva.com/design/DAFLolYPE4U/Dkb07e1Rh5mDvnB4ax-K2w/view'
 url_video: 'https://files.atypon.com/acm/22258c8949c3a7a9f885261c838eeada'
 # Markdown Slides (optional).
