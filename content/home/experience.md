@@ -3,6 +3,15 @@ widget: experience
 active: true
 date_format: Jan 2006
 experience:
+  - title: Visiting Researcher
+    company: Technical University Munich
+    company_url: ""
+    company_logo: tum-logo
+    location: Munich, Germany
+    date_start: 2023-06-01
+    date_end: 2023-08-31
+    description: |-2        
+        Areas: *Explainable AI*.
   - title: Post-doctoral Research Fellow
     company: Sapienza University of Rome College
     company_url: ""
@@ -34,7 +43,7 @@ experience:
         CUP: F84E21000000006
 
         Areas: *Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning*.
-  - title: Visiting Researcher
+  - title: Visiting Student
     company: George Mason University
     company_url: "https://cec.gmu.edu/"
     company_logo: george-mason
