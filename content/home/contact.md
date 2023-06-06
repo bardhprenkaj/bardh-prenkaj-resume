@@ -30,7 +30,7 @@ content:
     street: Via Salaria 113
     city: Rome
     region: Lazio
-    postcode: '00185'
+    postcode: '00198'
     country: Italy
     country_code: IT
   coordinates:

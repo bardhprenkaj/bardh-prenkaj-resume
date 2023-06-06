@@ -6,9 +6,9 @@ bio: My research interests include anomaly detection, time series analysis,
   educational data mining.
 interests:
   - Anomaly Detection
-  - Machine Learning
-  - Data Mining
-  - Time Series Prediction
+  - Explainable AI
+  - Geometric Deep Learning
+  - Time Series
 social:
   - icon: envelope
     icon_pack: fas
