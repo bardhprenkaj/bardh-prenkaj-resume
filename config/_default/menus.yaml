@@ -10,21 +10,24 @@ main:
   - name: Experience
     url: '#experience'
     weight: 20
+  - name: Collabs
+    url: '#collabs'
+    weight: 30  
   - name: Accomplishments
     url: '#accomplishments'
-    weight: 30
+    weight: 40
   - name: Projects
     url: '#projects'
-    weight: 40
+    weight: 50
   - name: Talks
     url: '#talks'
-    weight: 50
+    weight: 60
   - name: Courses
     url: '#courses'
-    weight: 60
+    weight: 70
   - name: Publications
     url: '#featured'
-    weight: 70
+    weight: 80
   - name: Contact
     url: '#contact'
-    weight: 80
+    weight: 90
