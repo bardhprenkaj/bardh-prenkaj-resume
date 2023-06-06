@@ -10,17 +10,16 @@ experience:
     location: Rome, Italy
     date_start: 2022-10-01
     date_end: 2023-09-30
-    description: |-2        
-        Areas: *Anomaly detection, explainable AI, time series, graph learning*.
+    description: "  Areas: *Anomaly detection, explainable AI, time series, graph
+      learning*."
   - title: Assistant Professor
     company: Heimerer College
-    company_url: "https://kolegji-heimerer.eu/en/"
+    company_url: https://kolegji-heimerer.eu/en/
     company_logo: heimerer
     location: Pristina (remote)
     date_start: 2022-07-01
     date_end: ""
-    description: |-2        
-        Areas: *AI for e-Health, anomaly detection, deep learning*.
+    description: "  Areas: *AI for e-Health, anomaly detection, deep learning*."
   - title: Senior Research Fellow
     company: Sapienza University of Rome
     company_url: ""
@@ -28,7 +27,7 @@ experience:
     location: Rome
     date_start: 2021-12-01
     date_end: 2022-09-30
-    description: |-2        
+    description: >-2
         Coordinated the research and implementative component of innovative deep learning algorithms to predict anomalous events in patient behavioural time series.
         Fundings: Avviso Pubblico “Emergenza Coronavirus e oltre”, Domanda prot. n. A0376-2020-070051,
         CUP: F84E21000000006
@@ -36,29 +35,31 @@ experience:
         Areas: *Anomaly detection, time series analysis, Electronic Health Records (EHR), deep learning*.
   - title: Software Engineer
     company: Pricewaterhouse Coopers
-    company_url: "https://www.pwc.com/it/it/"
+    company_url: https://www.pwc.com/it/it/
     company_logo: PwC-logo
     location: Rome
     date_start: 2021-12-01
     date_end: 2022-06-12
-    description: |-2    
+    description: >-2
         As a member of the Digital Innovation development team, I focused on software prototyping and development activities. In particular, I optimised back-end services and developed highly-maintainable and efficient API services.
 
         Skills: *full-stack development, API development, data processing, Azure DevOps*.
   - title: Senior Software Consultant
     company: E Software Solutions
-    company_url: "https://www.esoftwaresolutions.it/"
+    company_url: https://www.esoftwaresolutions.it/
     company_logo: ESoftwareSolutions-logo
     location: Rome
     date_start: 2020-09-01
     date_end: 2021-03-31
-    description: |-2
-      I designed and maintained the CMS for electric vehicle leasing in the UK (https://gridserve.com/)
+    description: >-
+      I designed and maintained the CMS for electric vehicle leasing in the UK
+      (https://gridserve.com/)
+
 
       Skills: *WordPress, software documentation, full-stack development, API development*.
 widget_id: experience
 headless: true
-weight: 40
+weight: 20
 title: Experience
 subtitle: null
 design:

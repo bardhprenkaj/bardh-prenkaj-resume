@@ -1,55 +1,42 @@
 ---
-# An instance of the Contact widget.
 widget: contact
-
-# This file represents a page section.
+widget_id: contact
 headless: true
-
-# Order that this section appears on the page.
-weight: 130
-
+weight: 100
 title: Contact
-subtitle:
-
+subtitle: null
 content:
-  # Automatically link email and phone or display as text?
-  autolink: true
-
-  # Email form provider
   form:
     provider: netlify
     formspree:
-      id:
+      ? id
     netlify:
-      # Enable CAPTCHA challenge to reduce spam?
       captcha: false
-
-  # Contact details (edit or remove options as required)
-  email: prenkaj[AT]di[dot]uniroma1[dot]it
+  autolink: true
+  office_hours:
+    - Monday 09:00 to 17:30
+    - Tuesday 09:00 to 17:30
+    - Wednesday 09:00 to 17:30
+    - Thursday 09:00 to 17:30
+    - Friday 09:00 to 17:30
+  appointment_url: https://calendly.com/bardhprenkaj/15min
+  directions: Enter the Faculty Building and take the lift to Office 316 on Floor 3
   address:
     street: Via Salaria 113
     city: Rome
     region: Lazio
-    postcode: '00198'
+    postcode: "00198"
     country: Italy
     country_code: IT
-  coordinates:
-    latitude: '41.914110'
-    longitude: '12.497350'
-  directions: Enter the Faculty Building and take the lift to Office 316 on Floor 3
-  office_hours:
-    - 'Monday 09:00 to 17:30'
-    - 'Tuesday 09:00 to 17:30'
-    - 'Wednesday 09:00 to 17:30'
-    - 'Thursday 09:00 to 17:30'
-    - 'Friday 09:00 to 17:30'
-  appointment_url: 'https://calendly.com/bardhprenkaj/15min'
   contact_links:
     - icon: linkedin
       icon_pack: fab
       name: DM Me
-      link: 'https://www.linkedin.com/in/prenkaj-bardh/'
-
+      link: https://www.linkedin.com/in/prenkaj-bardh/
+  coordinates:
+    latitude: "41.914110"
+    longitude: "12.497350"
+  email: prenkaj[AT]di[dot]uniroma1[dot]it
 design:
-  columns: '2'
+  columns: "2"
 ---
