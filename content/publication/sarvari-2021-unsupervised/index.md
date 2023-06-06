@@ -25,7 +25,7 @@ publication: In *Pacific-Asia Conference on Knowledge Discovery and Data Mining 
 abstract: Autoencoders have been recently applied to outlier detection. However, neural networks are known to be vulnerable to overfitting, and therefore have limited potential in the unsupervised outlier detection setting. The majority of existing deep learning methods for anomaly detection is sensitive to contamination of the training data to anomalous instances. To overcome the aforementioned limitations we develop a Boosting-based Autoencoder Ensemble approach (BAE). BAE is an unsupervised ensemble method that, similarly to boosting, builds an adaptive cascade of autoencoders to achieve improved and robust results. BAE trains the autoencoder components sequentially by performing a weighted sampling of the data, aimed at reducing the amount of outliers used during training, and at injecting diversity in the ensemble. We perform extensive experiments and show that the proposed methodology outperforms state-of-the-art approaches under a variety of conditions.
 
 
-tags: ['anomaly detection']
+tags: ['anomaly detection', 'deep learning']
 
 # Display this page in the Featured widget?
 featured: true

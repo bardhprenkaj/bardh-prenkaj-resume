@@ -30,7 +30,7 @@ abstract: The progress in modelling time series and, more generally, sequences o
 
 
 
-tags: ['anomaly detection', 'hyperbolic uncertainty']
+tags: ['anomaly detection', 'uncertainty estimation']
 
 # Display this page in the Featured widget?
 featured: true

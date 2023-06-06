@@ -25,7 +25,7 @@ publication: In *International Conference on Image Analysis and Processing*
 abstract: This paper does not present a novel technique for biometric recognition, but rather a novel way to use it. The proposal is to exploit cloud computing in order to support everyday applications. These are not necessarily bound to security, but span a wide range of possible useful tasks. This work presents a smart peephole able to recognize the person at the door, possibly automatically allowing entrance according to rules decided by the home keeper. The novelty is that very little processing is carried out locally, and biometrics is implemented as a service. The system relies on Microsoft Cognitive Services, a suite of remote services included in Microsoft Azure platform. The single user has to install nothing but a camera with a sound capture facility in correspondence to the peephole, and a lightweight software. A movement detector module triggers the capture/recognition activity. The captured audio and video samples are sent to the service. Most processing and recognition are carried out via the remote suite, and a final result is sent back to possibly trigger a response action. The present prototype includes face, speech and emotion recognition. It does not completely cover all system aspects. The aim is to demonstrate the feasibility of the approach.
 
 
-tags: ['biometrics', 'cloud computing', 'microsoft cognitive services']
+tags: ['biometrics']
 
 # Display this page in the Featured widget?
 featured: false

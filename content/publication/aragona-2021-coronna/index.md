@@ -26,7 +26,7 @@ publication_short: In *SAC 2021*
 abstract: We propose CoRoNNa, a deep framework for epidemic prediction to analyse the spread of COVID-19 and, potentially, of other unknown viruses, based on a flexible integration of sequential and convolutional components. Importantly, our framework is general and can be specialised according to different analysis objectives. In this paper, the specific purpose is to optimise CoRoNNa for analysing the impact of different mobility containment policies on the epidemic. To this end, we integrate cumulative viral diffusion statistics and local demographic and mobility information of several countries. Our analysis confirms that mobility data have a strong, but delayed, effect on the viral spread. In this context, CoRoNNa has superior performances when compared with other frameworks that incorporate multivariate lagged predictors, and with simple LSTM models. On the contrary, no method is able to predict daily cases based only on lagged viral diffusion statistics.
 
 
-tags: ['predictive epidemiology', 'COVID-19', 'time series prediction', 'deep learning']
+tags: ['time series', 'deep learning']
 
 # Display this page in the Featured widget?
 featured: false

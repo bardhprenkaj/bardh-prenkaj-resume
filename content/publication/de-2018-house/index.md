@@ -25,7 +25,7 @@ publication: In *IEEE Cloud Computing*
 abstract: This article presents a novel approach to extend cloud computing from company services to consumer biometrics. The proposed system recognizes the person at the door, allowing entrance or denying it according to the recognition result. Very little processing is required locally, and biometrics is implemented as a service.
 
 
-tags: ['biometric recognition', 'cloud services', 'coud consumer applications', 'home authentication', 'cloud computing', 'face recognition', 'feature extraction']
+tags: ['biometrics']
 
 # Display this page in the Featured widget?
 featured: false

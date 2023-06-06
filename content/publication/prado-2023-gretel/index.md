@@ -25,7 +25,7 @@ publication_short: In *WSDM 2023*
 abstract: The black-box nature and the lack of interpretability detract from constant improvements in Graph Neural Networks (GNNs) performance in social network tasks like friendship prediction and community detection. Graph Counterfactual Explanation (GCE) methods aid in understanding the prediction of GNNs by generating counterfactual examples that promote trustworthiness, debiasing, and privacy in social networks. Alas, the literature on GCE lacks standardised definitions, explainers, datasets, and evaluation metrics. To bridge the gap between the performance and interpretability of GNNs in social networks, we discuss GRETEL, a unified framework for GCE methods development and evaluation. We demonstrate how GRETEL comes with fully extensible built-in components that allow users to define ad-hoc explainer methods, generate synthetic datasets, implement custom evaluation metrics, and integrate state-of-the-art prediction models.
 
 
-tags: ['machine learning', 'graph neural networks', 'explainable AI', 'counterfactual', 'evaluation framework']
+tags: ['counterfactual', 'explainability']
 
 # Display this page in the Featured widget?
 featured: true

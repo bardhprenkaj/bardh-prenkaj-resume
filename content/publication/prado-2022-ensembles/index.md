@@ -27,7 +27,7 @@ publication_short: In *XAI.it 2022*
 
 abstract: In recent years, Graph Neural Networks have reported outstanding performances in tasks like community detection, molecule classification and link prediction. However, the black-box nature of these models prevents their application in domains like health and finance, where understanding the model’s decisions is essential. Explainable AI, or Explainable Machine Learning, is artificial intelligence in which humans can understand the decisions or predictions made by the AI. A special case is the Counterfactual examples which provide suggestions on the steps the system needs to take to change its decision. Historically ensemble learning and explainability have been jointly exploited to explain the decision of ensemble models. Contrarily, in this work, we focus on the ensemble mechanisms of the explainers to improve the quality of explanations. In this work, we explore, thus, which are the possible ensemble mechanism that can be adopted in several explainability scenarios. Furthermore, we introduce and discuss a new explainability problem where a single coherent counterfactual explanation must be provided for a set of input instances and their explanations.
 
-tags: ['explainable AI', 'counterfactual explanation', 'ensemble', 'machine learning']
+tags: ['counterfactual', 'explainability']
 
 # Display this page in the Featured widget?
 featured: false
