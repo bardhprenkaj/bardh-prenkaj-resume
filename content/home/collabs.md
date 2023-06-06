@@ -2,7 +2,7 @@
 widget: experience
 active: true
 date_format: Jan 2006
-experience:
+collabs:
   - title: Visiting Researcher
     company: Technical University Munich
     company_url: "https://www.sot.tum.de/sot/home/"
@@ -14,6 +14,17 @@ experience:
         Visiting period at the Responsible Data Science laboratory and prof. Kasneci's research group. 
         
         Areas: *Explainable AI*.
+  - title: Senior Researcher
+    company: PINLab
+    company_url: "https://www.pinlab.org/"
+    company_logo: pinlab-logo
+    location: Rome, Italy
+    date_start: 2023-01-01
+    date_end: ongoing
+    description: |-2        
+        Collaborating in Diffusion for Motion Anomaly Detection
+                
+        Areas: *Anomaly detection, deep learning*.
   - title: Visiting Student
     company: George Mason University
     company_url: "https://cec.gmu.edu/"
@@ -31,7 +42,7 @@ experience:
     company: George Mason University
     company_url: "https://cec.gmu.edu/"
     company_logo: george-mason
-    location: Fairfax, Virginia, USA
+    location: Remote
     date_start: 2020-03-01
     date_end: 2020-12-31
     description: |-2        
