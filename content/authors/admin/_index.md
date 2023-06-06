@@ -40,9 +40,6 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-Bardh Prenkaj is a post-doc at Sapienza University of Rome in explainable anomaly detection. From 2019 onward, he has been a Researcher in the IIM research group of Computer Science Department at Sapienza University of Rome.
-
-His research interests are across three areas: Anomaly Detection (AD), Educational Data Mining (EDM), and Time Series Prediction (TSP). More in detail, his studies include investigations on Student Dropout Prediction, Anomaly Detection on Symbolic Behavioural Patterns, Drift Anomaly Detection.
-
+Bardh Prenkaj is a post-doc at Sapienza University of Rome in eXplainable Anomaly Detection (XAD). From 2019 onward, he has been in various research positions within the Computer Science Department at Sapienza University of Rome. 
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj.pdf" "newtab" >}}curriculum vitae{{< /staticref >}}.
