@@ -2,7 +2,7 @@
 widget: portfolio
 widget_id: recent-courses
 headless: true
-weight: 60
+weight: 70
 title: Courses
 subtitle: ""
 content:
