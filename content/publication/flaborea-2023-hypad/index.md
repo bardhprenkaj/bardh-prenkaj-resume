@@ -43,7 +43,7 @@ featured: true
 url_pdf: 'https://openaccess.thecvf.com/content/CVPR2023W/VAND/papers/Flaborea_Are_We_Certain_Its_Anomalous_CVPRW_2023_paper.pdf'
 url_code: 'https://github.com/aleflabo/HypAD'
 url_dataset: ''
-url_poster: '../../../uploads/posters/CIKM2022_poster.pdf'
+url_poster: '../../../uploads/posters/CIKM2023.pdf'
 url_project: ''
 url_slides: ''
 url_source: ''
