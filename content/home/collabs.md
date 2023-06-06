@@ -10,7 +10,7 @@ experience:
     location: Munich, Germany
     date_start: 2023-06-01
     date_end: 2023-09-01
-    description: |-2
+    description: |-1
         Visiting period at the Responsible Data Science laboratory and prof. Kasneci's research group. 
         
         Areas: *Explainable AI*.
@@ -21,7 +21,7 @@ experience:
     location: Rome, Italy
     date_start: 2023-01-01
     date_end: ""
-    description: |-2        
+    description: |-1        
         Collaborating in Diffusion for Motion Anomaly Detection
                 
         Areas: *Anomaly detection, deep learning*.
@@ -32,7 +32,7 @@ experience:
     location: Fairfax, Virginia, USA
     date_start: 2021-04-01
     date_end: 2021-06-30
-    description: |-2        
+    description: |-1        
         Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
         
         Codebase: https://gitlab.com/bardhp95/bae
@@ -45,7 +45,7 @@ experience:
     location: Remote
     date_start: 2020-03-01
     date_end: 2020-12-31
-    description: |-2        
+    description: |-1        
         Junior Researcher at the Data Mining laboratory and prof. Domeniconi's research group.
         
         Codebase: https://gitlab.com/bardhp95/bae
@@ -57,5 +57,5 @@ weight: 40
 title: Collaborations & Visits
 subtitle: null
 design:
-  columns: "1"
+  columns: "2"
 ---
