@@ -10,7 +10,9 @@ experience:
     location: Munich, Germany
     date_start: 2023-06-01
     date_end: 2023-08-31
-    description: |-2        
+    description: |-2
+        Visiting period at the Responsible Data Science laboratory and prof. Kasneci's research group.
+
         Areas: *Explainable AI*.
   - title: Post-doctoral Research Fellow
     company: Sapienza University of Rome College
@@ -51,7 +53,7 @@ experience:
     date_start: 2021-04-01
     date_end: 2021-06-30
     description: |-2        
-        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group. Our collaboration resulted in a paper at the Pacific-Asia Conference on Knowledge Discovery and Data Mining in 2021.
+        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
 
         Codebase: https://gitlab.com/bardhp95/bae
 
