@@ -3,6 +3,17 @@ widget: experience
 active: true
 date_format: Jan 2006
 experience:
+  - title: Visiting Researcher
+    company: Technical University Munich
+    company_url: "https://www.sot.tum.de/sot/home/"
+    company_logo: tum-logo
+    location: Munich, Germany
+    date_start: 2023-06-01
+    date_end: 2023-09-01
+    description: |-1
+        Visiting period at the Responsible Data Science laboratory and prof. Kasneci's research group. 
+        
+        Areas: *Explainable AI*.
   - title: Post-doctoral Research Fellow
     company: Sapienza University of Rome College
     company_url: ""
@@ -45,6 +56,19 @@ experience:
         As a member of the Digital Innovation development team, I focused on software prototyping and development activities. In particular, I optimised back-end services and developed highly-maintainable and efficient API services.
 
         Skills: *full-stack development, API development, data processing, Azure DevOps*.
+  - title: Visiting Student
+    company: George Mason University
+    company_url: "https://cec.gmu.edu/"
+    company_logo: george-mason
+    location: Fairfax, Virginia, USA
+    date_start: 2021-04-01
+    date_end: 2021-06-30
+    description: |-1        
+        Visiting period at the Data Mining laboratory and prof. Domeniconi's research group.
+        
+        Codebase: https://gitlab.com/bardhp95/bae
+        
+        Areas: *Anomaly detection, deep learning*.
   - title: Senior Software Consultant
     company: E Software Solutions
     company_url: "https://www.esoftwaresolutions.it/"
