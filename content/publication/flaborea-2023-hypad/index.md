@@ -1,5 +1,5 @@
 ---
-title: 'Are we certain it\'s anomalous'
+title: 'Are we certain it is anomalous?'
 
 # Authors
 # If you created a profile for a user (e.g. the default `admin` user), write the username (folder name) here
