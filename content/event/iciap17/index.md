@@ -16,7 +16,7 @@ date_end: '2017-09-17T23:59:59Z'
 all_day: false
 
 authors: [Maria De Marsico, Eugenio Nemmi, Bardh Prenkaj, Gabriele Saturni]
-tags: [biometrics, cloud computing]
+tags: [biometrics, deep learning]
 
 # Is this a featured talk? (true/false)
 featured: false

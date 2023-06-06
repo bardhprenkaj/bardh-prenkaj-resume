@@ -17,7 +17,7 @@ date_end: '2020-10-16T18:10:00Z'
 all_day: false
 
 authors: [Bardh Prenkaj, Paola Velardi, Damiano Distante, Stefano Faralli]
-tags: [deep learning, attention networks, time series]
+tags: [deep learning, time series]
 
 # Is this a featured talk? (true/false)
 featured: false

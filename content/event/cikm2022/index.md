@@ -17,7 +17,7 @@ date_end: '2022-10-16T18:10:00Z'
 all_day: false
 
 authors: [Luca Podo, Paola Velardi]
-tags: [visualisation recommendation, data analytics, ML4Viz, machine learning]
+tags: [deep learning]
 
 # Is this a featured talk? (true/false)
 featured: true

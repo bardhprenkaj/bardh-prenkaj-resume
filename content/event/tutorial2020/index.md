@@ -15,7 +15,7 @@ date_end: '2020-10-19T12:50:00Z'
 all_day: false
 
 authors: [Bardh Prenkaj, Giovanni Stilo, Lorenzo Madeddu]
-tags: [deep learning, educational data mining, student dropout prediction]
+tags: [deep learning, time series, anomaly detection]
 
 # Is this a featured talk? (true/false)
 featured: true

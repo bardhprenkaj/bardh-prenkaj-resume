@@ -14,7 +14,7 @@ date_end: '2022-07-12T09:20:00Z'
 all_day: false
 
 authors: [Bardh Prenkaj]
-tags: [anomaly detection, graph neural networks, graph learning, XAI]
+tags: [anomaly detection, deep learning]
 
 # Is this a featured talk? (true/false)
 featured: true
