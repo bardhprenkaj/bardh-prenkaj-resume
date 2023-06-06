@@ -51,7 +51,7 @@ experience:
         Codebase: https://gitlab.com/bardhp95/bae
         
         Areas: *Anomaly detection, deep learning*.
-widget_id: recent-collabs
+widget_id: collabs
 headless: true
 weight: 40
 title: Collaborations & Visits

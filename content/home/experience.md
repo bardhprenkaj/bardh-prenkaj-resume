@@ -56,7 +56,7 @@ experience:
       I designed and maintained the CMS for electric vehicle leasing in the UK (https://gridserve.com/)
 
       Skills: *WordPress, software documentation, full-stack development, API development*.
-widget_id: recent-experience
+widget_id: experience
 headless: true
 weight: 40
 title: Experience
