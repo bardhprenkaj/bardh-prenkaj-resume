@@ -9,7 +9,7 @@ experience:
     company_logo: tum-logo
     location: Munich, Germany
     date_start: 2023-06-01
-    date_end: 2023-08-31
+    date_end: 2023-09-01
     description: |-2
         Visiting period at the Responsible Data Science laboratory and prof. Kasneci's research group.
 
