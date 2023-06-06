@@ -20,7 +20,7 @@ experience:
     company_logo: pinlab-logo
     location: Rome, Italy
     date_start: 2023-01-01
-    date_end: ongoing
+    date_end: ""
     description: |-2        
         Collaborating in Diffusion for Motion Anomaly Detection
                 
