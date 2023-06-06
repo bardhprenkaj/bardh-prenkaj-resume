@@ -2,7 +2,7 @@
 widget: experience
 active: true
 date_format: Jan 2006
-collabs:
+experience:
   - title: Visiting Researcher
     company: Technical University Munich
     company_url: "https://www.sot.tum.de/sot/home/"
