@@ -14,7 +14,7 @@ authors:
   - Fabio Galasso
 
 date: '2023-06-06T00:00:00Z'
-doi: 'https://openaccess.thecvf.com/content/CVPR2023W/VAND/papers/Flaborea_Are_We_Certain_Its_Anomalous_CVPRW_2023_paper.pdf'
+doi: ''
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
