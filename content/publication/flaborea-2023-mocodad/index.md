@@ -13,7 +13,7 @@ authors:
   - Fabio Galasso
 
 date: '2023-08-28T00:00:00Z'
-doi: 'https://doi.org/10.48550/arXiv.2307.07205'
+doi: '10.48550/arXiv.2307.07205'
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
