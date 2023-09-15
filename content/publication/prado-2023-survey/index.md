@@ -9,7 +9,7 @@ authors:
   - Bardh Prenkaj
   - Giovanni Stilo
   - Fosca Giannotti
-- 
+
 date: '2023-08-28T00:00:00Z'
 doi: '10.1145/3618105'
 
