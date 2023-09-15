@@ -40,9 +40,9 @@ featured: true
 url_pdf: 'https://arxiv.org/abs/2308.02353'
 url_code: 'https://github.com/bardhprenkaj/HANSEL'
 url_dataset: ''
-url_poster: '/static/uploads/posters/ECML_PKDD2023_DynXAI.pdf'
+url_poster: '/uploads/posters/ECML_PKDD2023_DynXAI.pdf'
 url_project: ''
-url_slides: '/static/uploads/conference_slides/ECMLPKDD23_DynXAI.pptx'
+url_slides: '/uploads/conference_slides/ECMLPKDD23_DynXAI.pptx'
 url_source: ''
 url_video: ''
 
