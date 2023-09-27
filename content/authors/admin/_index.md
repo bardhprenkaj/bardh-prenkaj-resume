@@ -2,12 +2,10 @@
 title: Bardh Prenkaj
 role: Computer Scientist, PhD
 avatar_filename: avatar.png
-bio: My research interests include anomaly detection and graph learning
+bio: What's up!
 interests:
   - Anomaly Detection
-  - Explainable AI
-  - Graph Learning
-  - Time Series
+  - eXplainable AI
 social:
   - icon: envelope
     icon_pack: fas
@@ -39,8 +37,10 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-I obtained my M.Sc. and PhD in Computer Science from the Sapienza University of Rome in 2018 and 2022, respectively. I then worked as a senior researcher at the Department of Computer Science in Sapienza. I led a team of 4 junior researchers and 6 software engineers in devising novel anomaly detection strategies for social isolation disorders. Since October 2022, I've been a postdoc at Sapienza in eXplainable AI and Anomaly Detection. I am part of and actively collaborate with Italian and international research groups (RDS of TUM, PINlab of Sapienza, AIIM of L'Aquila). I serve as a Program Committee (PC) member for conferences such as ICCV, CVPR, KDD, CIKM, and ECAI. I actively contribute as a reviewer for journals, including TKDE, TKDD, VLDB, TIST, and KAIS.
+I obtained my M.Sc. and PhD in Computer Science from the Sapienza University of Rome in 2018 and 2022, respectively. I then worked as a senior researcher at the Department of Computer Science in Sapienza. Here, I led a team of 4 junior researchers and 6 software engineers in devising novel anomaly detection strategies for social isolation disorders. Since October 2022, I've been a postdoc at Sapienza in eXplainable AI and Anomaly Detection. 
 
-In June 2023 I joined the Chair of {{<a href="https://www.gov.sot.tum.de/rds/overview/"> Responsible Data Science</a>}} at TU Munich lead by prof. Kasneci to work on counterfactual explainability ({{<i>external researcher</i>}}).
+I am part of and actively collaborate with Italian and international research groups ([RDS](https://www.gov.sot.tum.de/rds/overview/) of TU Munich, [PINlab](https://www.pinlab.org/) of Sapienza, [AIIM](http://aiim.disim.univaq.it/) of L'Aquila). I serve as a Program Committee (PC) member for conferences such as ICCV, CVPR, KDD, CIKM, and ECAI. I actively contribute as a reviewer for journals, including TKDE, TKDD, VLDB, TIST, and KAIS.
+
+In June 2023 I joined the Chair of [Responsible Data Science](https://www.gov.sot.tum.de/rds/overview/) at TU Munich lead by prof. Kasneci to work on counterfactual explainability (_external researcher_).
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj.pdf" "newtab" >}}curriculum vitae{{< /staticref >}}.
