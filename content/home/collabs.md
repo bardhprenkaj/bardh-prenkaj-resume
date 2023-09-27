@@ -58,4 +58,5 @@ title: Collaborations & Visits
 subtitle: null
 design:
   columns: "2"
+  view: 5
 ---
