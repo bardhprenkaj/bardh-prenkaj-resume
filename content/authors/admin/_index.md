@@ -2,12 +2,11 @@
 title: Bardh Prenkaj
 role: Computer Scientist, PhD
 avatar_filename: avatar.png
-bio: My research interests include anomaly detection, time series analysis,
-  educational data mining.
+bio: My research interests include anomaly detection and graph learning
 interests:
   - Anomaly Detection
   - Explainable AI
-  - Geometric Deep Learning
+  - Graph Learning
   - Time Series
 social:
   - icon: envelope
@@ -40,6 +39,6 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-Bardh Prenkaj is a post-doc at Sapienza University of Rome in eXplainable Anomaly Detection (XAD). From 2019 onward, he has been in various research positions within the Computer Science Department at Sapienza University of Rome. 
+I obtained my M.Sc. and PhD in Computer Science from the Sapienza University of Rome in 2018 and 2022, respectively. I then worked as a senior researcher at the Department of Computer Science in Sapienza. I led a team of 4 junior researchers and 6 software engineers in devising novel anomaly detection strategies for social isolation disorders. Since October 2022, I've been a postdoc at Sapienza in eXplainable AI and Anomaly Detection. I am part of and actively collaborate with Italian and international research groups (Responsible Data Science of TUM, PINlab of Sapienza, AIIM of L'Aquila). I serve as a Program Committee (PC) member for conferences such as ICCV, CVPR, KDD, CIKM, and ECAI. I actively contribute as a reviewer for journals, including TKDE, TKDD, VLDB, TIST, and KAIS.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj.pdf" "newtab" >}}curriculum vitae{{< /staticref >}}.
