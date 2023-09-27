@@ -57,6 +57,6 @@ weight: 30
 title: Collaborations & Visits
 subtitle: null
 design:
-  columns: "1"
+  columns: "2"
   view: 1
 ---
