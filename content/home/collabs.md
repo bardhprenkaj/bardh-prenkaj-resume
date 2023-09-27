@@ -1,5 +1,5 @@
 ---
-widget: experience
+widget: portfolio
 active: true
 date_format: Jan 2006
 experience:
