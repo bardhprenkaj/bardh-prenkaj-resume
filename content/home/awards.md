@@ -60,7 +60,7 @@ item:
     date_start: '2017-03-01'
     description: '[Winner](http://www.laziodisco.it/wp-content/uploads/2017/11/GRADUATORIA-VINCITORI-PREMIO-DI-LAUREA-A.A.-2015-2016.pdf) of the Premio di Laurea distributed from LazioDiSU to excellent bachelor degree students. Winner num: 899, grade: 110/110, *Sum: € 2,559.18*'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
-    organization_url: https://irdta.eu/deeplearn2019/
+    organization_url: ''
     title: 'Graduation Prize (B.Sc.)'
     url: ''
   - certificate_url: ''
@@ -68,7 +68,7 @@ item:
     date_start: '2013-09-01'
     description: 'Winner of the LazioDiSU Study Scholarship for B.Sc. (3 years) and M.Sc. (2 years). *Yearly sum: € 5,118.36*'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
-    organization_url: https://irdta.eu/deeplearn2019/
+    organization_url: ''
     title: 'Merit Scholarship in Computer Science'
     url: ''
 design:

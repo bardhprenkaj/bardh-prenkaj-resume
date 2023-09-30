@@ -53,8 +53,8 @@ experience:
     company_url: ""
     company_logo: sapienza-logo
     location: Rome, Italy
-    date_start: 2020-03-01
-    date_end: 2021-12-31
+    date_start: 2017-07-01
+    date_end: 2018-10-01
     description: >-2
         Extended the [UCrawler](https://github.com/giovanni-stilo/uCrawler-Core) framework for crawling and scraping content of research articles and citation graphs on DBLP and SemanticScholar. During this period, I also completed my master's thesis.
 
