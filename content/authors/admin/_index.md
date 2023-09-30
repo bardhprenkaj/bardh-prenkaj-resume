@@ -12,7 +12,7 @@ social:
     link: /#contact
   - icon: graduation-cap
     icon_pack: fas
-    link: https://scholar.google.com/citations?user=ORwkZE0AAAAJ
+    link: https://scholar.google.com/citations?user=JIidltYAAAAJ
   - icon: github
     icon_pack: fab
     link: https://github.com/bardhprenkaj
@@ -24,7 +24,7 @@ organizations:
     url: https://www.uniroma1.it/en
 education:
   courses:
-    - course: PhD in Student Dropout Prediction in Educational Behavioural Time Series
+    - course: PhD in Computer Science (Grade very good/excellent)
       institution: Sapienza University of Rome
       year: 2022
     - course: MSc in Computer Science (Grade 110/110 with honors; GPA 4.00)
