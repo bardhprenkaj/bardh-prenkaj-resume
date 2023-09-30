@@ -10,7 +10,7 @@ headless: true
 weight: 50
 
 # Note: `&shy;` is used to add a 'soft' hyphen in a long heading.
-title: 'Awards'
+title: 'Honors & Awards'
 subtitle:
 
 # Date format
@@ -23,13 +23,13 @@ date_format: Jan 2006
 #   Leave other parameters empty if not required.
 #   Begin multi-line descriptions with YAML's `|2-` multi-line prefix.
 item:
-  - certificate_url: https://www.coursera.org/account/accomplishments/specialization/JHTVBYTGDLY4
+  - certificate_url: ''
     date_end: ''
-    date_start: '2019-03-24'
-    description: 'The foundational concepts of neural networks and deep learning'
-    organization: Coursera
-    organization_url: https://www.coursera.org
-    title: Deep Learning Specialization
+    date_start: '2023-03-01'
+    description: 'Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in MS Computer Science, Department of Information Engineering, Computer Science, and Mathematics.'
+    organization: University of L'Aquila
+    organization_url: ''
+    title: Subject Expert _("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_
     url: ''
   - certificate_url: https://drive.google.com/file/d/1dKtYsRVJoF6dNqYhA7VTDV5Gu6eUVU1j/view?usp=sharing
     date_end: '2019-09-18'
