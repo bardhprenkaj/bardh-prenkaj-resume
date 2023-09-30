@@ -11,7 +11,7 @@ main:
     url: '#experience'
     weight: 20
   - name: Honors & Awards
-    url: '#accomplishments'
+    url: '#awards'
     weight: 40
   - name: Projects
     url: '#projects'
