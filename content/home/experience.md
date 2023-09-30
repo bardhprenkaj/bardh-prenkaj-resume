@@ -65,4 +65,5 @@ title: Research Experience
 subtitle: null
 design:
   columns: "2"
+  view: list
 ---
