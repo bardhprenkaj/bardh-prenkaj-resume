@@ -31,20 +31,20 @@ item:
     organization_url: 'https://www.univaq.it/en/section.php?id=372'
     title: Subject Expert _("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_
     url: ''
-  - certificate_url: ''
+  - certificate_url: 'https://web.uniroma1.it/trasparenza/sites/default/files/Approvazione%20atti%20BS-S%2006-2021.pdf'
     date_end: '2022-09-30'
     date_start: '2021-11-01'
     description: 'Winner of the BS-S 6/2021 Open Competition published on September 15th 2021 (num: 1207, rep: 326, class: VII/1) on research project "000090 19 RS VELARDI - RICERCA ATENEO 2019 - MEDI PROGETTI-VELARDI (Responsabile Scientifico, VELARDI P.)"'
     organization: Sapienza University of Rome
-    organization_url: ''
+    organization_url: 'https://www.di.uniroma1.it/en'
     title: Scholarship in AI & Computer Science
     url: ''
-  - certificate_url: ''
+  - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
     date_end: ''
     date_start: '2020-05-01'
-    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey.'
+    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. I published '
     organization: Sapienza University of Rome
-    organization_url: ''
+    organization_url: 'https://www.di.uniroma1.it/en'
     title: 'Scholarship in AI'
     url: ''
   - certificate_url: ''
@@ -55,10 +55,10 @@ item:
     organization_url: https://irdta.eu/deeplearn2019/
     title: '3rd International Summer School on Deep Learning'
     url: ''
-  - certificate_url: ''
+  - certificate_url: 'http://www.laziodisco.it/wp-content/uploads/2017/11/GRADUATORIA-VINCITORI-PREMIO-DI-LAUREA-A.A.-2015-2016.pdf'
     date_end: ''
     date_start: '2017-03-01'
-    description: '[Winner](http://www.laziodisco.it/wp-content/uploads/2017/11/GRADUATORIA-VINCITORI-PREMIO-DI-LAUREA-A.A.-2015-2016.pdf) of the Premio di Laurea distributed from LazioDiSU to excellent bachelor degree students. Winner num: 899, grade: 110/110, **Sum: € 2,559.18**'
+    description: 'Winner of the Premio di Laurea distributed from LazioDiSU to excellent bachelor degree students. Winner num: 899, grade: 110/110, **Sum: € 2,559.18**'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
     organization_url: ''
     title: 'Graduation Prize (B.Sc.)'
