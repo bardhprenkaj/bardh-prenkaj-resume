@@ -16,7 +16,7 @@ date: '2024-02-21T10:45:00Z'
 date_end: '2024-02-21T12:30:00Z'
 all_day: false
 
-authors: [Mario Alfonso Prado-Romer, Bardh Prenkaj, Giovanni Stilo]
+authors: [Mario Alfonso Prado-Romero, Bardh Prenkaj, Giovanni Stilo]
 tags: [deep learning, explainability]
 
 # Is this a featured talk? (true/false)

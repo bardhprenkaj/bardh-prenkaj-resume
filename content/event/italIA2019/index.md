@@ -22,7 +22,7 @@ authors: [Bardh Prenkaj, Giovanni Stilo, Paola Velardi, Damiano Distante, Stefan
 tags: [deep learning, time series, anomaly detection]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/bzdhc5b3Bxs)'
