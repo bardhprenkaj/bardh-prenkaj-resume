@@ -26,9 +26,10 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2023-03-01'
-    description: 'Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in MS Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
+    description: 'Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
     organization: University of L'Aquila
-    organization_url: ''
+    organization_url: 'https://www.univaq.it/en/section.php?id=372'
+    organization_logo: logo-univaq
     title: Subject Expert _("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_
     url: ''
   - certificate_url: ''
@@ -37,6 +38,7 @@ item:
     description: 'Winner of the BS-S 6/2021 Open Competition published on September 15th 2021 (num: 1207, rep: 326, class: VII/1) on research project "000090 19 RS VELARDI - RICERCA ATENEO 2019 - MEDI PROGETTI-VELARDI (Responsabile Scientifico, VELARDI P.)"'
     organization: Sapienza University of Rome
     organization_url: ''
+    organization_logo: sapienza-logo
     title: Scholarship in AI & Computer Science
     url: ''
   - certificate_url: ''
