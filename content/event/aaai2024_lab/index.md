@@ -12,8 +12,8 @@ abstract: In this lab, we provide a hands-on experience to help users develop an
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: '2024-02-21T10:45:00Z'
-date_end: '2024-02-21T12:30:00Z'
+date: '2024-02-21T14:00:00Z'
+date_end: '2024-02-21T15:45:00Z'
 all_day: false
 
 authors: [Mario Alfonso Prado-Romero, Bardh Prenkaj, Giovanni Stilo]
