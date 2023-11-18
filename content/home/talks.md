@@ -3,11 +3,11 @@ widget: pages
 widget_id: recent-talks
 headless: true
 weight: 60
-title: Invited Talks
+title: Invited Talks, Tutorials & Conference Presentations
 subtitle: null
 content:
   page_type: event
-  count: 5
+  count: 4
   filters:
     author: ""
     category: ""
