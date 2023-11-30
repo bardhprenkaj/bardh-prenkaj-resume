@@ -24,7 +24,7 @@ organizations:
     url: https://www.uniroma1.it/en
 education:
   courses:
-    - course: PhD in Computer Science (Grade very good/excellent)
+    - course: PhD in Computer Science
       institution: Sapienza University of Rome
       year: 2022
     - course: MSc in Computer Science (Grade 110/110 with honors; GPA 4.00)

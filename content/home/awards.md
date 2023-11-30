@@ -26,10 +26,10 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2023-03-01'
-    description: 'Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
+    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
     organization: University of L'Aquila
     organization_url: 'https://www.univaq.it/en/section.php?id=372'
-    title: Subject Expert _("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_
+    title: Subject Expert
     url: ''
   - certificate_url: 'https://web.uniroma1.it/trasparenza/sites/default/files/Approvazione%20atti%20BS-S%2006-2021.pdf'
     date_end: '2022-09-30'
@@ -40,9 +40,9 @@ item:
     title: Scholarship in AI & Computer Science
     url: ''
   - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
-    date_end: ''
+    date_end: '2021-04-30'
     date_start: '2020-05-01'
-    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. I published '
+    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. With this money (€ *1000.00*), I bought my PC (now pretty slow 🤣🙄) and published the paper Prenkaj et al. "_Hidden Space Deep Sequential Risk Prediction on Student Trajectories_", In Future Generation Computing Systems, vol. 125, pp. 532-543, 2021.'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
     title: 'Scholarship in AI'
