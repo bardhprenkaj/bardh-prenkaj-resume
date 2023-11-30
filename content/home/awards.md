@@ -42,7 +42,7 @@ item:
   - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
     date_end: '2021-04-30'
     date_start: '2020-05-01'
-    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. With this money (€ *1000.00*), I bought my PC (now pretty slow 🤣🙄) and published the paper Prenkaj et al. "_Hidden Space Deep Sequential Risk Prediction on Student Trajectories_", In Future Generation Computing Systems, vol. 125, pp. 532-543, 2021.'
+    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. With this money (€ **1000.00** ), I bought my PC (now pretty slow 🤣🙄) and published the paper Prenkaj et al. "_Hidden Space Deep Sequential Risk Prediction on Student Trajectories_", In Future Generation Computing Systems, vol. 125, pp. 532-543, 2021.'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
     title: 'Scholarship in AI'
