@@ -11,7 +11,7 @@ date: '2023-12-06T16:00:00Z'
 external_link: ''
 
 links:
-url_code: 'https://github.com/bardhprenkaj/ML_labs/2023' # change to github
+url_code: 'https://github.com/bardhprenkaj/ML_labs/src/2023' # change to github
 url_pdf: 'https://github.com/pg/intellidrive/blob/master/research/Machine%20Learning%20-%20Tom%20Mitchell.pdf'
 url_slides: ''
 url_video: ''
