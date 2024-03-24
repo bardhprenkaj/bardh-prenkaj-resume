@@ -25,6 +25,14 @@ date_format: Jan 2006
 item:
   - certificate_url: ''
     date_end: ''
+    date_start: '2024-02-01'
+    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Machine Learning_ course in M.Sc. Computer Science, Department of Computer Science'
+    organization: Sapienza University of Rome
+    organization_url: 'https://www.di.uniroma1.it/en'
+    title: Subject Expert
+    url: ''
+  - certificate_url: ''
+    date_end: ''
     date_start: '2023-12-06'
     description: 'I reviewed three workshop papers thoroughly and provided useful hints to make the submissions better. The Program Chairs emailed me that I received the _Highlighted Reviewer_ acknowledgement. Unfortunately, I did not receive a certificate 🤨'
     organization: NeurIPS XAIA 2023 Workshop
