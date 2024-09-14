@@ -7,9 +7,9 @@ interests:
   - Anomaly Detection
   - eXplainable AI
 social:
-  - icon: envelope
+  - icon: twitter
     icon_pack: fas
-    link: /#contact
+    link: https://x.com/bardh95
   - icon: graduation-cap
     icon_pack: fas
     link: https://scholar.google.com/citations?user=JIidltYAAAAJ
@@ -20,8 +20,8 @@ social:
     icon_pack: fab
     link: https://www.linkedin.com/in/prenkaj-bardh/
 organizations:
-  - name: Sapienza University of Rome
-    url: https://www.uniroma1.it/en
+  - name: Technical University of Munich
+    url: https://www.gov.sot.tum.de/rds/overview/
 education:
   courses:
     - course: PhD in Computer Science
@@ -37,10 +37,10 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-I obtained my M.Sc. and PhD in Computer Science from the Sapienza University of Rome in 2018 and 2022, respectively. I then worked as a senior researcher at the Department of Computer Science in Sapienza. Here, I led a team of 4 junior researchers and 6 software engineers in devising novel anomaly detection strategies for social isolation disorders. Since October 2022, I've been a postdoc at Sapienza in eXplainable AI and Anomaly Detection. 
+Currently a postdoc in AI at the Technical University of Munich trying to understand _What Makes us (or not) Human and What Actually is Machine Intelligence_ with [Gjergji Kasneci](https://scholar.google.de/citations?user=Zbc8GK4AAAAJ&hl=en).
 
-I am part of and actively collaborate with Italian and international research groups ([RDS](https://www.gov.sot.tum.de/rds/overview/) of TU Munich, [PINlab](https://www.pinlab.org/) of Sapienza, [AIIM](http://aiim.disim.univaq.it/) of L'Aquila). I serve as a Program Committee (PC) member for conferences such as ICCV, CVPR, KDD, CIKM, and ECAI. I actively contribute as a reviewer for journals, including TKDE, TKDD, VLDB, TIST, and KAIS.
+I received my PhD in Computer Science from the Sapienza University of Rome in 2022 with a thesis on "Latent Deep Sequential Learning of Behavioural Sequences". In Rome, I worked in the [AIIM](https://aiimlab.org/) - formerly [IIM](https://iim.di.uniroma1.it/) - advised by [Paola Velardi](https://scholar.google.com/citations?hl=en&user=yf0g6zkAAAAJ&view_op=list_works&sortby=pubdate) and [Giovanni Stilo](https://scholar.google.com/citations?hl=en&user=uTyaicMAAAAJ&view_op=list_works&sortby=pubdate). I then worked as a senior researcher at the Department of Computer Science in Sapienza. Here, I led a team of 4 junior researchers and 6 software engineers in devising novel anomaly detection strategies for social isolation disorders. From 2022 to 2024, I was a postdoc at Sapienza in anomaly detection and explainability. During this period (June-September 2023), I spent time at my current research group, [RDS](https://www.gov.sot.tum.de/rds/overview/) working on graph counterfactual explainability.
 
-In June 2023 I joined the Chair of [Responsible Data Science](https://www.gov.sot.tum.de/rds/overview/) at TU Munich lead by prof. Kasneci to work on counterfactual explainability (_external researcher_).
+I made [BetterScholar](https://betterscholar.org/) with [Antonio Norelli](https://noranta4.com/), an alternative to Google Scholar profiles. Read more here: [Why BetterScholar?](https://medium.com/@noranta4/why-betterscholar-051ffff7e46d)
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj.pdf" "newtab" >}}curriculum vitae{{< /staticref >}}.
