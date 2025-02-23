@@ -30,7 +30,7 @@ abstract: We introduce a novel semi-supervised Graph Counterfactual Explainer (G
 tags: ['counterfactual', 'explainability']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

@@ -28,7 +28,7 @@ abstract: Autoencoders have been recently applied to outlier detection. However,
 tags: ['anomaly detection', 'deep learning']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

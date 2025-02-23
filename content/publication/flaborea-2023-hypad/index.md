@@ -33,7 +33,7 @@ abstract: The progress in modelling time series and, more generally, sequences o
 tags: ['anomaly detection', 'uncertainty estimation']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:
@@ -43,7 +43,7 @@ featured: true
 url_pdf: 'https://openaccess.thecvf.com/content/CVPR2023W/VAND/papers/Flaborea_Are_We_Certain_Its_Anomalous_CVPRW_2023_paper.pdf'
 url_code: 'https://github.com/aleflabo/HypAD'
 url_dataset: ''
-url_poster: '../../../uploads/posters/CIKM2023.pdf'
+url_poster: ''
 url_project: ''
 url_slides: ''
 url_source: ''

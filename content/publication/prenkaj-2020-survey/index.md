@@ -29,7 +29,7 @@ abstract: The recent diffusion of online education (both MOOCs and e-courses) ha
 tags: ['time series', 'deep learning']
 
 # Display this page in the Featured widget?
-featured: true
+featured: false
 
 # Custom links (uncomment lines below)
 # links:

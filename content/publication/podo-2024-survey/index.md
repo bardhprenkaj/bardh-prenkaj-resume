@@ -28,7 +28,7 @@ abstract: Visualization Recommendation Systems (VRSs) are a novel and challengin
 tags: ['VisualML']
 
 # Display this page in the Featured widget?
-featured: True
+featured: false
 
 # Custom links (uncomment lines below)
 # links:
