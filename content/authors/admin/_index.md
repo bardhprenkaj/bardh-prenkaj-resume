@@ -5,7 +5,9 @@ avatar_filename: avatar.png
 bio: What's up!
 interests:
   - Anomaly Detection
-  - eXplainable AI
+  - Machine Robustness
+  - Machine Unlearning
+  - AI for Healthcare
 social:
   - icon: twitter
     icon_pack: fab
