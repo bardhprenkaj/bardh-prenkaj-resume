@@ -37,7 +37,7 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-Currently a postdoc in AI at the Technical University of Munich in _ML Privacy and Security_.
+Currently a postdoc in ML Privacy and Security at the Technical University of Munich.
 
 From 10/2022 to 10/2024, I was a postdoc at Sapienza in anomaly detection and explainability. During this period (June-September 2023), I spent time at my current research group, [RDS](https://www.gov.sot.tum.de/rds/overview/) working on graph counterfactual explainability.
 
