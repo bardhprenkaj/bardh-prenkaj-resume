@@ -47,8 +47,7 @@ url_video: ''
 # Featured image
 # To use, add an image named `featured.jpg/png` to your page's folder.
 image:
-  caption: 'Comparison of the distribution of Normalised RMSE (NRMSE) of CoRoNNa+LSTM with the average performances
-of CoRoNNa+GRU and CoRoNNa+RNN for all countries in examination'
+  caption: 'Comparison of the distribution of Normalised RMSE (NRMSE) of CoRoNNa+LSTM with the average performances of CoRoNNa+GRU and CoRoNNa+RNN for all countries in examination'
   focal_point: ''
   preview_only: false
 
