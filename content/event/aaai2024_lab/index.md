@@ -20,7 +20,7 @@ authors: [Mario Alfonso Prado-Romero, Bardh Prenkaj, Giovanni Stilo]
 tags: [deep learning, explainability]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 image:
   caption: 'AAAI 2024 Banner'
