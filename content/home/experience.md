@@ -4,12 +4,21 @@ active: true
 date_format: Jan 2006
 experience:
   - title: Postdoctoral Researcher
+    company: Technical University of Munich
+    company_url: ""
+    company_logo: tum-logo
+    location: Munich, Germany
+    date_start: 2024-04-15
+    date_end: "2026-03-13"
+    description: >-2
+        I am currently working on fairness and trustworthiness of generative models as part of the Chair of Responsible Data Science. I currently co-advise 3 PhD students.
+  - title: Postdoctoral Researcher
     company: Sapienza University of Rome
     company_url: ""
     company_logo: sapienza-logo
     location: Rome, Italy
     date_start: 2022-10-01
-    date_end: ""
+    date_end: "2026-01-31"
     description: >-2
         Researching on Anomaly Detection and Counterfactual Explainability. I actively participate in e-health and anomaly detection interdisciplinary projects.
   - title: Visiting Researcher
