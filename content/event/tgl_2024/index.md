@@ -34,7 +34,7 @@ featured: true
 #     url: https://twitter.com/georgecushen
 url_code: 'https://github.com/bardhprenkaj/HANSEL'
 url_pdf: 'https://dl.acm.org/doi/pdf/10.1145/3637528.3671831'
-url_slides: ''
+url_slides: '../../../uploads/speeches/tgl_17_10_2024_speech.pdf'
 url_video: 'https://www.youtube.com/watch?v=LZ47oqbfYJU'
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
