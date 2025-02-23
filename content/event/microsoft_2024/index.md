@@ -22,9 +22,9 @@ tags: [deep learning, explainability]
 # Is this a featured talk? (true/false)
 featured: true
 
-#image:
-#  caption: 'AAAI 2024 Banner'
-#  focal_point: Right
+image:
+  caption: 'Microsoft Logo'
+  focal_point: Right
 
 
 # links:
