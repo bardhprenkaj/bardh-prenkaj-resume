@@ -43,7 +43,7 @@ experience:
     date_start: 2020-03-01
     date_end: 2021-12-31
     description: >-2
-        Worked alongside Dr Sarvari and Prof Domeniconi on boosting-based anomaly detection models. We published BAE.
+        Worked alongside Dr Sarvari and Prof Domeniconi on boosting-based anomaly detection models. We published Boosting-based Autoencoder at PAKDD'21.
   - title: Student Research Assistant
     company: Sapienza University of Rome
     company_url: ""

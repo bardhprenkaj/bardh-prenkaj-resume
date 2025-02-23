@@ -17,7 +17,7 @@ authors: [Bardh Prenkaj]
 tags: [deep learning]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 #image:
 #  caption: 'Workflow to generate and test an improved version of the Plotly dataset'

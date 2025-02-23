@@ -7,7 +7,7 @@ title: Invited Talks, Tutorials & Conference Presentations
 subtitle: null
 content:
   page_type: event
-  count: 4
+  count: 2
   filters:
     author: ""
     category: ""

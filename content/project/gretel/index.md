@@ -9,7 +9,7 @@ date: '2022-06-01T00:00:00Z'
 external_link: ''
 
 links:
-url_code: 'https://github.com/MarioTheOne/GRETEL'
+url_code: 'https://github.com/aiim-research/GRETEL'
 url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3539597.3573026'
 url_slides: ''
 url_video: ''

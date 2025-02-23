@@ -17,7 +17,7 @@ authors: [Bardh Prenkaj]
 tags: [anomaly detection, deep learning]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 # links:
 #   - icon: twitter

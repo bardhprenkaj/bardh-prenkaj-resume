@@ -17,7 +17,7 @@ authors: [Bardh Prenkaj]
 tags: [technology, healthcare]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 links:
    - icon: linkedin

@@ -18,7 +18,7 @@ authors: [Bardh Prenkaj, Giovanni Stilo, Lorenzo Madeddu]
 tags: [deep learning, time series, anomaly detection]
 
 # Is this a featured talk? (true/false)
-featured: true
+featured: false
 
 image:
   caption: 'Image credit: [**Lorenzo Madeddu**] (https://www.lorenzomadeddu.com/talk/challenges-and-solutions-to-the-student-dropout-prediction-problem-in-online-courses/featured.png)'
