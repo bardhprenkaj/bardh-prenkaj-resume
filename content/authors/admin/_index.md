@@ -29,10 +29,10 @@ education:
     - course: PhD in Computer Science
       institution: Sapienza University of Rome
       year: 2022
-    - course: MSc in Computer Science (Grade 110/110 with honors; GPA 4.00)
+    - course: MSc in Computer Science (Grade 110/110 with honors; GPA 4.00, top 1%)
       institution: Sapienza University of Rome
       year: 2018
-    - course: BSc in Computer Science (Grade 110/110; GPA 4.00)
+    - course: BSc in Computer Science (Grade 110/110; GPA 4.00, top 1%)
       institution: Sapienza University of Rome
       year: 2016
 email: ""
