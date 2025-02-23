@@ -37,7 +37,7 @@ email: ""
 superuser: true
 highlight_name: true
 ---
-Currently a postdoc in AI at the Technical University of Munich trying to understand _What Makes us (or not) Human and What Actually is Machine Intelligence_ with [Gjergji Kasneci](https://scholar.google.de/citations?user=Zbc8GK4AAAAJ&hl=en).
+Currently a postdoc in AI at the Technical University of Munich in _ML Privacy and Security_.
 
 From 10/2022 to 10/2024, I was a postdoc at Sapienza in anomaly detection and explainability. During this period (June-September 2023), I spent time at my current research group, [RDS](https://www.gov.sot.tum.de/rds/overview/) working on graph counterfactual explainability.
 
