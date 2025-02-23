@@ -32,7 +32,7 @@ image:
 #     icon_pack: fab
 #     name: Follow
 #     url: https://twitter.com/georgecushen
-url_code: 'https://github.com/MarioTheOne/GRETEL'
+url_code: 'https://github.com/aiim-research/GRETEL'
 url_pdf: ''
 url_slides: ''
 url_video: ''

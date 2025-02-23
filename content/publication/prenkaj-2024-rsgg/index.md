@@ -36,7 +36,7 @@ featured: True
 #   url: http://example.org
 
 url_pdf: ''
-url_code: 'https://github.com/MarioTheOne/GRETEL'
+url_code: 'https://github.com/aiim-research/GRETEL'
 url_dataset: ''
 url_poster: '/uploads/posters/AAAI2024.pdf'
 url_project: 'https://aiimlab.org/blog/2023/12/19/AAAI_24_Robust_Stochastic_Graph_Generator_for_Counterfactual_Explanations'

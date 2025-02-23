@@ -37,7 +37,7 @@ featured: true
 #   url: http://example.org
 
 url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3618105'
-url_code: 'https://github.com/MarioTheONE/GRETEL'
+url_code: 'https://github.com/aiim-research/GRETEL'
 url_dataset: ''
 url_poster: ''
 url_project: ''
