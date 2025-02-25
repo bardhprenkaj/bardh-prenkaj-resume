@@ -2,13 +2,16 @@
 title: Bardh Prenkaj
 role: Computer Scientist, PhD
 avatar_filename: avatar.png
-bio: What's up!
+bio: It's okay to stalk for professional reasons!
 interests:
   - Anomaly Detection
   - Machine Robustness
   - Machine Unlearning
   - AI for Healthcare
 social:
+  - icon: betterscholar
+    icon_pack: fas
+    link: https://betterscholar.org/profile/32208207/
   - icon: twitter
     icon_pack: fab
     link: https://x.com/bardh95
@@ -47,4 +50,7 @@ I received my PhD in Computer Science from the Sapienza University of Rome in 20
 
 I made [BetterScholar](https://betterscholar.org/) with [Antonio Norelli](https://noranta4.com/), an alternative to Google Scholar profiles. Read more here: [Why BetterScholar?](https://medium.com/@noranta4/why-betterscholar-051ffff7e46d)
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_bardh_prenkaj.pdf" "newtab" >}}curriculum vitae{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/resume_prenkaj.pdf" "newtab" >}}Resume{{< /staticref >}}.
+
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_prenkaj.pdf" "newtab" >}}Curriculum Vitae{{< /staticref >}}.
+
