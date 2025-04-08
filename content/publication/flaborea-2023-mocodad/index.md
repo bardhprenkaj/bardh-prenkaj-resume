@@ -41,7 +41,7 @@ featured: true
 url_pdf: 'https://arxiv.org/pdf/2307.07205.pdf'
 url_code: 'https://github.com/aleflabo/MoCoDAD'
 url_dataset: ''
-url_poster: '/uploads/posters/AAAI2024.pdf'
+url_poster: '/uploads/posters/ICCV2023.pdf'
 url_project: ''
 url_slides: ''
 url_source: ''
