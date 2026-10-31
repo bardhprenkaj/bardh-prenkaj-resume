@@ -33,7 +33,7 @@ item:
     url: ''
   - certificate_url: ''
     date_end: ''
-    date_start: '2026-07-01'
+    date_start: '2026-05-01'
     description: ''
     organization: ICML 2026
     organization_url: 'https://icml.cc/Conferences/2026'
@@ -58,7 +58,7 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2024-02-01'
-    description: '_Robust Stochastic Graph Generator for Counterfactual Explanations_ (RSGG-CE), with Mario Alfonso Prado-Romero and Giovanni Stilo, was selected as a spotlight paper.'
+    description: '[_Robust Stochastic Graph Generator for Counterfactual Explanations_](/publication/prenkaj-2024-rsgg/)'
     organization: AAAI 2024
     organization_url: 'https://aaai.org/aaai-conference/aaai-24/'
     title: '🔦 Spotlight Paper'
