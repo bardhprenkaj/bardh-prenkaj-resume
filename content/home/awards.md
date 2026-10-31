@@ -25,11 +25,51 @@ date_format: Jan 2006
 item:
   - certificate_url: ''
     date_end: ''
+    date_start: '2026-10-01'
+    description: ''
+    organization: NeurIPS 2026
+    organization_url: 'https://neurips.cc/Conferences/2026'
+    title: '🏆 Top Reviewer Award'
+    url: ''
+  - certificate_url: ''
+    date_end: ''
+    date_start: '2026-07-01'
+    description: ''
+    organization: ICML 2026
+    organization_url: 'https://icml.cc/Conferences/2026'
+    title: '🏆 Golden Reviewer Award'
+    url: ''
+  - certificate_url: ''
+    date_end: ''
+    date_start: '2025-08-01'
+    description: ''
+    organization: KDD 2025
+    organization_url: 'https://kdd2025.kdd.org/'
+    title: '🏆 Outstanding Reviewer Award'
+    url: ''
+  - certificate_url: ''
+    date_end: '2037-03-01'
+    date_start: '2025-03-01'
+    description: 'Associate Professor (II Fascia) in the call 2023/2025 (Ministerial Decree n. 1796/2023) for the disciplinary field 01/B1 – Informatics.'
+    organization: Italian Ministry of University and Research
+    organization_url: 'https://www.mur.gov.it/'
+    title: '🎓 Italian National Scientific Qualification (Habilitation)'
+    url: ''
+  - certificate_url: ''
+    date_end: ''
+    date_start: '2025-02-01'
+    description: '_RAZOR: Sharpening Knowledge by Cutting Bias with Unsupervised Text Rewriting_ was selected as a spotlight paper.'
+    organization: AAAI 2025
+    organization_url: 'https://aaai.org/conference/aaai/aaai-25/'
+    title: '🏆 Spotlight Paper'
+    url: ''
+  - certificate_url: ''
+    date_end: ''
     date_start: '2024-02-01'
     description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Machine Learning_ course in M.Sc. Computer Science, Department of Computer Science'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
-    title: Subject Expert
+    title: '🎓 Subject Expert'
     url: ''
   - certificate_url: ''
     date_end: ''
@@ -37,7 +77,7 @@ item:
     description: 'I reviewed three workshop papers thoroughly and provided useful hints to make the submissions better. The Program Chairs emailed me that I received the _Highlighted Reviewer_ acknowledgement. Unfortunately, I did not receive a certificate 🤨'
     organization: NeurIPS XAIA 2023 Workshop
     organization_url: 'https://xai-in-action.github.io/#accepted-papers'
-    title: Highlighted Reviewer
+    title: '🏆 Highlighted Reviewer'
     url: ''
   - certificate_url: ''
     date_end: ''
@@ -45,7 +85,7 @@ item:
     description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
     organization: University of L'Aquila
     organization_url: 'https://www.univaq.it/en/section.php?id=372'
-    title: Subject Expert
+    title: '🎓 Subject Expert'
     url: ''
   - certificate_url: 'https://web.uniroma1.it/trasparenza/sites/default/files/Approvazione%20atti%20BS-S%2006-2021.pdf'
     date_end: '2022-09-30'
@@ -53,7 +93,7 @@ item:
     description: 'Winner of the BS-S 6/2021 Open Competition published on September 15th 2021 (num: 1207, rep: 326, class: VII/1) on research project "000090 19 RS VELARDI - RICERCA ATENEO 2019 - MEDI PROGETTI-VELARDI (Responsabile Scientifico, VELARDI P.)"'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
-    title: Scholarship in AI & Computer Science
+    title: '🏅 Scholarship in AI & Computer Science'
     url: ''
   - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
     date_end: '2021-04-30'
@@ -61,7 +101,7 @@ item:
     description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. With this money (€ **1000.00** ), I bought my PC (now pretty slow 🤣🙄) and published the paper Prenkaj et al. "_Hidden Space Deep Sequential Risk Prediction on Student Trajectories_", In Future Generation Computing Systems, vol. 125, pp. 532-543, 2021.'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
-    title: 'Scholarship in AI'
+    title: '🏅 Scholarship in AI'
     url: ''
   - certificate_url: ''
     date_end: '2019-07-26'
@@ -69,7 +109,7 @@ item:
     description: 'Research training event about the most recent advances in the critical and fast developing area of deep learning'
     organization: IRDTA
     organization_url: https://irdta.eu/deeplearn2019/
-    title: '3rd International Summer School on Deep Learning'
+    title: '📚 3rd International Summer School on Deep Learning'
     url: ''
   - certificate_url: 'http://www.laziodisco.it/wp-content/uploads/2017/11/GRADUATORIA-VINCITORI-PREMIO-DI-LAUREA-A.A.-2015-2016.pdf'
     date_end: ''
@@ -77,7 +117,7 @@ item:
     description: 'Winner of the Premio di Laurea distributed from LazioDiSU to excellent bachelor degree students. Winner num: 899, grade: 110/110, **Sum: € 2,559.18**'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
     organization_url: ''
-    title: 'Graduation Prize (B.Sc.)'
+    title: '🏅 Graduation Prize (B.Sc.)'
     url: ''
   - certificate_url: ''
     date_end: '2018-10-31'
@@ -85,7 +125,7 @@ item:
     description: 'Winner of the LazioDiSU Study Scholarship for B.Sc. (3 years) and M.Sc. (2 years). **Yearly sum: € 5,118.36**'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
     organization_url: ''
-    title: 'Merit Scholarship in Computer Science'
+    title: '🏅 Merit Scholarship in Computer Science'
     url: ''
 design:
   columns: '2'
