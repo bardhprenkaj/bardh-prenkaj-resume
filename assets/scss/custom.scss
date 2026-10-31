@@ -104,27 +104,18 @@ $places-map-speed: 0.45s;
   transition: flex-basis $places-map-speed ease;
 }
 
+// No box around the map: the globe sits directly on the section background.
 .places-map {
   height: $places-map-height;
-  border-radius: 6px;
   z-index: 0;
-  // Space around the globe.
-  background: radial-gradient(circle at 50% 50%, #f4f8fb 0%, #dfe8ef 100%);
+  background: transparent;
   transition: height $places-map-speed ease;
-}
-
-.dark .places-map {
-  background: radial-gradient(circle at 50% 50%, #1c2230 0%, #0b0e14 100%);
 }
 
 // Let popups extend past the map's edges instead of being clipped. Only popups can
 // overflow: the canvas is exactly the size of the map.
 .places-map.maplibregl-map {
   overflow: visible;
-}
-
-.places-map .maplibregl-canvas {
-  border-radius: 6px;
 }
 
 .places-map .maplibregl-popup {
