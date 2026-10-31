@@ -5,7 +5,7 @@ date_format: Jan 2006
 experience:
   - title: AI Scientist
     company: GaiaLogic
-    company_url: "https://gaialogic.ai/"
+    company_url: ""
     company_logo: gaialogic
     location: Remote
     date_start: 2026-06-01

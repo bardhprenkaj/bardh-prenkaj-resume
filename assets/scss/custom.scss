@@ -591,3 +591,8 @@ a:focus,
     width: 100%;
   }
 }
+
+// Every home page section on white (the theme greys out every second section).
+.home-section:nth-of-type(even) {
+  background: #fff;
+}
