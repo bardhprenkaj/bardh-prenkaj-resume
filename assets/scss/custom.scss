@@ -156,11 +156,12 @@ a:focus,
   }
 }
 
-.places-map-badge--static {
+// Badge next to the conference name in a popup.
+.places-map-name-badge {
   display: inline-block;
-  width: 15px;
-  height: 15px;
-  margin-right: 0.35rem;
+  width: 16px;
+  height: 16px;
+  margin-left: 0.35rem;
   vertical-align: -2px;
 }
 

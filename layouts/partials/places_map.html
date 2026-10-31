@@ -2,7 +2,8 @@
      Call: partial "places_map.html" (dict "places" LIST "regions" "data/FILE.geojson" "id" "NAME")
      Each place needs: name, location, lat, lng.
      Optional: kind ("visit", the default, green point; or "conference", blue point),
-     badge ("star": blue star for a spotlight paper; "trophy": trophy for a reviewer award),
+     badge ("star": blue star for a spotlight paper; "trophy": blue trophy for a reviewer award;
+     drawn instead of the point and next to the name in the popup),
      dates, people (Markdown), people_label (default "Worked with"),
      logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
      the card title),
@@ -22,7 +23,9 @@
   {{ with .people }}
     {{ $info = printf "%s<div class=\"places-map-people\">%s: %s</div>" $info ($place.people_label | default "Worked with") (. | markdownify) }}
   {{ end }}
-  {{ $popup := printf "<div class=\"places-map-name\">%s</div>%s<a href=\"#\" class=\"places-map-details\" data-index=\"%d\">Check details →</a>" (.name | htmlEscape) $info $k }}
+  {{ $badge := "" }}
+  {{ with .badge }}{{ $badge = printf "<span class=\"places-map-name-badge\" title=\"%s\">%s</span>" (cond (eq . "star") "Spotlight paper" "Reviewer award") (partial "places_map_icon.html" .) }}{{ end }}
+  {{ $popup := printf "<div class=\"places-map-name\">%s%s</div>%s<a href=\"#\" class=\"places-map-details\" data-index=\"%d\">Check details →</a>" (.name | htmlEscape) $badge $info $k }}
   {{ $header := printf "<h3 class=\"places-map-card-title\">%s</h3>" (.name | htmlEscape) }}
   {{ with .logo }}
     {{ $file := cond (strings.Contains . ".") . (printf "%s.svg" .) }}
@@ -50,8 +53,6 @@
   <div class="places-map-legend" aria-hidden="true">
     <span><i class="places-map-dot places-map-dot--static"></i>Visiting periods</span>
     <span><i class="places-map-dot places-map-dot--conference places-map-dot--static"></i>Conferences</span>
-    {{ if where . "badge" "star" }}<span><i class="places-map-badge places-map-badge--static">{{ partial "places_map_icon.html" "star" }}</i>Spotlight paper</span>{{ end }}
-    {{ if where . "badge" "trophy" }}<span><i class="places-map-badge places-map-badge--static">{{ partial "places_map_icon.html" "trophy" }}</i>Reviewer award</span>{{ end }}
   </div>
   {{ end }}
 </div>

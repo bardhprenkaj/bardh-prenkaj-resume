@@ -71,7 +71,7 @@ item:
     description: '[_Robust Stochastic Graph Generator for Counterfactual Explanations_](/publication/prenkaj-2024-rsgg/)'
     organization: AAAI 2024
     organization_url: 'https://aaai.org/aaai-conference/aaai-24/'
-    title: '🔦 Spotlight Paper'
+    title: '⭐ Spotlight Paper'
     url: ''
   - certificate_url: ''
     date_end: ''
