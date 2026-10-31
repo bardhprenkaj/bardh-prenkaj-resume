@@ -3,6 +3,12 @@ widget: experience
 active: true
 date_format: Jan 2006
 experience:
+  - title: AI Scientist
+    company: GaiaLogic
+    company_url: "https://gaialogic.ai/"
+    company_logo: gaialogic
+    location: Remote
+    date_start: 2026-06-01
   - title: Postdoc
     company: Technical University of Munich
     company_url: ""
