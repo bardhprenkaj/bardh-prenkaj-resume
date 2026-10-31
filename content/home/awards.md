@@ -61,7 +61,7 @@ item:
     description: '_Robust Stochastic Graph Generator for Counterfactual Explanations_ (RSGG-CE), with Mario Alfonso Prado-Romero and Giovanni Stilo, was selected as a spotlight paper.'
     organization: AAAI 2024
     organization_url: 'https://aaai.org/aaai-conference/aaai-24/'
-    title: '🏆 Spotlight Paper'
+    title: '🔦 Spotlight Paper'
     url: ''
   - certificate_url: ''
     date_end: ''

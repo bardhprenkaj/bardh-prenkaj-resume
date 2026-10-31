@@ -1,4 +1,6 @@
-{{/* Compact override of the Wowchemy accomplishments widget: one row per item, description in small text. */}}
+{{/* Compact override of the Wowchemy accomplishments widget: one row per item, description in small text.
+     Only items from the last 2 years (counted from the visitor's current date) are shown at first;
+     each "Load more" click reveals the next 2 years. Without JavaScript every item is shown. */}}
 {{ $page := .page }}
 {{ $columns := $page.Params.design.columns | default "2" }}
 {{ $date_format := $page.Params.date_format | default "Jan 2006" }}
@@ -7,9 +9,10 @@
   {{ with $page.Content }}{{ . }}{{ end }}
 
   {{ if $page.Params.item }}
-  <ul class="compact-awards list-unstyled">
+  {{ $list_id := printf "compact-awards-%s" $page.File.TranslationBaseName }}
+  <ul class="compact-awards list-unstyled" id="{{ $list_id }}">
     {{ range sort $page.Params.item ".date_start" "desc" }}
-    <li class="compact-award">
+    <li class="compact-award" data-date="{{ (time .date_start) | time.Format "2006-01-02" }}">
       <div class="compact-award-date">
         {{ (time .date_start) | time.Format $date_format }}{{ with .date_end }} – {{ (time .) | time.Format $date_format }}{{ end }}
       </div>
@@ -36,5 +39,46 @@
     </li>
     {{ end }}
   </ul>
+  <div class="compact-awards-more">
+    <button type="button" class="btn btn-outline-primary btn-sm" data-target="{{ $list_id }}" hidden>Load more</button>
+  </div>
+  <script>
+    (function () {
+      var list = document.getElementById("{{ $list_id }}");
+      var button = document.querySelector('[data-target="{{ $list_id }}"]');
+      var items = Array.prototype.slice.call(list.querySelectorAll(".compact-award"));
+      var cutoff = new Date();
+
+      function stepBack() {
+        cutoff.setFullYear(cutoff.getFullYear() - 2);
+      }
+
+      function update() {
+        var hidden = 0;
+        items.forEach(function (item) {
+          var show = new Date(item.dataset.date) >= cutoff;
+          item.hidden = !show;
+          if (!show) hidden++;
+        });
+        button.hidden = hidden === 0;
+        return hidden;
+      }
+
+      function countVisible() {
+        return items.filter(function (item) { return !item.hidden; }).length;
+      }
+
+      stepBack();
+      update();
+
+      button.addEventListener("click", function () {
+        var before = countVisible();
+        // Skip empty 2-year windows so every click shows at least one more item.
+        do {
+          stepBack();
+        } while (update() > 0 && countVisible() === before);
+      });
+    })();
+  </script>
   {{ end }}
 </div>
