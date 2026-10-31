@@ -1,6 +1,5 @@
 ---
 title: Bardh Prenkaj
-role: Computer Scientist, PhD
 avatar_filename: avatar.png
 bio: It's okay to stalk for professional reasons!
 interests:
