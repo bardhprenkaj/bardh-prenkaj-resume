@@ -66,6 +66,140 @@ places:
       I was General Chair of the 4th International Summer School on "Artificial Intelligence for Healthcare and Societal Impact", hosted at Heimerer College in Pristina. Rona helped with the logistics of the school, and I took care of inviting the keynote speakers ([Giovanni Stilo](https://giovannistilo.eu/), [Andrea Aliverti](https://www.deib.polimi.it/eng/people/details/569774), [Olav Götz](https://science.rsu.lv/en/persons/olav-goetz/), and [Valerio Pellegrini](https://www.linkedin.com/in/valerio-p-2580916b/)) and organizing the workshops.
     lat: 42.6629
     lng: 21.1655
+  # Conferences attended in person (blue points; their country, or US/Canadian state, is outlined).
+  - name: ICML 2026
+    kind: conference
+    location: COEX Convention & Exhibition Center, Seoul, South Korea
+    lat: 37.5116
+    lng: 127.0595
+    dates: Jul 2026
+    logo: conf-icml
+    card_text: |-
+      🏆 Received the Golden Reviewer Award.
+
+      Paper, presented by [Zheyu Zhang](https://scholar.google.com/citations?user=iiK2yI8AAAAJ&hl=en):
+
+      - [Active Tabular Augmentation via Policy-Guided Diffusion Inpainting](/publication/zhang-2026-active/)
+  - name: ELLIS UnConference 2025
+    kind: conference
+    location: Bella Center, Copenhagen, Denmark
+    lat: 55.6375
+    lng: 12.5781
+    dates: Dec 2025
+    logo: conf-ellis.png
+    logo_height: 32px
+    card_text: |-
+      Presented:
+
+      - [Graph Inverse Style Transfer for Counterfactual Explainability](/publication/prenkaj-2025-gist/)
+  - name: ICML 2025
+    kind: conference
+    location: Vancouver Convention Centre, Vancouver, Canada
+    lat: 49.2888
+    lng: -123.1111
+    dates: Jul 2025
+    logo: conf-icml
+    card_text: |-
+      Presented:
+
+      - [Graph Inverse Style Transfer for Counterfactual Explainability](/publication/prenkaj-2025-gist/)
+  - name: ECML PKDD 2025
+    kind: conference
+    location: Alfândega do Porto Congress Centre, Porto, Portugal
+    lat: 41.1427
+    lng: -8.6205
+    dates: Sep 2025
+    logo: conf-ecmlpkdd2025.png
+    logo_height: 64px
+    card_text: |-
+      Presented the tutorial:
+
+      - [Unraveling Graph Counterfactual Explainability: from Theoretical Foundations to Technical Mastery](https://aiimlab.org/events/ECML_PKDD_2025_Unraveling_Graph_Counterfactual_Explainability_from_Theoretical_Foundations_to_Technical_Mastery.html)
+  - name: AAAI 2025
+    kind: conference
+    location: Pennsylvania Convention Center, Philadelphia, PA, USA
+    lat: 39.9548
+    lng: -75.1600
+    dates: Feb 2025
+    logo: conf-aaai2025.png
+    logo_height: 64px
+    card_text: |-
+      Presented:
+
+      - [RAZOR: Sharpening Knowledge by Cutting Bias with Unsupervised Text Rewriting](/publication/yang-2025-shortcut/)
+  - name: KDD 2024
+    kind: conference
+    location: Centre de Convencions Internacional de Barcelona (CCIB), Barcelona, Spain
+    lat: 41.4106
+    lng: 2.2214
+    dates: Aug 2024
+    logo: conf-kdd2024.jpg
+    card_text: |-
+      Presented:
+
+      - [Unifying Evolution, Explanation, and Discernment: A Generative Approach for Dynamic Graph Counterfactuals](/publication/prenkaj-2024-gracie/)
+
+      Co-chair of the workshop:
+
+      - [Discovering Drift Phenomena in Evolving Landscape (DELTA)](https://aiimlab.org/events/KDD_2024_Discovering_Drift_Phenomena_in_Evolving_Landscape.html)
+  - name: AAAI 2024
+    kind: conference
+    location: Vancouver Convention Centre, Vancouver, Canada
+    lat: 49.2888
+    lng: -123.1111
+    dates: Feb 2024
+    logo: conf-aaai2024.png
+    logo_height: 64px
+    card_text: |-
+      Presented (🔦 spotlight):
+
+      - [Robust Stochastic Graph Generator for Counterfactual Explanations](/publication/prenkaj-2024-rsgg/)
+
+      Presented the tutorials:
+
+      - [Graphs Counterfactual Explainability: A Comprehensive Landscape](https://aiimlab.org/events/AAAI_2024_Graphs_Counterfactual_Explainability_A_Comprehensive_Landscape.html)
+      - [Digging into the Landscape of Graphs Counterfactual Explainability](https://aiimlab.org/events/AAAI_2024_Digging_into_the_Landscape_of_Graphs_Counterfactual_Explainability.html)
+  - name: ECCV 2024
+    kind: conference
+    location: MiCo Milano Convention Centre, Milan, Italy
+    lat: 45.4790
+    lng: 9.1530
+    dates: Oct 2024
+    logo: conf-eccv2024
+    card_text: |-
+      Presented:
+
+      - [Semantically Guided Representation Learning For Action Anticipation](/publication/diko-2024-anticipation/)
+  - name: ICCV 2023
+    kind: conference
+    location: Paris Convention Center, Paris, France
+    lat: 48.8323
+    lng: 2.2875
+    dates: Oct 2023
+    logo: conf-iccv2023
+    card_text: |-
+      Presented:
+
+      - [Multimodal Motion Conditioned Diffusion Model for Skeleton-based Video Anomaly Detection](/publication/flaborea-2023-mocodad/)
+  - name: ICLR 2024
+    kind: conference
+    location: Messe Wien Exhibition & Congress Center, Vienna, Austria
+    lat: 48.2178
+    lng: 16.4063
+    dates: May 2024
+    logo: conf-iclr
+    card_text: |-
+      Presented [BetterScholar.org](https://betterscholar.org/).
+  - name: ICIAP 2017
+    kind: conference
+    location: Catania, Italy
+    lat: 37.5079
+    lng: 15.0830
+    dates: Sep 2017
+    card_text: |-
+      Presented:
+
+      - [A smart peephole on the cloud](/publication/de-2017-smart/)
 headless: true
 weight: 30
 title: Visiting Periods

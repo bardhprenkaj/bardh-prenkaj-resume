@@ -1,11 +1,12 @@
 {{/* Globe map (MapLibre GL) of the `places` list in the current page's front matter.
      Each place needs: name, location, lat, lng.
-     Optional: dates, people (Markdown), people_label (default "Worked with"),
+     Optional: kind ("visit", the default, green point; or "conference", blue point),
+     dates, people (Markdown), people_label (default "Worked with"),
      logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
      the card title),
      logo_height (CSS length, default 48px), card_text (Markdown; shown only in the detail card).
-     Shortcode parameter `regions`: optional GeoJSON file in assets/ whose areas are shaded
-     on the map (e.g. countries or states visited).
+     Shortcode parameter `regions`: optional GeoJSON file in assets/. Features with
+     properties.kind "visit" are filled green; "conference" ones get a blue outline.
      The globe can be dragged to rotate it. Hovering a point opens its popup; clicking keeps
      it open. "Check details" in a popup shrinks the map to the left, flies to the place and
      slides in a card on the right. MapLibre (about 1 MB) loads only when the map is near
@@ -31,7 +32,7 @@
   {{ end }}
   {{ $card := printf "%s%s" $header $info }}
   {{ with .card_text }}{{ $card = printf "%s<div class=\"places-map-card-text\">%s</div>" $card (. | markdownify) }}{{ end }}
-  {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card) }}
+  {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card "kind" (.kind | default "visit")) }}
 {{ end }}
 {{ $regions := "null" }}
 {{ with .Get "regions" }}
@@ -44,6 +45,12 @@
   <div class="places-map-pane">
     <div id="{{ $id }}" class="places-map" role="img" aria-label="Globe of places: {{ delimit (apply . "index" "." "name") ", " }}"></div>
   </div>
+  {{ if where . "kind" "conference" }}
+  <div class="places-map-legend" aria-hidden="true">
+    <span><i class="places-map-dot places-map-dot--static"></i>Visiting periods</span>
+    <span><i class="places-map-dot places-map-dot--conference places-map-dot--static"></i>Conferences</span>
+  </div>
+  {{ end }}
   <aside class="places-map-card" aria-hidden="true">
     <button type="button" class="places-map-card-close" aria-label="Close details">×</button>
     <div class="places-map-card-body"></div>
@@ -63,16 +70,15 @@
     var DETAIL_ZOOM = 6;
     var OVERLAP_PX = 14;
     var GREEN = "#00a933";
+    var BLUE = "#1a5fd0";
     var LIB = "https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/5.24.0/";
 
-    // Initial view: the globe centered between the westernmost and easternmost places.
-    var lngs = places.map(function (p) { return p.lng; });
-    var lats = places.map(function (p) { return p.lat; });
-    var HOME = {
-      center: [(Math.min.apply(null, lngs) + Math.max.apply(null, lngs)) / 2,
-               (Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2],
-      zoom: 1
-    };
+    // Initial view: the globe centered on the average position of all places, so the side
+    // with most of them faces the visitor.
+    function mean(key) {
+      return places.reduce(function (sum, p) { return sum + p[key]; }, 0) / places.length;
+    }
+    var HOME = { center: [mean("lng"), mean("lat")], zoom: 1 };
 
     function loadLibrary(done) {
       if (window.maplibregl) return done();
@@ -125,8 +131,8 @@
         center: HOME.center,
         zoom: HOME.zoom,
         scrollZoom: false,
-        // OpenStreetMap asks for its credit to stay visible, not collapsed behind a button.
-        attributionControl: { compact: false },
+        // OpenStreetMap credit as a small "i" button; the credit shows on hover or click.
+        attributionControl: { compact: true },
         dragRotate: false,
         touchPitch: false,
         pitchWithRotate: false
@@ -144,18 +150,31 @@
       map.on("load", function () {
         if (regions) {
           map.addSource("regions", { type: "geojson", data: regions });
+          // Borders are coarse (1:50m data): fade them out between zoom 3.5 and 5, so they
+          // show on the globe but not in the city view of a detail card.
+          var fade = function (opacity) {
+            return ["interpolate", ["linear"], ["zoom"], 3.5, opacity, 5, 0];
+          };
           map.addLayer({ id: "regions-fill", type: "fill", source: "regions",
-                         paint: { "fill-color": GREEN, "fill-opacity": 0.18 } });
+                         filter: ["==", ["get", "kind"], "visit"],
+                         paint: { "fill-color": GREEN, "fill-opacity": fade(0.18) } });
           map.addLayer({ id: "regions-line", type: "line", source: "regions",
-                         paint: { "line-color": GREEN, "line-opacity": 0.6, "line-width": 1 } });
+                         filter: ["==", ["get", "kind"], "visit"],
+                         paint: { "line-color": GREEN, "line-opacity": fade(0.6), "line-width": 1 } });
+          map.addLayer({ id: "conference-line", type: "line", source: "regions",
+                         filter: ["==", ["get", "kind"], "conference"],
+                         paint: { "line-color": BLUE, "line-opacity": fade(0.85), "line-width": 1.5 } });
         }
         applyTheme();
+        // MapLibre opens the compact credit at first; start with it collapsed.
+        var attrib = mapEl.querySelector(".maplibregl-ctrl-attrib");
+        if (attrib) attrib.classList.remove("maplibregl-compact-show");
         new MutationObserver(applyTheme).observe(document.body, { attributes: true, attributeFilter: ["class"] });
       });
 
       var markers = places.map(function (p) {
         var el = document.createElement("div");
-        el.className = "places-map-dot";
+        el.className = "places-map-dot" + (p.kind === "conference" ? " places-map-dot--conference" : "");
         return new maplibregl.Marker({ element: el, opacityWhenCovered: "0" })
           .setLngLat([p.lng, p.lat])
           .addTo(map);

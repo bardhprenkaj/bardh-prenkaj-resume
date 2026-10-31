@@ -137,6 +137,34 @@ $places-map-speed: 0.45s;
     width: 20px;
     height: 20px;
   }
+
+  &--conference {
+    background: #1a5fd0;
+  }
+
+  &--static {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 0.4rem;
+    vertical-align: -1px;
+    cursor: default;
+  }
+}
+
+// Legend under the globe; hidden while a detail card is open.
+.places-map-legend {
+  position: absolute;
+  left: 0;
+  bottom: -1.6rem;
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.has-card .places-map-legend {
+  display: none;
 }
 
 // Detail card: zero width until "Check details" is pressed, then it takes the right 60%.
