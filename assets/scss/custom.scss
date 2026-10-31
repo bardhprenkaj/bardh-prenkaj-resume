@@ -1,0 +1,62 @@
+// Compact Honors & Awards list (layouts/partials/widgets/accomplishments.html)
+.compact-awards {
+  margin: 0;
+}
+
+.compact-award {
+  display: flex;
+  gap: 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.2);
+}
+
+.compact-award:last-child {
+  border-bottom: none;
+}
+
+.compact-award-date {
+  flex: 0 0 8.75rem;
+  white-space: nowrap;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  padding-top: 0.15rem;
+}
+
+.compact-award-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.compact-award-title {
+  font-weight: 600;
+}
+
+.compact-award-org {
+  font-size: 0.85rem;
+}
+
+.compact-award-details {
+  font-size: 0.85rem;
+  margin-top: 0;
+  line-height: 1.4;
+
+  summary {
+    cursor: pointer;
+    opacity: 0.7;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .compact-award {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .compact-award-date {
+    flex-basis: auto;
+  }
+}

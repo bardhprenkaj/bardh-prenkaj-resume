@@ -1,0 +1,43 @@
+{{/* Compact override of the Wowchemy accomplishments widget: one row per item, description collapsed. */}}
+{{ $page := .page }}
+{{ $columns := $page.Params.design.columns | default "2" }}
+{{ $date_format := $page.Params.date_format | default "Jan 2006" }}
+
+<div class="col-12 {{if eq $columns "2"}}col-lg-8{{end}}">
+  {{ with $page.Content }}{{ . }}{{ end }}
+
+  {{ if $page.Params.item }}
+  <ul class="compact-awards list-unstyled">
+    {{ range sort $page.Params.item ".date_start" "desc" }}
+    <li class="compact-award">
+      <div class="compact-award-date">
+        {{ (time .date_start) | time.Format $date_format }}{{ with .date_end }} – {{ (time .) | time.Format $date_format }}{{ end }}
+      </div>
+      <div class="compact-award-body">
+        <span class="compact-award-title">
+          {{- with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end -}}
+          {{- .title | markdownify | emojify -}}
+          {{- with .url }}</a>{{ end -}}
+        </span>
+        <span class="middot-divider"></span>
+        <span class="compact-award-org">
+          {{- with .organization_url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end -}}
+          {{- .organization | markdownify | emojify -}}
+          {{- with .organization_url }}</a>{{ end -}}
+        </span>
+        {{ with .certificate_url }}
+        <span class="middot-divider"></span>
+        <a class="compact-award-org" href="{{ . }}" target="_blank" rel="noopener">{{ i18n "see_certificate" | default "See certificate" }}</a>
+        {{ end }}
+        {{ with .description }}
+        <details class="compact-award-details">
+          <summary>Details</summary>
+          <div>{{ . | markdownify | emojify }}</div>
+        </details>
+        {{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>
