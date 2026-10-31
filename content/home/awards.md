@@ -25,6 +25,14 @@ date_format: Jan 2006
 item:
   - certificate_url: ''
     date_end: ''
+    date_start: '2025-04-01'
+    description: 'Won a grant of €20,000 for the project _“Game–Theoretic Counterfactual Explainability for Ethical and Transparent AI in Society”_ (Jun 2025 – Apr 2026).'
+    organization: TUM Think Tank
+    organization_url: 'https://tumthinktank.de/'
+    title: '🎖️ Friedrich Schiedel Fellowship'
+    url: 'https://tumthinktank.de/project/friedrich-schiedel-fellowship-for-technology-in-society/#kohorte2'
+  - certificate_url: ''
+    date_end: ''
     date_start: '2026-10-01'
     description: ''
     organization: NeurIPS 2026

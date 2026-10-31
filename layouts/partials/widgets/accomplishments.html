@@ -50,26 +50,69 @@
       var button = document.querySelector('[data-target="{{ $list_id }}"][data-action="more"]');
       var lessButton = document.querySelector('[data-target="{{ $list_id }}"][data-action="less"]');
       var items = Array.prototype.slice.call(list.querySelectorAll(".compact-award"));
+      var shown = items.map(function () { return true; });
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var DURATION = 300;
       var cutoff;
       var defaultCount;
 
-      function reset() {
-        cutoff = new Date();
-        stepBack();
-        update();
-        defaultCount = countVisible();
-        lessButton.hidden = true;
+      // Grow an item from zero height and fade it in.
+      function expand(item) {
+        if (item._anim) item._anim.cancel();
+        item.hidden = false;
+        if (reduceMotion || !item.animate) return;
+        var style = getComputedStyle(item);
+        item.style.overflow = "hidden";
+        item._anim = item.animate([
+          { height: "0px", paddingTop: "0px", paddingBottom: "0px", opacity: 0 },
+          { height: item.offsetHeight + "px", paddingTop: style.paddingTop, paddingBottom: style.paddingBottom, opacity: 1 }
+        ], { duration: DURATION, easing: "ease-out" });
+        item._anim.onfinish = item._anim.oncancel = function () {
+          item.style.overflow = "";
+          item._anim = null;
+        };
+      }
+
+      // Shrink an item to zero height, fade it out, then hide it.
+      function collapse(item) {
+        if (item._anim) item._anim.cancel();
+        if (reduceMotion || !item.animate) {
+          item.hidden = true;
+          return;
+        }
+        var style = getComputedStyle(item);
+        item.style.overflow = "hidden";
+        var anim = item.animate([
+          { height: item.offsetHeight + "px", paddingTop: style.paddingTop, paddingBottom: style.paddingBottom, opacity: 1 },
+          { height: "0px", paddingTop: "0px", paddingBottom: "0px", opacity: 0 }
+        ], { duration: DURATION, easing: "ease-in" });
+        item._anim = anim;
+        anim.onfinish = function () {
+          item.hidden = true;
+          item.style.overflow = "";
+          item._anim = null;
+        };
+        anim.oncancel = function () {
+          item.style.overflow = "";
+          item._anim = null;
+        };
       }
 
       function stepBack() {
         cutoff.setFullYear(cutoff.getFullYear() - 2);
       }
 
-      function update() {
+      // Show items dated on or after the cutoff; returns how many stay hidden.
+      function update(animate) {
         var hidden = 0;
-        items.forEach(function (item) {
+        items.forEach(function (item, k) {
           var show = new Date(item.dataset.date) >= cutoff;
-          item.hidden = !show;
+          if (show !== shown[k]) {
+            if (!animate) item.hidden = !show;
+            else if (show) expand(item);
+            else collapse(item);
+            shown[k] = show;
+          }
           if (!show) hidden++;
         });
         button.hidden = hidden === 0;
@@ -77,26 +120,34 @@
       }
 
       function countVisible() {
-        return items.filter(function (item) { return !item.hidden; }).length;
+        return shown.filter(Boolean).length;
       }
 
-      reset();
+      function reset(animate) {
+        cutoff = new Date();
+        stepBack();
+        update(animate);
+        defaultCount = countVisible();
+        lessButton.hidden = true;
+      }
+
+      reset(false);
 
       button.addEventListener("click", function () {
         var before = countVisible();
         // Skip empty 2-year windows so every click shows at least one more item.
         do {
           stepBack();
-        } while (update() > 0 && countVisible() === before);
+        } while (update(true) > 0 && countVisible() === before);
         lessButton.hidden = countVisible() <= defaultCount;
       });
 
       lessButton.addEventListener("click", function () {
-        reset();
+        reset(true);
         // Bring the list back into view if the collapse left the reader below it.
         var top = list.getBoundingClientRect().top;
         if (top < 0) {
-          window.scrollTo({ top: window.pageYOffset + top - 90, behavior: "smooth" });
+          window.scrollTo({ top: window.pageYOffset + top - 90, behavior: reduceMotion ? "auto" : "smooth" });
         }
       });
     })();
