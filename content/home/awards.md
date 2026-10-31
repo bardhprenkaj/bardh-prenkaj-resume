@@ -66,7 +66,7 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2024-02-01'
-    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Machine Learning_ course in M.Sc. Computer Science, Department of Computer Science'
+    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Machine Learning_ course in M.Sc. CS, Department of CS'
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
     title: '🎓 Subject Expert'
@@ -82,7 +82,7 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2023-03-01'
-    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. Computer Science, Department of Information Engineering, Computer Science, and Mathematics'
+    description: '_("Cultore della Materia" Art. 42 del R.D. 04/06/1938, n. 1269)_ Award for highly-skilled researcher and technician on _Deep Neural Networks_ course in M.Sc. CS, Department of Information Engineering, CS, and Mathematics'
     organization: University of L'Aquila
     organization_url: 'https://www.univaq.it/en/section.php?id=372'
     title: '🎓 Subject Expert'
@@ -93,7 +93,7 @@ item:
     description: ''
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
-    title: '🏅 Scholarship in AI & Computer Science'
+    title: '🏅 Scholarship in AI & CS'
     url: ''
   - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
     date_end: '2021-04-30'
@@ -125,7 +125,7 @@ item:
     description: 'Winner of the LazioDiSU Study Scholarship for B.Sc. (3 years) and M.Sc. (2 years). **Yearly sum: € 5,118.36**'
     organization: LazioDiSU, Ente per il Diritto agli Studi Universitari nel Lazio
     organization_url: ''
-    title: '🏅 Merit Scholarship in Computer Science'
+    title: '🏅 Merit Scholarship in CS'
     url: ''
 design:
   columns: '2'

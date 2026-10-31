@@ -16,6 +16,10 @@
 
 .compact-awards-more {
   margin-top: 0.75rem;
+
+  .btn + .btn {
+    margin-left: 0.5rem;
+  }
 }
 
 .compact-award:last-child {

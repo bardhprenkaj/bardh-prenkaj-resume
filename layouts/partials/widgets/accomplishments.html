@@ -1,6 +1,7 @@
 {{/* Compact override of the Wowchemy accomplishments widget: one row per item, description in small text.
      Only items from the last 2 years (counted from the visitor's current date) are shown at first;
-     each "Load more" click reveals the next 2 years. Without JavaScript every item is shown. */}}
+     each "Load more" click reveals the next 2 years, and "Show less" returns to the first view.
+     Without JavaScript every item is shown. */}}
 {{ $page := .page }}
 {{ $columns := $page.Params.design.columns | default "2" }}
 {{ $date_format := $page.Params.date_format | default "Jan 2006" }}
@@ -40,14 +41,25 @@
     {{ end }}
   </ul>
   <div class="compact-awards-more">
-    <button type="button" class="btn btn-outline-primary btn-sm" data-target="{{ $list_id }}" hidden>Load more</button>
+    <button type="button" class="btn btn-outline-primary btn-sm" data-target="{{ $list_id }}" data-action="more" hidden>Load more</button>
+    <button type="button" class="btn btn-outline-secondary btn-sm" data-target="{{ $list_id }}" data-action="less" hidden>Show less</button>
   </div>
   <script>
     (function () {
       var list = document.getElementById("{{ $list_id }}");
-      var button = document.querySelector('[data-target="{{ $list_id }}"]');
+      var button = document.querySelector('[data-target="{{ $list_id }}"][data-action="more"]');
+      var lessButton = document.querySelector('[data-target="{{ $list_id }}"][data-action="less"]');
       var items = Array.prototype.slice.call(list.querySelectorAll(".compact-award"));
-      var cutoff = new Date();
+      var cutoff;
+      var defaultCount;
+
+      function reset() {
+        cutoff = new Date();
+        stepBack();
+        update();
+        defaultCount = countVisible();
+        lessButton.hidden = true;
+      }
 
       function stepBack() {
         cutoff.setFullYear(cutoff.getFullYear() - 2);
@@ -68,8 +80,7 @@
         return items.filter(function (item) { return !item.hidden; }).length;
       }
 
-      stepBack();
-      update();
+      reset();
 
       button.addEventListener("click", function () {
         var before = countVisible();
@@ -77,6 +88,16 @@
         do {
           stepBack();
         } while (update() > 0 && countVisible() === before);
+        lessButton.hidden = countVisible() <= defaultCount;
+      });
+
+      lessButton.addEventListener("click", function () {
+        reset();
+        // Bring the list back into view if the collapse left the reader below it.
+        var top = list.getBoundingClientRect().top;
+        if (top < 0) {
+          window.scrollTo({ top: window.pageYOffset + top - 90, behavior: "smooth" });
+        }
       });
     })();
   </script>
