@@ -85,3 +85,21 @@ a:focus,
     flex-basis: auto;
   }
 }
+
+// Places map in the Visiting Periods section (layouts/shortcodes/places_map.html)
+.places-map {
+  height: 360px;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  z-index: 0;
+}
+
+.dark .places-map .leaflet-tile-pane {
+  filter: invert(1) hue-rotate(180deg) brightness(0.9);
+}
+
+@media (max-width: 575px) {
+  .places-map {
+    height: 260px;
+  }
+}

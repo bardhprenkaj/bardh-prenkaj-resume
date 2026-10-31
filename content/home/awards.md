@@ -30,7 +30,9 @@ item:
     organization: TUM Think Tank
     organization_url: 'https://tumthinktank.de/'
     title: '🎖️ Friedrich Schiedel Fellowship'
-    url: 'https://tumthinktank.de/project/friedrich-schiedel-fellowship-for-technology-in-society/#kohorte2'
+    url: ''
+    extra_link_label: 'see cohort'
+    extra_link_url: 'https://tumthinktank.de/project/friedrich-schiedel-fellowship-for-technology-in-society/#kohorte2'
   - certificate_url: ''
     date_end: ''
     date_start: '2026-10-01'

@@ -12,7 +12,7 @@
   {{ if $page.Params.item }}
   {{ $list_id := printf "compact-awards-%s" $page.File.TranslationBaseName }}
   <ul class="compact-awards list-unstyled" id="{{ $list_id }}">
-    {{ range sort $page.Params.item ".date_start" "desc" }}
+    {{ range $item := sort $page.Params.item ".date_start" "desc" }}
     <li class="compact-award" data-date="{{ (time .date_start) | time.Format "2006-01-02" }}">
       <div class="compact-award-date">
         {{ (time .date_start) | time.Format $date_format }}{{ with .date_end }} – {{ (time .) | time.Format $date_format }}{{ end }}
@@ -28,6 +28,7 @@
           {{- with .organization_url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end -}}
           {{- .organization | markdownify | emojify -}}
           {{- with .organization_url }}</a>{{ end -}}
+          {{- with .extra_link_url }} (<a href="{{ . }}" target="_blank" rel="noopener">{{ $item.extra_link_label | default "link" }}</a>){{ end -}}
         </span>
         {{ with .certificate_url }}
         <span class="middot-divider"></span>
