@@ -1,9 +1,7 @@
----
-widget: experience
-active: true
-date_format: Jan 2006
-widget_id: visiting_periods
-# Places shown on the globe (rendered by the places_map shortcode in the body below).
+# Places on the globe in the profile column of the home page
+# (rendered by layouts/partials/places_map.html from layouts/partials/widgets/about.html).
+# Each place: name, location, lat, lng; optional kind (visit|conference), dates, people,
+# people_label, logo, logo_height, card_text. See the partial for details.
 places:
   - name: Technical University of Munich
     location: Munich, Germany
@@ -66,7 +64,7 @@ places:
       I was General Chair of the 4th International Summer School on "Artificial Intelligence for Healthcare and Societal Impact", hosted at Heimerer College in Pristina. Rona helped with the logistics of the school, and I took care of inviting the keynote speakers ([Giovanni Stilo](https://giovannistilo.eu/), [Andrea Aliverti](https://www.deib.polimi.it/eng/people/details/569774), [Olav Götz](https://science.rsu.lv/en/persons/olav-goetz/), and [Valerio Pellegrini](https://www.linkedin.com/in/valerio-p-2580916b/)) and organizing the workshops.
     lat: 42.6629
     lng: 21.1655
-  # Conferences attended in person (blue points; their country, or US/Canadian state, is outlined).
+  # Conferences attended in person (blue points; their country, or US/Canadian state, is filled blue).
   - name: ICML 2026
     kind: conference
     location: COEX Convention & Exhibition Center, Seoul, South Korea
@@ -190,6 +188,18 @@ places:
     logo: conf-iclr
     card_text: |-
       Presented [BetterScholar.org](https://betterscholar.org/).
+  - name: CIKM 2022
+    kind: conference
+    location: Georgia World Congress Center, Atlanta, GA, USA
+    lat: 33.7593
+    lng: -84.3970
+    dates: Oct 2022
+    logo: conf-cikm2022.png
+    logo_height: 64px
+    card_text: |-
+      Presented, on behalf of my PhD colleague [Luca Podo](https://scholar.google.com/citations?user=9dpPuhQAAAAJ&hl=en):
+
+      - [Plotly.plus, an Improved Dataset for Visualization Recommendation](/event/cikm2022/)
   - name: ICIAP 2017
     kind: conference
     location: Catania, Italy
@@ -200,13 +210,3 @@ places:
       Presented:
 
       - [A smart peephole on the cloud](/publication/de-2017-smart/)
-headless: true
-weight: 30
-title: Visiting Periods
-subtitle: null
-design:
-  columns: "2"
-  view: compact
----
-
-{{< places_map regions="data/visited-regions.geojson" >}}

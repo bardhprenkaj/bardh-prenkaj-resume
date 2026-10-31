@@ -1,19 +1,19 @@
-{{/* Globe map (MapLibre GL) of the `places` list in the current page's front matter.
+{{/* Globe map (MapLibre GL) of a list of places.
+     Call: partial "places_map.html" (dict "places" LIST "regions" "data/FILE.geojson" "id" "NAME")
      Each place needs: name, location, lat, lng.
      Optional: kind ("visit", the default, green point; or "conference", blue point),
      dates, people (Markdown), people_label (default "Worked with"),
      logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
      the card title),
      logo_height (CSS length, default 48px), card_text (Markdown; shown only in the detail card).
-     Shortcode parameter `regions`: optional GeoJSON file in assets/. Features with
-     properties.kind "visit" are filled green; "conference" ones get a blue outline.
+     `regions`: optional GeoJSON file in assets/. Features with
+     properties.kind "visit" are filled green; "conference" ones are filled blue.
      The globe can be dragged to rotate it. Hovering a point opens its popup; clicking keeps
      it open. "Check details" in a popup shrinks the map to the left, flies to the place and
      slides in a card on the right. MapLibre (about 1 MB) loads only when the map is near
-     the viewport.
-     Usage: {{< places_map >}} */}}
-{{ $places := .Page.Params.places }}
-{{ $id := printf "places-map-%d" .Ordinal }}
+     the viewport. Below 600px of width the detail card opens under the globe. */}}
+{{ $places := .places }}
+{{ $id := .id | default "places-map" }}
 {{ $points := slice }}
 {{ range $k, $place := $places }}
   {{ $info := printf "<div class=\"places-map-meta\">%s</div>" (.location | htmlEscape) }}
@@ -35,7 +35,7 @@
   {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card "kind" (.kind | default "visit")) }}
 {{ end }}
 {{ $regions := "null" }}
-{{ with .Get "regions" }}
+{{ with .regions }}
   {{ $file := resources.Get . }}
   {{ if not $file }}{{ errorf "places_map: regions file not found at assets/%s" . }}{{ end }}
   {{ $regions = $file.Content }}
@@ -64,7 +64,12 @@
     var mapEl = document.getElementById("{{ $id }}");
     var card = wrap.querySelector(".places-map-card");
     var cardBody = wrap.querySelector(".places-map-card-body");
-    var phone = window.matchMedia("(max-width: 575px)");
+    // Narrow container (phones, or a side column): the card opens below the globe.
+    var NARROW_PX = 600;
+    var phone = { get matches() { return wrap.clientWidth < NARROW_PX; } };
+    function updateNarrow() { wrap.classList.toggle("is-narrow", phone.matches); }
+    updateNarrow();
+    window.addEventListener("resize", updateNarrow);
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var TRANSITION_MS = 450;
     var DETAIL_ZOOM = 6;
@@ -157,10 +162,13 @@
           };
           map.addLayer({ id: "regions-fill", type: "fill", source: "regions",
                          filter: ["==", ["get", "kind"], "visit"],
-                         paint: { "fill-color": GREEN, "fill-opacity": fade(0.18) } });
+                         paint: { "fill-color": GREEN, "fill-opacity": fade(0.3) } });
           map.addLayer({ id: "regions-line", type: "line", source: "regions",
                          filter: ["==", ["get", "kind"], "visit"],
                          paint: { "line-color": GREEN, "line-opacity": fade(0.6), "line-width": 1 } });
+          map.addLayer({ id: "conference-fill", type: "fill", source: "regions",
+                         filter: ["==", ["get", "kind"], "conference"],
+                         paint: { "fill-color": BLUE, "fill-opacity": fade(0.3) } });
           map.addLayer({ id: "conference-line", type: "line", source: "regions",
                          filter: ["==", ["get", "kind"], "conference"],
                          paint: { "line-color": BLUE, "line-opacity": fade(0.85), "line-width": 1.5 } });
@@ -286,22 +294,72 @@
       // point and the popup (so links inside stay clickable). A click on the point or inside
       // the popup keeps it open until it is closed. Points that overlap on screen share one
       // popup that lists all of them.
+      //
+      // The popup is attached to <body>, not to the map, so it sits above everything on the
+      // page (navigation bar included). It follows its point while the globe moves, opens
+      // above the point (below it when there is no room above) and fades/scales in and out.
 
-      var popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, offset: 12,
-                                         maxWidth: "300px", className: "places-map-popup" });
+      var pop = document.createElement("div");
+      pop.className = "places-popup";
+      pop.setAttribute("role", "dialog");
+      pop.innerHTML = '<button type="button" class="places-popup-close" aria-label="Close">×</button>' +
+                      '<div class="places-popup-body"></div><div class="places-popup-tip"></div>';
+      document.body.appendChild(pop);
+      var popBody = pop.querySelector(".places-popup-body");
+      var popTip = pop.querySelector(".places-popup-tip");
+      var POP_GAP = 14;      // px between the point and the popup's tip
+      var POP_MARGIN = 8;    // px kept free at the window edges
+      var POP_OUT_MS = 150;  // must match the closing animation in custom.scss
+
       var owner = -1;
+      var popOpen = false;
       var pinned = false;
       var timer = null;
+      var outTimer = null;
 
       function keepOpen() { clearTimeout(timer); }
       function closeSoon() {
         if (pinned) return;
         clearTimeout(timer);
-        timer = setTimeout(function () { popup.remove(); }, 300);
+        timer = setTimeout(hidePopup, 300);
       }
       function pin() { pinned = true; keepOpen(); }
 
-      popup.on("close", function () { owner = -1; pinned = false; keepOpen(); });
+      function placePopup() {
+        if (!popOpen) return;
+        // Close if the point has rotated to the far side of the globe.
+        if (getComputedStyle(markers[owner].getElement()).opacity === "0") return hidePopup();
+        var box = mapEl.getBoundingClientRect();
+        var pt = map.project(markers[owner].getLngLat());
+        var x = box.left + pt.x;                       // viewport coordinates of the point
+        var y = box.top + pt.y;
+        var w = pop.offsetWidth;
+        var h = pop.offsetHeight;
+        var below = y - POP_GAP - h < POP_MARGIN;
+        var left = Math.min(Math.max(x - w / 2, POP_MARGIN),
+                            document.documentElement.clientWidth - w - POP_MARGIN);
+        pop.classList.toggle("is-below", below);
+        pop.style.left = left + window.pageXOffset + "px";
+        pop.style.top = (below ? y + POP_GAP : y - POP_GAP - h) + window.pageYOffset + "px";
+        popTip.style.left = Math.min(Math.max(x - left, 14), w - 14) + "px";
+      }
+
+      function hidePopup() {
+        if (!popOpen) return;
+        popOpen = false;
+        owner = -1;
+        pinned = false;
+        keepOpen();
+        if (reduceMotion) {
+          pop.classList.remove("is-open");
+          return;
+        }
+        pop.classList.add("is-closing");
+        clearTimeout(outTimer);
+        outTimer = setTimeout(function () {
+          if (!popOpen) pop.classList.remove("is-open", "is-closing");
+        }, POP_OUT_MS);
+      }
 
       function nearby(k) {
         var here = map.project(markers[k].getLngLat());
@@ -316,24 +374,35 @@
       function showPopup(k) {
         var group = nearby(k);
         if (group.length === 1 && k === current) return;
-        if (owner === k && popup.isOpen()) return;
+        if (owner === k && popOpen) return;
+        clearTimeout(outTimer);
         pinned = false;
         owner = k;
-        popup.setLngLat(markers[k].getLngLat())
-          .setHTML(group.map(function (i) { return places[i].popup; }).join('<hr class="places-map-sep">'))
-          .addTo(map);
-        var el = popup.getElement();
-        el.addEventListener("mouseenter", keepOpen);
-        el.addEventListener("mouseleave", closeSoon);
-        el.addEventListener("click", pin);
-        el.querySelectorAll(".places-map-details").forEach(function (link) {
-          link.addEventListener("click", function (ev) {
-            ev.preventDefault();
-            popup.remove();
-            openCard(+link.dataset.index);
-          });
-        });
+        popOpen = true;
+        popBody.innerHTML = group.map(function (i) { return places[i].popup; }).join('<hr class="places-map-sep">');
+        // Restart the opening animation (also when moving from one point to another).
+        pop.classList.remove("is-open", "is-closing");
+        void pop.offsetWidth;
+        pop.classList.add("is-open");
+        placePopup();
       }
+
+      pop.addEventListener("mouseenter", keepOpen);
+      pop.addEventListener("mouseleave", closeSoon);
+      pop.addEventListener("click", function (ev) {
+        var link = ev.target.closest(".places-map-details");
+        if (link) {
+          ev.preventDefault();
+          hidePopup();
+          openCard(+link.dataset.index);
+          return;
+        }
+        if (ev.target.closest(".places-popup-close")) {
+          hidePopup();
+          return;
+        }
+        pin();
+      });
 
       markers.forEach(function (marker, k) {
         var el = marker.getElement();
@@ -346,8 +415,14 @@
         });
       });
 
-      // A click on the globe itself closes the popup.
-      map.on("click", function () { popup.remove(); });
+      map.on("move", placePopup);
+      window.addEventListener("scroll", placePopup, { passive: true });
+      window.addEventListener("resize", placePopup);
+      // A click on the globe itself, or the Escape key, closes the popup.
+      map.on("click", hidePopup);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") hidePopup();
+      });
     }
   })();
 </script>

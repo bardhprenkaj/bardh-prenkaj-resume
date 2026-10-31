@@ -93,9 +93,7 @@ $places-map-speed: 0.45s;
 .places-map-wrap {
   display: flex;
   margin-bottom: 1.5rem;
-  // Above the content that follows, so popups hanging past the map stay visible.
   position: relative;
-  z-index: 3;
 }
 
 .places-map-pane {
@@ -110,16 +108,6 @@ $places-map-speed: 0.45s;
   z-index: 0;
   background: transparent;
   transition: height $places-map-speed ease;
-}
-
-// Let popups extend past the map's edges instead of being clipped. Only popups can
-// overflow: the canvas is exactly the size of the map.
-.places-map.maplibregl-map {
-  overflow: visible;
-}
-
-.places-map .maplibregl-popup {
-  z-index: 5;
 }
 
 // Visited place on the globe.
@@ -255,6 +243,7 @@ $places-map-speed: 0.45s;
   position: absolute;
   top: 0.4rem;
   right: 0.6rem;
+  z-index: 3; // above the card body, which can form its own layer while it animates
   border: none;
   background: none;
   font-size: 1.4rem;
@@ -280,22 +269,110 @@ $places-map-speed: 0.45s;
   font-weight: 600;
 }
 
-.places-map-popup .maplibregl-popup-content {
-  padding: 10px 26px 10px 14px;
+// Popup for points on the globe (layouts/shortcodes/places_map.html). It is attached to
+// <body> and sits above everything else on the page.
+.places-popup {
+  position: absolute;
+  z-index: 2000;
+  display: none;
+  max-width: 300px;
+  padding: 10px 28px 10px 14px;
   font-size: 0.85rem;
   line-height: 1.4;
   color: #333;
+  background: #fff;
   border-radius: 8px;
-  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.22), 0 1px 3px rgba(0, 0, 0, 0.12);
+  transform-origin: 50% 100%;
+
+  &.is-below {
+    transform-origin: 50% 0;
+  }
+
+  &.is-open {
+    display: block;
+    animation: places-popup-in 0.2s ease-out;
+  }
+
+  &.is-closing {
+    animation: places-popup-out 0.15s ease-in forwards;
+  }
 
   a {
     color: $link-color;
   }
 }
 
-.places-map-popup .maplibregl-popup-close-button {
+@keyframes places-popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes places-popup-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .places-popup.is-open,
+  .places-popup.is-closing {
+    animation: none;
+  }
+}
+
+// Small triangle pointing at the point; flips when the popup opens below the point.
+.places-popup-tip {
+  position: absolute;
+  bottom: -7px;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  background: #fff;
+  transform: rotate(45deg);
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.08);
+
+  .is-below & {
+    top: -7px;
+    bottom: auto;
+    box-shadow: -2px -2px 3px rgba(0, 0, 0, 0.06);
+  }
+}
+
+.places-popup-body {
+  position: relative;
+  z-index: 1;
+}
+
+.places-popup-close {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  z-index: 2;
+  border: none;
+  background: none;
   font-size: 1.1rem;
-  padding: 0 6px;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #000;
+  }
 }
 
 .places-map-sep {
@@ -323,18 +400,19 @@ $places-map-speed: 0.45s;
   }
 }
 
-// Phones: too narrow for side by side, so the card opens below the map instead.
-@media (max-width: 575px) {
+// Narrow container (phones, or the profile column): the card opens below the globe.
+// The `is-narrow` class is set by the script from the container's width.
+@mixin places-map-narrow {
   .places-map {
     height: 320px;
   }
 
-  .places-map-wrap {
+  &.places-map-wrap {
     flex-direction: column;
   }
 
   .places-map-pane,
-  .has-card .places-map-pane {
+  &.has-card .places-map-pane {
     flex: none;
     width: 100%;
   }
@@ -348,9 +426,34 @@ $places-map-speed: 0.45s;
       transform $places-map-speed ease, opacity 0.3s ease 0.15s;
   }
 
-  .has-card .places-map-card {
+  &.has-card .places-map-card {
     flex: none;
     margin-left: 0;
     margin-top: 1rem;
+  }
+}
+
+.places-map-wrap.is-narrow {
+  @include places-map-narrow;
+}
+
+@media (max-width: 575px) {
+  .places-map-wrap {
+    @include places-map-narrow;
+  }
+}
+
+// Globe in the profile column, under the social links.
+.profile-globe {
+  margin-top: 1rem;
+  text-align: left;
+
+  .places-map-wrap {
+    margin-bottom: 2.5rem;
+  }
+
+  .places-map-legend {
+    right: 0;
+    justify-content: center;
   }
 }
