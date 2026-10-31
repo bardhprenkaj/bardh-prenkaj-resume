@@ -42,6 +42,4 @@ url_video: ''
 #   Otherwise, set `projects = []`.
 #projects:
 #  - example
-projects:
-    - elinus
 ---
