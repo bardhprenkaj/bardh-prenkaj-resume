@@ -93,6 +93,9 @@ $places-map-speed: 0.45s;
 .places-map-wrap {
   display: flex;
   margin-bottom: 1.5rem;
+  // Above the content that follows, so popups hanging past the map stay visible.
+  position: relative;
+  z-index: 3;
 }
 
 .places-map-pane {
@@ -105,7 +108,44 @@ $places-map-speed: 0.45s;
   height: $places-map-height;
   border-radius: 6px;
   z-index: 0;
+  // Space around the globe.
+  background: radial-gradient(circle at 50% 50%, #f4f8fb 0%, #dfe8ef 100%);
   transition: height $places-map-speed ease;
+}
+
+.dark .places-map {
+  background: radial-gradient(circle at 50% 50%, #1c2230 0%, #0b0e14 100%);
+}
+
+// Let popups extend past the map's edges instead of being clipped. Only popups can
+// overflow: the canvas is exactly the size of the map.
+.places-map.maplibregl-map {
+  overflow: visible;
+}
+
+.places-map .maplibregl-canvas {
+  border-radius: 6px;
+}
+
+.places-map .maplibregl-popup {
+  z-index: 5;
+}
+
+// Visited place on the globe.
+.places-map-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00a933;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+  transition: width 0.2s ease, height 0.2s ease;
+
+  &.is-selected {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 // Detail card: zero width until "Check details" is pressed, then it takes the right 60%.
@@ -221,15 +261,30 @@ $places-map-speed: 0.45s;
   font-weight: 600;
 }
 
-.places-map .leaflet-popup-content {
-  margin: 10px 14px;
+.places-map-popup .maplibregl-popup-content {
+  padding: 10px 26px 10px 14px;
   font-size: 0.85rem;
   line-height: 1.4;
+  color: #333;
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.25);
+
+  a {
+    color: $link-color;
+  }
 }
 
-// Leaflet colors its own links blue; use the site link color in popups.
-.places-map .leaflet-popup-content a {
-  color: $link-color;
+.places-map-popup .maplibregl-popup-close-button {
+  font-size: 1.1rem;
+  padding: 0 6px;
+}
+
+.places-map-sep {
+  margin: 0.6rem 0;
+  height: 0;
+  border: 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.3);
+  background: none;
 }
 
 .places-map-name {
@@ -247,10 +302,6 @@ $places-map-speed: 0.45s;
     display: inline;
     margin: 0;
   }
-}
-
-.dark .places-map .leaflet-tile-pane {
-  filter: invert(1) hue-rotate(180deg) brightness(0.9);
 }
 
 // Phones: too narrow for side by side, so the card opens below the map instead.

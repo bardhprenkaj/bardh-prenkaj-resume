@@ -30,7 +30,7 @@ places:
     people: '[Gjergji Kasneci](https://www.professoren.tum.de/en/kasneci-gjergji)'
     logo: tum-logo
     card_text: |-
-      We worked on dynamic graph counterfactual data, where the underlying data distribution changes and the classifier (in this case binary) can't be trusted in subsequent iterations. During the visiting period I wanted to bring my expertise in anomaly detection and counterfactuality together. We submitted a working draft to AAAI'24 (Aug 2023; we got rejected in the second phase). I continued working on the paper after my visiting period was officially over and was confident enough to send the second version to KDD'24 (Feb 2024), where [it was accepted](/publication/prenkaj-2024-gracie/). Here I met long-lasting friends, Mario and Tobias, with whom I kept working after this period too.
+      We worked on dynamic graph counterfactual data, where the underlying data distribution changes and the classifier (in this case binary) can't be trusted in subsequent iterations. During the visiting period I wanted to bring my expertise in anomaly detection and counterfactuality together. We submitted a working draft to AAAI'24 (Aug 2023; we got rejected in the second phase). I continued working on the paper after my visiting period was officially over and was confident enough to send the second version to KDD'24 (Feb 2024), where [it was accepted](/publication/prenkaj-2024-gracie/). Here I met long-lasting friends, [Mario](https://scholar.google.com/citations?user=2iDbdk0AAAAJ&hl=en) and [Tobias](https://scholar.google.com/citations?user=VsNjvo0AAAAJ&hl=en), with whom I kept working after this period too.
 
       After my visiting period was over, Gjergji offered me a postdoctoral position at the [Responsible Data Science](https://www.gov.sot.tum.de/rds/overview/) lab.
     lat: 48.1497
@@ -65,6 +65,17 @@ places:
     card_text: Taught a hands-on tutorial on detecting handwritten digits (MNIST) with autoencoders and transformers for the master's course Deep Neural Networks.
     lat: 42.3676
     lng: 13.3527
+  - name: University of Camerino
+    location: Camerino, Italy
+    lat: 43.1390
+    lng: 13.0687
+    dates: Jun 2025 (5 days)
+    people_label: Visited
+    people: '[Marco Piangerelli](https://scholar.google.com/citations?user=x5_c85IAAAAJ&hl=en)'
+    logo: unicam.png
+    logo_height: 72px
+    card_text: |-
+      I gave a talk on game-theoretic counterfactual explainability and presented my paper, [GIST](/publication/prenkaj-2025-gist/), which was about to appear at ICML'25 that July. I was accompanied by two of my PhD students, [Felix Steinbauer](https://scholar.google.com/citations?user=RoAes-UAAAAJ&hl=en) and [Alina Fastowski](https://scholar.google.com/citations?user=5PSP5scAAAAJ&hl=en), who also gave talks on their PhD topics. The rector himself, [Flavio Corradini](https://scholar.google.com/citations?user=BseLkiIAAAAJ&hl=en), gave us a tour of the School of Information and Technology. We also met [Martina Zannotti](https://scholar.google.com/citations?user=9bZiqzkAAAAJ&hl=en), who had already been visiting our group at TUM for about two months, and who showed us around.
   - name: Heimerer College
     location: Pristina, Kosovo
     dates: May 2024 – Jun 2024
@@ -83,4 +94,4 @@ design:
   view: compact
 ---
 
-{{< places_map >}}
+{{< places_map regions="data/visited-regions.geojson" >}}

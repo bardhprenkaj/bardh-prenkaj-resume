@@ -1,10 +1,15 @@
-{{/* Leaflet map of the `places` list in the current page's front matter.
+{{/* Globe map (MapLibre GL) of the `places` list in the current page's front matter.
      Each place needs: name, location, lat, lng.
      Optional: dates, people (Markdown), people_label (default "Worked with"),
-     logo (file name in assets/media/icons/brands/, without .svg; replaces the card title),
-     card_text (Markdown; shown only in the detail card).
-     Hovering a point opens its popup; clicking keeps it open. "Check details" in a popup
-     shrinks the map to the left, centers it on the place and slides in a card on the right.
+     logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
+     the card title),
+     logo_height (CSS length, default 48px), card_text (Markdown; shown only in the detail card).
+     Shortcode parameter `regions`: optional GeoJSON file in assets/ whose areas are shaded
+     on the map (e.g. countries or states visited).
+     The globe can be dragged to rotate it. Hovering a point opens its popup; clicking keeps
+     it open. "Check details" in a popup shrinks the map to the left, flies to the place and
+     slides in a card on the right. MapLibre (about 1 MB) loads only when the map is near
+     the viewport.
      Usage: {{< places_map >}} */}}
 {{ $places := .Page.Params.places }}
 {{ $id := printf "places-map-%d" .Ordinal }}
@@ -18,240 +23,313 @@
   {{ $popup := printf "<div class=\"places-map-name\">%s</div>%s<a href=\"#\" class=\"places-map-details\" data-index=\"%d\">Check details →</a>" (.name | htmlEscape) $info $k }}
   {{ $header := printf "<h3 class=\"places-map-card-title\">%s</h3>" (.name | htmlEscape) }}
   {{ with .logo }}
-    {{ $logo := resources.Get (printf "media/icons/brands/%s.svg" .) }}
-    {{ if not $logo }}{{ errorf "places_map: logo not found at assets/media/icons/brands/%s.svg" . }}{{ end }}
-    {{ $header = printf "<img class=\"places-map-card-logo\" src=\"%s\" alt=\"%s\">" $logo.RelPermalink ($place.name | htmlEscape) }}
+    {{ $file := cond (strings.Contains . ".") . (printf "%s.svg" .) }}
+    {{ $logo := resources.Get (printf "media/icons/brands/%s" $file) }}
+    {{ if not $logo }}{{ errorf "places_map: logo not found at assets/media/icons/brands/%s" $file }}{{ end }}
+    {{ $style := "" }}{{ with $place.logo_height }}{{ $style = printf " style=\"height: %s\"" (. | htmlEscape) }}{{ end }}
+    {{ $header = printf "<img class=\"places-map-card-logo\" src=\"%s\" alt=\"%s\"%s>" $logo.RelPermalink ($place.name | htmlEscape) $style }}
   {{ end }}
   {{ $card := printf "%s%s" $header $info }}
   {{ with .card_text }}{{ $card = printf "%s<div class=\"places-map-card-text\">%s</div>" $card (. | markdownify) }}{{ end }}
   {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card) }}
 {{ end }}
+{{ $regions := "null" }}
+{{ with .Get "regions" }}
+  {{ $file := resources.Get . }}
+  {{ if not $file }}{{ errorf "places_map: regions file not found at assets/%s" . }}{{ end }}
+  {{ $regions = $file.Content }}
+{{ end }}
 {{ with $places }}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
-      integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
-      crossorigin="anonymous" referrerpolicy="no-referrer">
 <div class="places-map-wrap" id="{{ $id }}-wrap">
   <div class="places-map-pane">
-    <div id="{{ $id }}" class="places-map" role="img" aria-label="Map of places: {{ delimit (apply . "index" "." "name") ", " }}"></div>
+    <div id="{{ $id }}" class="places-map" role="img" aria-label="Globe of places: {{ delimit (apply . "index" "." "name") ", " }}"></div>
   </div>
   <aside class="places-map-card" aria-hidden="true">
     <button type="button" class="places-map-card-close" aria-label="Close details">×</button>
     <div class="places-map-card-body"></div>
   </aside>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
-        integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   (function () {
     var places = {{ $points | jsonify | safeJS }};
+    var regions = {{ $regions | safeJS }};
     var wrap = document.getElementById("{{ $id }}-wrap");
+    var mapEl = document.getElementById("{{ $id }}");
     var card = wrap.querySelector(".places-map-card");
     var cardBody = wrap.querySelector(".places-map-card-body");
-    var mapEl = document.getElementById("{{ $id }}");
     var phone = window.matchMedia("(max-width: 575px)");
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var TRANSITION_MS = 450;
     var DETAIL_ZOOM = 6;
-    var FIT_OPTIONS = { paddingTopLeft: [130, 130], paddingBottomRight: [130, 20] };
+    var OVERLAP_PX = 14;
+    var GREEN = "#00a933";
+    var LIB = "https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/5.24.0/";
 
-    var map = L.map("{{ $id }}", { scrollWheelZoom: false, worldCopyJump: true });
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    // Initial view: the globe centered between the westernmost and easternmost places.
+    var lngs = places.map(function (p) { return p.lng; });
+    var lats = places.map(function (p) { return p.lat; });
+    var HOME = {
+      center: [(Math.min.apply(null, lngs) + Math.max.apply(null, lngs)) / 2,
+               (Math.min.apply(null, lats) + Math.max.apply(null, lats)) / 2],
+      zoom: 1
+    };
 
-    var BASE_STYLE = { radius: 7, color: "#ffffff", weight: 2, fillColor: "#00a933", fillOpacity: 1 };
-    var markers = places.map(function (p) {
-      return L.circleMarker([p.lat, p.lng], BASE_STYLE)
-        .bindPopup(p.popup, { offset: [0, -4], autoPan: false })
-        .addTo(map);
-    });
-    var bounds = L.featureGroup(markers).getBounds();
+    function loadLibrary(done) {
+      if (window.maplibregl) return done();
+      var css = document.createElement("link");
+      css.rel = "stylesheet";
+      css.href = LIB + "maplibre-gl.css";
+      css.integrity = "sha512-KIMsMWIdnoG9OwZa+oaIafmbDonqck1UCmq+/zcUi2aaZ97N9QE6TqpTM+n36EO40HGh64hU/375zxtjx7WTyQ==";
+      css.crossOrigin = "anonymous";
+      css.referrerPolicy = "no-referrer";
+      document.head.appendChild(css);
+      var js = document.createElement("script");
+      js.src = LIB + "maplibre-gl.js";
+      js.integrity = "sha512-rOFgoUgWaVi69JW1dzBu6PWF9xKW9rxYfY5u2SexFABHhWk0qUWkJoWNz4UuZRMvSXsNZG66+tU5B+HlwWF5kA==";
+      js.crossOrigin = "anonymous";
+      js.referrerPolicy = "no-referrer";
+      js.onload = done;
+      document.head.appendChild(js);
+    }
 
-    // Keep Leaflet's idea of the map size in step with the CSS size transition, then run `done`.
-    function followResize(done) {
-      if (reduceMotion) {
-        map.invalidateSize({ pan: false });
-        done();
-        return;
+    // Load the library once the map is within 600px of the viewport.
+    if ("IntersectionObserver" in window) {
+      var seen = new IntersectionObserver(function (entries) {
+        if (entries.some(function (e) { return e.isIntersecting; })) {
+          seen.disconnect();
+          loadLibrary(init);
+        }
+      }, { rootMargin: "600px 0px" });
+      seen.observe(wrap);
+    } else {
+      loadLibrary(init);
+    }
+
+    function init() {
+      var map = new maplibregl.Map({
+        container: mapEl,
+        style: {
+          version: 8,
+          projection: { type: "globe" },
+          sources: {
+            osm: {
+              type: "raster",
+              tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+              tileSize: 256,
+              maxzoom: 19,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }
+          },
+          layers: [{ id: "osm", type: "raster", source: "osm" }]
+        },
+        center: HOME.center,
+        zoom: HOME.zoom,
+        scrollZoom: false,
+        // OpenStreetMap asks for its credit to stay visible, not collapsed behind a button.
+        attributionControl: { compact: false },
+        dragRotate: false,
+        touchPitch: false,
+        pitchWithRotate: false
+      });
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
+      map.touchZoomRotate.disableRotation();
+
+      // Dark mode: dim and desaturate the map tiles (the regions and points keep their colors).
+      function applyTheme() {
+        var dark = document.body.classList.contains("dark");
+        map.setPaintProperty("osm", "raster-brightness-max", dark ? 0.6 : 1);
+        map.setPaintProperty("osm", "raster-saturation", dark ? -0.3 : 0);
       }
-      var start = performance.now();
-      (function frame(now) {
-        map.invalidateSize({ pan: false });
-        if (now - start < TRANSITION_MS) requestAnimationFrame(frame);
-        else done();
-      })(start);
-    }
 
-    var current = -1;
+      map.on("load", function () {
+        if (regions) {
+          map.addSource("regions", { type: "geojson", data: regions });
+          map.addLayer({ id: "regions-fill", type: "fill", source: "regions",
+                         paint: { "fill-color": GREEN, "fill-opacity": 0.18 } });
+          map.addLayer({ id: "regions-line", type: "line", source: "regions",
+                         paint: { "line-color": GREEN, "line-opacity": 0.6, "line-width": 1 } });
+        }
+        applyTheme();
+        new MutationObserver(applyTheme).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+      });
 
-    // The map's normal height (from CSS). Re-read on resize while no card is open.
-    var baseHeight = mapEl.offsetHeight;
+      var markers = places.map(function (p) {
+        var el = document.createElement("div");
+        el.className = "places-map-dot";
+        return new maplibregl.Marker({ element: el, opacityWhenCovered: "0" })
+          .setLngLat([p.lng, p.lat])
+          .addTo(map);
+      });
 
-    // Height the card text needs at the card body's current width. Read with height "auto"
-    // so neither the card's current (possibly mid-transition) height nor the map's counts.
-    function contentHeight() {
-      cardBody.style.height = "auto";
-      var h = cardBody.offsetHeight;
-      cardBody.style.height = "";
-      return h;
-    }
+      // ---- Detail card ----------------------------------------------------------------
 
-    // Size the card for its content. On wide screens the card body gets its final width up
-    // front (so text does not reflow while the card slides in), and the map and card grow
-    // together to the height the text needs, never below the map's normal height.
-    function sizeCard() {
-      if (phone.matches) {
+      var current = -1;
+      var baseHeight = mapEl.offsetHeight;
+
+      // Height the card text needs at the card body's current width, read with height
+      // "auto" so the card's current (possibly mid-transition) height does not count.
+      function contentHeight() {
+        cardBody.style.height = "auto";
+        var h = cardBody.offsetHeight;
+        cardBody.style.height = "";
+        return h;
+      }
+
+      // Wide screens: the card body gets its final width up front (no reflow while the card
+      // slides in) and the map and card grow together to the height the text needs.
+      // Phones: the card opens below the map at the height its text needs.
+      function sizeCard() {
+        if (phone.matches) {
+          cardBody.style.width = "";
+          mapEl.style.height = "";
+          card.style.height = "";
+          card.style.maxHeight = contentHeight() + "px";
+          return;
+        }
+        card.style.maxHeight = "";
+        cardBody.style.width = (wrap.clientWidth - 16) * 0.6 + "px";
+        var height = Math.max(baseHeight, contentHeight());
+        mapEl.style.height = height + "px";
+        card.style.height = height + "px";
+      }
+
+      function resetSize() {
         cardBody.style.width = "";
         mapEl.style.height = "";
         card.style.height = "";
-        card.style.maxHeight = contentHeight() + "px";
-        return;
+        card.style.maxHeight = "";
       }
-      card.style.maxHeight = "";
-      cardBody.style.width = (wrap.clientWidth - 16) * 0.6 + "px";
-      var height = Math.max(baseHeight, contentHeight());
-      mapEl.style.height = height + "px";
-      card.style.height = height + "px";
-    }
 
-    function resetSize() {
-      cardBody.style.width = "";
-      mapEl.style.height = "";
-      card.style.height = "";
-      card.style.maxHeight = "";
-    }
-
-    window.addEventListener("resize", function () {
-      if (current < 0) baseHeight = mapEl.offsetHeight;
-      if (current >= 0) {
-        sizeCard();
-        map.invalidateSize({ pan: false });
-      }
-    });
-
-    function openCard(k) {
-      var wasOpen = wrap.classList.contains("has-card");
-      current = k;
-      markers.forEach(function (m, i) {
-        m.setStyle(i === k ? { radius: 10 } : { radius: BASE_STYLE.radius });
+      window.addEventListener("resize", function () {
+        if (current < 0) baseHeight = mapEl.offsetHeight;
+        else sizeCard();
       });
-      cardBody.innerHTML = places[k].card;
-      card.setAttribute("aria-hidden", "false");
-      if (!wasOpen) {
-        cardBody.classList.remove("places-map-card-swap");
-      } else {
-        // Restart the fade-in when switching from one place to another.
-        cardBody.classList.remove("places-map-card-swap");
-        void cardBody.offsetWidth;
-        cardBody.classList.add("places-map-card-swap");
+
+      // Keep the map's canvas in step with the CSS size transition, then run `done`.
+      function followResize(done) {
+        var start = performance.now();
+        (function frame(now) {
+          map.resize();
+          if (!reduceMotion && now - start < TRANSITION_MS) requestAnimationFrame(frame);
+          else done();
+        })(start);
       }
-      wrap.classList.add("has-card");
-      sizeCard();
-      var target = markers[k].getLatLng();
-      var zoom = Math.max(map.getZoom(), DETAIL_ZOOM);
-      followResize(function () {
-        // Grow further if the text still overflows (e.g. a web font finished loading).
-        if (!phone.matches && cardBody.scrollHeight > cardBody.clientHeight + 1) {
-          var h = card.offsetHeight + cardBody.scrollHeight - cardBody.clientHeight;
-          mapEl.style.height = h + "px";
-          card.style.height = h + "px";
-          map.invalidateSize({ pan: false });
+
+      function fly(options) {
+        map.flyTo(Object.assign({ duration: reduceMotion ? 0 : 1800, essential: true }, options));
+      }
+
+      function openCard(k) {
+        var wasOpen = wrap.classList.contains("has-card");
+        current = k;
+        markers.forEach(function (m, i) {
+          m.getElement().classList.toggle("is-selected", i === k);
+        });
+        cardBody.innerHTML = places[k].card;
+        card.setAttribute("aria-hidden", "false");
+        cardBody.classList.remove("places-map-card-swap");
+        if (wasOpen) {
+          // Restart the fade-in when switching from one place to another.
+          void cardBody.offsetWidth;
+          cardBody.classList.add("places-map-card-swap");
         }
-        map.flyTo(target, zoom, { duration: reduceMotion ? 0 : 0.8 });
+        wrap.classList.add("has-card");
+        sizeCard();
+        followResize(function () {
+          // Grow further if the text still overflows (e.g. a web font finished loading).
+          if (!phone.matches && cardBody.scrollHeight > cardBody.clientHeight + 1) {
+            var h = card.offsetHeight + cardBody.scrollHeight - cardBody.clientHeight;
+            mapEl.style.height = h + "px";
+            card.style.height = h + "px";
+            map.resize();
+          }
+          fly({ center: [places[k].lng, places[k].lat], zoom: Math.max(map.getZoom(), DETAIL_ZOOM) });
+        });
+      }
+
+      function closeCard() {
+        if (!wrap.classList.contains("has-card")) return;
+        current = -1;
+        markers.forEach(function (m) { m.getElement().classList.remove("is-selected"); });
+        wrap.classList.remove("has-card");
+        card.setAttribute("aria-hidden", "true");
+        resetSize();
+        followResize(function () { fly(HOME); });
+      }
+
+      wrap.querySelector(".places-map-card-close").addEventListener("click", closeCard);
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") closeCard();
       });
-    }
 
-    function closeCard() {
-      if (!wrap.classList.contains("has-card")) return;
-      current = -1;
-      markers.forEach(function (m) { m.setStyle({ radius: BASE_STYLE.radius }); });
-      wrap.classList.remove("has-card");
-      card.setAttribute("aria-hidden", "true");
-      resetSize();
-      followResize(function () {
-        map.flyToBounds(bounds, Object.assign({ duration: reduceMotion ? 0 : 0.8 }, FIT_OPTIONS));
-      });
-    }
+      // ---- Popups ---------------------------------------------------------------------
+      // Hovering a point opens its popup; it closes shortly after the pointer leaves both the
+      // point and the popup (so links inside stay clickable). A click on the point or inside
+      // the popup keeps it open until it is closed. Points that overlap on screen share one
+      // popup that lists all of them.
 
-    wrap.querySelector(".places-map-card-close").addEventListener("click", closeCard);
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeCard();
-    });
-
-    // Hover opens a popup and it closes shortly after the pointer leaves both the point and
-    // the popup (so links inside it stay clickable). A click on the point or inside the popup
-    // keeps it open until it is closed.
-    markers.forEach(function (marker, k) {
+      var popup = new maplibregl.Popup({ closeButton: true, closeOnClick: false, offset: 12,
+                                         maxWidth: "300px", className: "places-map-popup" });
+      var owner = -1;
       var pinned = false;
       var timer = null;
-      var shift = null;
+
+      function keepOpen() { clearTimeout(timer); }
       function closeSoon() {
         if (pinned) return;
         clearTimeout(timer);
-        timer = setTimeout(function () { marker.closePopup(); }, 300);
+        timer = setTimeout(function () { popup.remove(); }, 300);
       }
-      function keepOpen() {
-        clearTimeout(timer);
+      function pin() { pinned = true; keepOpen(); }
+
+      popup.on("close", function () { owner = -1; pinned = false; keepOpen(); });
+
+      function nearby(k) {
+        var here = map.project(markers[k].getLngLat());
+        var group = [];
+        markers.forEach(function (m, i) {
+          var pt = map.project(m.getLngLat());
+          if (Math.hypot(pt.x - here.x, pt.y - here.y) < OVERLAP_PX) group.push(i);
+        });
+        return group;
       }
-      function pin() {
-        pinned = true;
-        keepOpen();
-      }
-      // If the popup is cut off by the map edge, shift the map so it fits. The shift always
-      // moves the popup down by at least 40px, so it ends up under the pointer that opened it
-      // instead of sliding away from it. The map shifts back when the popup closes.
-      function fitPopup(el) {
-        var box = map.getContainer().getBoundingClientRect();
-        var pop = el.getBoundingClientRect();
-        var margin = 10;
-        var dx = 0;
-        if (pop.left < box.left + margin) dx = pop.left - box.left - margin;
-        else if (pop.right > box.right - margin) dx = pop.right - box.right + margin;
-        var top = box.top + margin - pop.top;
-        if (top > 0 || dx !== 0) {
-          shift = [dx, -Math.max(top, 40)];
-          map.panBy(shift, { animate: false });
-        }
-      }
-      marker.on("mouseover", function () {
-        keepOpen();
-        // The open card already shows this place; the map may also have flown the point under
-        // the pointer, which should not pop the popup back up.
-        if (k === current) return;
-        if (!marker.isPopupOpen()) marker.openPopup();
-      });
-      marker.on("mouseout", closeSoon);
-      marker.on("click", pin);
-      marker.on("popupopen", function (e) {
-        var el = e.popup.getElement();
+
+      function showPopup(k) {
+        var group = nearby(k);
+        if (group.length === 1 && k === current) return;
+        if (owner === k && popup.isOpen()) return;
+        pinned = false;
+        owner = k;
+        popup.setLngLat(markers[k].getLngLat())
+          .setHTML(group.map(function (i) { return places[i].popup; }).join('<hr class="places-map-sep">'))
+          .addTo(map);
+        var el = popup.getElement();
         el.addEventListener("mouseenter", keepOpen);
         el.addEventListener("mouseleave", closeSoon);
         el.addEventListener("click", pin);
-        // Leaflet stops click events from leaving the popup, so listen on the link itself.
-        var link = el.querySelector(".places-map-details");
-        if (link) {
+        el.querySelectorAll(".places-map-details").forEach(function (link) {
           link.addEventListener("click", function (ev) {
             ev.preventDefault();
-            marker.closePopup();
-            openCard(k);
+            popup.remove();
+            openCard(+link.dataset.index);
           });
-        }
-        fitPopup(el);
-      });
-      marker.on("popupclose", function () {
-        pinned = false;
-        keepOpen();
-        if (shift) {
-          map.panBy([-shift[0], -shift[1]], { animate: false });
-          shift = null;
-        }
-      });
-    });
+        });
+      }
 
-    // Leave room above and beside the outermost points so hover popups fit inside the map.
-    map.fitBounds(bounds, FIT_OPTIONS);
+      markers.forEach(function (marker, k) {
+        var el = marker.getElement();
+        el.addEventListener("mouseenter", function () { keepOpen(); showPopup(k); });
+        el.addEventListener("mouseleave", closeSoon);
+        el.addEventListener("click", function (ev) {
+          ev.stopPropagation();
+          showPopup(k);
+          if (owner === k) pin();
+        });
+      });
+
+      // A click on the globe itself closes the popup.
+      map.on("click", function () { popup.remove(); });
+    }
   })();
 </script>
 {{ end }}
