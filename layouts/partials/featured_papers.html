@@ -1,8 +1,9 @@
 {{/* "My Top Papers" popup (data/featured_papers.yaml, at most 5 papers).
      The button is rendered next to the "Biography" heading by layouts/partials/widgets/about.html
      (class "top-papers-button"). It opens a popup over a grey overlay with the papers side by side:
-     for each, title and venue, the arXiv PDF rendered by pdf.js (each page drawn when it scrolls
-     into view; pdf.js loads only on first use), the summary and "Why I recommend it".
+     for each, title and venue, a zoomed snapshot of the top of the first PDF page rendered by
+     pdf.js (pdf.js loads only on first use; the snapshot links to the full PDF), the summary
+     and "Why I recommend it".
      4 columns on wide screens, 2 on medium, 1 (stacked) on phones. */}}
 {{ $papers := first 5 (site.Data.featured_papers.papers | default slice) }}
 {{ with $papers }}
@@ -52,7 +53,7 @@
         return '<article class="paper-col">' +
           '<a class="paper-col-title" href="' + p.url + '">' + esc(p.title) + '</a>' +
           '<div class="paper-col-meta">' + esc(p.meta) + '</div>' +
-          '<div class="paper-pdf" data-pdf="' + p.pdf + '" aria-label="PDF preview"></div>' +
+          '<div class="paper-pdf" data-pdf="' + p.pdf + '" aria-label="First page of the paper"></div>' +
           '<div class="paper-notes">' +
             '<h4>Summary</h4>' + p.summary +
             '<h4>Why I recommend it</h4>' + p.why +
@@ -89,42 +90,39 @@
       return libReady;
     }
 
-    // Render one paper into its box; each page is drawn when it scrolls near the box's view.
+    // Snapshot of the top of page 1 (title, authors, start of the abstract), zoomed in:
+    // the page's side margins (CROP_X of the width on each side) and top margin (CROP_TOP
+    // of the height) are cut off, so the text fills the box. Clicking it opens the full PDF.
+    var CROP_X = 0.1;
+    var CROP_TOP = 0.06;
     function renderPdf(box) {
       var url = box.dataset.pdf;
       box.innerHTML = '<div class="paper-pdf-status">Loading PDF…</div>';
       loadPdfJs().then(function (lib) {
         return lib.getDocument({ url: url }).promise;
       }).then(function (doc) {
-        return doc.getPage(1).then(function (first) {
+        return doc.getPage(1);
+      }).then(function (page) {
+        var ratio = window.devicePixelRatio || 1;
+        var base = page.getViewport({ scale: 1 });
+        var cssScale = box.clientWidth / (base.width * (1 - 2 * CROP_X));
+        var vp = page.getViewport({ scale: cssScale * ratio });
+        var canvas = document.createElement("canvas");
+        canvas.width = vp.width;
+        canvas.height = vp.height;
+        canvas.style.width = base.width * cssScale + "px";
+        canvas.style.left = -base.width * CROP_X * cssScale + "px";
+        canvas.style.top = -base.height * CROP_TOP * cssScale + "px";
+        return page.render({ canvasContext: canvas.getContext("2d"), viewport: vp }).promise.then(function () {
+          var link = document.createElement("a");
+          link.href = url;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.className = "paper-pdf-link";
+          link.title = "Open the full PDF on arXiv";
+          link.appendChild(canvas);
           box.innerHTML = "";
-          var ratio = window.devicePixelRatio || 1;
-          var v = first.getViewport({ scale: 1 });
-          var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (!e.isIntersecting || e.target.dataset.done) return;
-              e.target.dataset.done = "1";
-              observer.unobserve(e.target);
-              doc.getPage(+e.target.dataset.page).then(function (page) {
-                var base = page.getViewport({ scale: 1 });
-                var vp = page.getViewport({ scale: e.target.clientWidth / base.width * ratio });
-                var canvas = document.createElement("canvas");
-                canvas.width = vp.width;
-                canvas.height = vp.height;
-                e.target.appendChild(canvas);
-                page.render({ canvasContext: canvas.getContext("2d"), viewport: vp });
-              });
-            });
-          }, { root: box, rootMargin: "400px 0px" });
-          // Placeholders sized from the first page, so the box scrolls correctly from the start.
-          for (var n = 1; n <= doc.numPages; n++) {
-            var ph = document.createElement("div");
-            ph.className = "paper-pdf-page";
-            ph.dataset.page = n;
-            ph.style.aspectRatio = v.width + " / " + v.height;
-            box.appendChild(ph);
-            observer.observe(ph);
-          }
+          box.appendChild(link);
         });
       }).catch(function () {
         box.innerHTML = '<div class="paper-pdf-status">The preview could not be loaded. ' +

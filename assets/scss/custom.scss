@@ -747,26 +747,34 @@ a:focus,
   margin-bottom: 0.5rem;
 }
 
-// Each PDF scrolls inside its own box.
+// Zoomed snapshot of the top of the first page; links to the full PDF.
 .paper-pdf {
-  height: 52vh;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: 0.5rem;
+  position: relative;
+  height: 260px;
+  overflow: hidden;
   border-radius: 8px;
-  background: #eef0f3;
+  border: 1px solid rgba(127, 127, 127, 0.25);
+  background: #fff;
 }
 
-.paper-pdf-page {
-  width: 100%;
-  margin: 0 auto 0.5rem;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+.paper-pdf-link {
+  display: block;
+  height: 100%;
 
   canvas {
-    display: block;
-    width: 100%;
+    position: absolute;
     height: auto;
+  }
+
+  // Fade the cut-off bottom edge.
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 48px;
+    background: linear-gradient(rgba(255, 255, 255, 0), #fff);
   }
 }
 
@@ -840,6 +848,6 @@ html.paper-modal-open body {
   }
 
   .paper-pdf {
-    height: 60vh;
+    height: 220px;
   }
 }
