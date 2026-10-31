@@ -17,8 +17,8 @@ doi: '10.48550/arXiv.2603.24543'
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
 
-publication: In *Findings of the Association for Computational Linguistics: ACL 2026*
-publication_short: In *Findings of ACL 2026*
+publication: 'In *Findings of the Association for Computational Linguistics: ACL 2026*'
+publication_short: 'In *Findings of ACL 2026*'
 
 abstract: 'Activation steering has emerged as a powerful tool to shape LLM behavior without the need for weight updates. While its inherent brittleness and unreliability are well-documented, its safety implications remain underexplored. In this work, we present a systematic safety audit of steering vectors obtained with Contrastive Activation Addition (CAA), a widely used steering approach, under a unified evaluation protocol. Using JailbreakBench as benchmark, we show that steering vectors consistently influence the success rate of jailbreak attacks, with stronger amplification under simple template-based attacks. Across LLM families and sizes, steering the model in specific directions can drastically increase (up to 57%) or decrease (up to 50%) its attack success rate (ASR), depending on the targeted behavior. We attribute this phenomenon to the overlap between the steering vectors and the latent directions of refusal behavior. Thus, we offer a traceable explanation for this discovery. Together, our findings reveal the previously unobserved origin of this safety gap in LLMs, highlighting a trade-off between controllability and safety.'
 

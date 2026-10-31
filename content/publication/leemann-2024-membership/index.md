@@ -15,8 +15,8 @@ doi: ''
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
 
-publication: In *ICML 2024 Next Generation of AI Safety Workshop*
-publication_short: In *ICML 2024 Workshop*
+publication: 'In *ICML 2024 Next Generation of AI Safety Workshop*'
+publication_short: 'In *ICML 2024 Workshop*'
 
 abstract: ''
 

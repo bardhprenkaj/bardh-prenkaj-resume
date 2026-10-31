@@ -15,8 +15,8 @@ doi: ''
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
 
-publication: In *The First Tiny Papers Track at ICLR 2023*
-publication_short: In *ICLR 2023 Tiny Papers*
+publication: 'In *The First Tiny Papers Track at ICLR 2023*'
+publication_short: 'In *ICLR 2023 Tiny Papers*'
 
 abstract: 'Counterfactual explainability (CE) has been widely explored in various domains ranging from medical image diagnosis to self-driving cars. Graph CE (GCE), on the other hand, and especially, generative-based GCE has yet to be explored. Here, we adapt CounteRGAN, an image-based generative approach, to consider graph adjacency matrices as special black-and-white images and sample valid counterfactuals directly from the learnt latent space probabilistic distribution.'
 

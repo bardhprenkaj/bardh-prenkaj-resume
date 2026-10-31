@@ -15,8 +15,8 @@ doi: '10.1007/978-3-031-74633-8_10'
 # 7 = Thesis; 8 = Patent
 publication_types: ['1']
 
-publication: In *Joint European Conference on Machine Learning and Knowledge Discovery in Databases (Workshops)*, pp. 152-170
-publication_short: In *ECML PKDD 2023 Workshops*
+publication: 'In *Joint European Conference on Machine Learning and Knowledge Discovery in Databases (Workshops)*, pp. 152-170'
+publication_short: 'In *ECML PKDD 2023 Workshops*'
 
 abstract: ''
 
