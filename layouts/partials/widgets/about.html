@@ -1,4 +1,5 @@
-{{/* Override of the Wowchemy About widget: adds the places globe under the social links. */}}
+{{/* Override of the Wowchemy About widget: adds the places globe under the social links
+     and the featured papers under the biography. */}}
 {{ $ := .root }}
 {{ $page := .page }}
 
@@ -96,6 +97,9 @@
     <div class="article-style">
       {{ $person_page.Content }}
     </div>
+
+    {{/* Featured papers with PDF preview (data/featured_papers.yaml). */}}
+    {{ partial "featured_papers.html" . }}
 
     <div class="row">
 

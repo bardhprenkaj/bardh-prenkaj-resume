@@ -1,0 +1,23 @@
+# Featured papers shown under the biography (layouts/partials/featured_papers.html).
+# At most 5 are shown, in this order. For each paper:
+#   slug:    folder name in content/publication/ (title, venue and page link come from there)
+#   arxiv:   arXiv identifier; the preview renders https://arxiv.org/pdf/<arxiv>
+#   summary: what the paper does (Markdown)
+#   why:     why you recommend reading it (Markdown)
+papers:
+  - slug: hegelich-2026-cosse
+    arxiv: "2610.31097"
+    summary: TODO
+    why: TODO
+  - slug: prenkaj-2025-gist
+    arxiv: "2505.17542"
+    summary: TODO
+    why: TODO
+  - slug: yang-2025-shortcut
+    arxiv: "2412.07675"
+    summary: TODO
+    why: TODO
+  - slug: flaborea-2023-mocodad
+    arxiv: "2307.07205"
+    summary: TODO
+    why: TODO

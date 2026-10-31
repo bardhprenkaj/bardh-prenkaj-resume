@@ -1,0 +1,185 @@
+{{/* Featured papers under the biography (data/featured_papers.yaml, at most 5).
+     Each row: title (link to the publication page), venue and year, and a "Preview" button.
+     The button opens a popup over a grey overlay with the arXiv PDF rendered by pdf.js
+     (loaded only when the first preview is opened), followed by the summary and
+     "Why I recommend it". */}}
+{{ $papers := first 5 (site.Data.featured_papers.papers | default slice) }}
+{{ with $papers }}
+{{ $items := slice }}
+<div class="featured-papers">
+  <div class="featured-papers-heading">Featured papers</div>
+  <ul class="list-unstyled featured-papers-list">
+    {{ range $k, $p := . }}
+      {{ $page := site.GetPage (printf "/publication/%s" $p.slug) }}
+      {{ if not $page }}{{ errorf "featured_papers: no publication page content/publication/%s" $p.slug }}{{ end }}
+      {{ $venue := $page.Params.publication_short | default $page.Params.publication | default "" | markdownify | plainify }}
+      {{ $venue = replaceRE "^In " "" $venue }}
+      {{ $year := $page.Date.Format "2006" }}
+      {{ $meta := cond (strings.Contains $venue $year) $venue (trim (printf "%s %s" $venue $year) " ") }}
+      {{ $items = $items | append (dict
+           "title" $page.Title
+           "url" $page.RelPermalink
+           "meta" $meta
+           "pdf" (printf "https://arxiv.org/pdf/%s" $p.arxiv)
+           "abs" (printf "https://arxiv.org/abs/%s" $p.arxiv)
+           "summary" ($p.summary | markdownify)
+           "why" ($p.why | markdownify)) }}
+    <li class="featured-paper">
+      <div class="featured-paper-text">
+        <a class="featured-paper-title" href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
+        <div class="featured-paper-meta">{{ $meta }}</div>
+      </div>
+      <button type="button" class="btn btn-sm featured-paper-preview" data-index="{{ $k }}">
+        <i class="far fa-file-pdf" aria-hidden="true"></i> Preview
+      </button>
+    </li>
+    {{ end }}
+  </ul>
+</div>
+
+<script>
+  (function () {
+    var papers = {{ $items | jsonify | safeJS }};
+    var PDFJS = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/";
+    var PDFJS_SRI = "sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==";
+    var WORKER_SRI = "sha512-BbrZ76UNZq5BhH7LL7pn9A4TKQpQeNCHOo65/akfelcIBbcVvYWOFQKPXIrykE3qZxYjmDX573oa4Ywsc7rpTw==";
+    var FADE_MS = 200;  // must match the transitions in custom.scss
+
+    var overlay = document.createElement("div");
+    overlay.className = "paper-overlay";
+    var modal = document.createElement("div");
+    modal.className = "paper-modal";
+    modal.setAttribute("role", "dialog");
+    modal.setAttribute("aria-modal", "true");
+    modal.innerHTML =
+      '<div class="paper-modal-head">' +
+        '<div><div class="paper-modal-title"></div><div class="paper-modal-meta"></div></div>' +
+        '<button type="button" class="paper-modal-close" aria-label="Close">×</button>' +
+      '</div>' +
+      '<div class="paper-modal-scroll">' +
+        '<div class="paper-pdf" aria-label="PDF preview"></div>' +
+        '<div class="paper-notes">' +
+          '<h4>Summary</h4><div class="paper-summary"></div>' +
+          '<h4>Why I recommend it</h4><div class="paper-why"></div>' +
+          '<div class="paper-links"></div>' +
+        '</div>' +
+      '</div>';
+    overlay.appendChild(modal);
+    document.body.appendChild(overlay);
+    var pdfBox = modal.querySelector(".paper-pdf");
+    var scroller = modal.querySelector(".paper-modal-scroll");
+    var opened = -1;
+    var loadId = 0;      // ignore renders of a paper that is no longer shown
+    var closeTimer = null;
+
+    // pdf.js and its worker, both checked against their published hashes.
+    var libReady = null;
+    function loadPdfJs() {
+      if (libReady) return libReady;
+      libReady = new Promise(function (resolve, reject) {
+        var s = document.createElement("script");
+        s.src = PDFJS + "pdf.min.js";
+        s.integrity = PDFJS_SRI;
+        s.crossOrigin = "anonymous";
+        s.referrerPolicy = "no-referrer";
+        s.onload = resolve;
+        s.onerror = reject;
+        document.head.appendChild(s);
+      }).then(function () {
+        return fetch(PDFJS + "pdf.worker.min.js", { integrity: WORKER_SRI, mode: "cors" });
+      }).then(function (r) { return r.blob(); }).then(function (blob) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(blob);
+        return window.pdfjsLib;
+      });
+      return libReady;
+    }
+
+    // Render each page only when it scrolls near the visible part of the popup.
+    function renderPdf(url, myLoad) {
+      pdfBox.innerHTML = '<div class="paper-pdf-status">Loading PDF…</div>';
+      loadPdfJs().then(function (lib) {
+        return lib.getDocument({ url: url }).promise;
+      }).then(function (doc) {
+        if (myLoad !== loadId) return;
+        pdfBox.innerHTML = "";
+        var width = pdfBox.clientWidth;
+        var ratio = window.devicePixelRatio || 1;
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting || e.target.dataset.done) return;
+            e.target.dataset.done = "1";
+            observer.unobserve(e.target);
+            doc.getPage(+e.target.dataset.page).then(function (page) {
+              if (myLoad !== loadId) return;
+              var base = page.getViewport({ scale: 1 });
+              var vp = page.getViewport({ scale: width / base.width * ratio });
+              var canvas = document.createElement("canvas");
+              canvas.width = vp.width;
+              canvas.height = vp.height;
+              e.target.appendChild(canvas);
+              page.render({ canvasContext: canvas.getContext("2d"), viewport: vp });
+            });
+          });
+        }, { root: scroller, rootMargin: "600px 0px" });
+        // Placeholders sized from the first page, so the scroll height is right from the start.
+        doc.getPage(1).then(function (first) {
+          if (myLoad !== loadId) return;
+          var v = first.getViewport({ scale: 1 });
+          for (var n = 1; n <= doc.numPages; n++) {
+            var ph = document.createElement("div");
+            ph.className = "paper-pdf-page";
+            ph.dataset.page = n;
+            ph.style.aspectRatio = v.width + " / " + v.height;
+            pdfBox.appendChild(ph);
+            observer.observe(ph);
+          }
+        });
+      }).catch(function () {
+        if (myLoad !== loadId) return;
+        pdfBox.innerHTML = '<div class="paper-pdf-status">The preview could not be loaded. ' +
+          '<a href="' + url + '" target="_blank" rel="noopener">Open the PDF on arXiv</a>.</div>';
+      });
+    }
+
+    function open(k) {
+      var p = papers[k];
+      opened = k;
+      loadId++;
+      clearTimeout(closeTimer);
+      modal.querySelector(".paper-modal-title").textContent = p.title;
+      modal.querySelector(".paper-modal-meta").textContent = p.meta;
+      modal.querySelector(".paper-summary").innerHTML = p.summary;
+      modal.querySelector(".paper-why").innerHTML = p.why;
+      modal.querySelector(".paper-links").innerHTML =
+        '<a href="' + p.url + '">Paper page</a> · ' +
+        '<a href="' + p.abs + '" target="_blank" rel="noopener">arXiv</a> · ' +
+        '<a href="' + p.pdf + '" target="_blank" rel="noopener">PDF</a>';
+      scroller.scrollTop = 0;
+      overlay.classList.remove("is-closing");
+      overlay.classList.add("is-open");
+      document.documentElement.classList.add("paper-modal-open");
+      modal.querySelector(".paper-modal-close").focus({ preventScroll: true });
+      renderPdf(p.pdf, loadId);
+    }
+
+    function close() {
+      if (opened < 0) return;
+      opened = -1;
+      loadId++;
+      overlay.classList.add("is-closing");
+      document.documentElement.classList.remove("paper-modal-open");
+      closeTimer = setTimeout(function () {
+        overlay.classList.remove("is-open", "is-closing");
+        pdfBox.innerHTML = "";
+      }, FADE_MS);
+    }
+
+    document.querySelectorAll(".featured-paper-preview").forEach(function (b) {
+      b.addEventListener("click", function () { open(+b.dataset.index); });
+    });
+    modal.querySelector(".paper-modal-close").addEventListener("click", close);
+    overlay.addEventListener("click", function (e) { if (e.target === overlay) close(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  })();
+</script>
+{{ end }}
