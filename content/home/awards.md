@@ -48,9 +48,9 @@ item:
     title: '🏆 Outstanding Reviewer Award'
     url: ''
   - certificate_url: ''
-    date_end: '2037-03-01'
+    date_end: ''
     date_start: '2025-03-01'
-    description: 'Associate Professor (II Fascia) in the call 2023/2025 (Ministerial Decree n. 1796/2023) for the disciplinary field 01/B1 – Informatics.'
+    description: 'Associate Professor (II Fascia) in the call 2023/2025 (Ministerial Decree n. 1796/2023) for the disciplinary field 01/B1 – Informatics. Valid until 03/2037.'
     organization: Italian Ministry of University and Research
     organization_url: 'https://www.mur.gov.it/'
     title: '🎓 Italian National Scientific Qualification (Habilitation)'
@@ -74,7 +74,7 @@ item:
   - certificate_url: ''
     date_end: ''
     date_start: '2023-12-06'
-    description: 'I reviewed three workshop papers thoroughly and provided useful hints to make the submissions better. The Program Chairs emailed me that I received the _Highlighted Reviewer_ acknowledgement. Unfortunately, I did not receive a certificate 🤨'
+    description: ''
     organization: NeurIPS XAIA 2023 Workshop
     organization_url: 'https://xai-in-action.github.io/#accepted-papers'
     title: '🏆 Highlighted Reviewer'
