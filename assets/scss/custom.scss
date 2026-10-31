@@ -87,17 +87,128 @@ a:focus,
 }
 
 // Places map in the Visiting Periods section (layouts/shortcodes/places_map.html)
-.places-map {
-  height: 360px;
-  border-radius: 6px;
+$places-map-height: 360px;
+$places-map-speed: 0.45s;
+
+.places-map-wrap {
+  display: flex;
   margin-bottom: 1.5rem;
+}
+
+.places-map-pane {
+  flex: 0 0 100%;
+  min-width: 0;
+  transition: flex-basis $places-map-speed ease;
+}
+
+.places-map {
+  height: $places-map-height;
+  border-radius: 6px;
   z-index: 0;
+}
+
+// Detail card: zero width until "Check details" is pressed, then it takes the right half.
+.places-map-card {
+  position: relative;
+  flex: 0 0 0%;
+  min-width: 0;
+  height: $places-map-height;
+  margin-left: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(24px);
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  transition: flex-basis $places-map-speed ease, margin-left $places-map-speed ease,
+    transform $places-map-speed ease, opacity 0.3s ease 0.15s;
+}
+
+.has-card {
+  .places-map-pane {
+    flex-basis: calc(50% - 0.5rem);
+  }
+
+  .places-map-card {
+    flex-basis: calc(50% - 0.5rem);
+    margin-left: 1rem;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.places-map-card-body {
+  height: 100%;
+  overflow-y: auto;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+
+  a {
+    color: $link-color;
+  }
+}
+
+.places-map-card-swap {
+  animation: places-map-card-in 0.3s ease;
+}
+
+@keyframes places-map-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.places-map-card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 1.5rem 0.5rem 0;
+}
+
+.places-map-card-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  border: none;
+  background: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
+.dark .places-map-card {
+  background: #1f2023;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.places-map-details {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-weight: 600;
 }
 
 .places-map .leaflet-popup-content {
   margin: 10px 14px;
   font-size: 0.85rem;
   line-height: 1.4;
+}
+
+// Leaflet colors its own links blue; use the site link color in popups.
+.places-map .leaflet-popup-content a {
+  color: $link-color;
 }
 
 .places-map-name {
@@ -117,12 +228,44 @@ a:focus,
   }
 }
 
+.places-map-note {
+  margin-top: 0.25rem;
+  opacity: 0.85;
+}
+
 .dark .places-map .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.9);
 }
 
+// Phones: too narrow for side by side, so the card opens below the map instead.
 @media (max-width: 575px) {
   .places-map {
-    height: 260px;
+    height: 320px;
+  }
+
+  .places-map-wrap {
+    flex-direction: column;
+  }
+
+  .places-map-pane,
+  .has-card .places-map-pane {
+    flex: none;
+    width: 100%;
+  }
+
+  .places-map-card {
+    flex: none;
+    height: auto;
+    max-height: 0;
+    transform: translateY(-12px);
+    transition: max-height $places-map-speed ease, margin-top $places-map-speed ease,
+      transform $places-map-speed ease, opacity 0.3s ease 0.15s;
+  }
+
+  .has-card .places-map-card {
+    flex: none;
+    max-height: 600px;
+    margin-left: 0;
+    margin-top: 1rem;
   }
 }

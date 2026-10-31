@@ -1,55 +1,132 @@
 {{/* Leaflet map of the `places` list in the current page's front matter.
      Each place needs: name, location, lat, lng.
-     Optional: dates, people (Markdown), people_label (default "Worked with").
-     Hovering a point opens its popup; clicking keeps it open. Usage: {{< places_map >}} */}}
+     Optional: dates, people (Markdown), people_label (default "Worked with"), note (Markdown).
+     Hovering a point opens its popup; clicking keeps it open. "Check details" in a popup
+     shrinks the map to the left, centers it on the place and slides in a card on the right.
+     Usage: {{< places_map >}} */}}
 {{ $places := .Page.Params.places }}
 {{ $id := printf "places-map-%d" .Ordinal }}
 {{ $points := slice }}
-{{ range $place := $places }}
-  {{ $html := printf "<div class=\"places-map-name\">%s</div><div class=\"places-map-meta\">%s</div>" (.name | htmlEscape) (.location | htmlEscape) }}
-  {{ with .dates }}{{ $html = printf "%s<div class=\"places-map-meta\">%s</div>" $html (. | htmlEscape) }}{{ end }}
+{{ range $k, $place := $places }}
+  {{ $info := printf "<div class=\"places-map-meta\">%s</div>" (.location | htmlEscape) }}
+  {{ with .dates }}{{ $info = printf "%s<div class=\"places-map-meta\">%s</div>" $info (. | htmlEscape) }}{{ end }}
   {{ with .people }}
-    {{ $people := . | markdownify }}
-    {{ $html = printf "%s<div class=\"places-map-people\">%s: %s</div>" $html ($place.people_label | default "Worked with") $people }}
+    {{ $info = printf "%s<div class=\"places-map-people\">%s: %s</div>" $info ($place.people_label | default "Worked with") (. | markdownify) }}
   {{ end }}
-  {{ $points = $points | append (dict "lat" .lat "lng" .lng "html" $html) }}
+  {{ with .note }}{{ $info = printf "%s<div class=\"places-map-note\">%s</div>" $info (. | markdownify) }}{{ end }}
+  {{ $popup := printf "<div class=\"places-map-name\">%s</div>%s<a href=\"#\" class=\"places-map-details\" data-index=\"%d\">Check details →</a>" (.name | htmlEscape) $info $k }}
+  {{ $card := printf "<h3 class=\"places-map-card-title\">%s</h3>%s" (.name | htmlEscape) $info }}
+  {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card) }}
 {{ end }}
 {{ with $places }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
       integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
       crossorigin="anonymous" referrerpolicy="no-referrer">
-<div id="{{ $id }}" class="places-map" role="img" aria-label="Map of places: {{ delimit (apply . "index" "." "name") ", " }}"></div>
+<div class="places-map-wrap" id="{{ $id }}-wrap">
+  <div class="places-map-pane">
+    <div id="{{ $id }}" class="places-map" role="img" aria-label="Map of places: {{ delimit (apply . "index" "." "name") ", " }}"></div>
+  </div>
+  <aside class="places-map-card" aria-hidden="true">
+    <button type="button" class="places-map-card-close" aria-label="Close details">×</button>
+    <div class="places-map-card-body"></div>
+  </aside>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"
         integrity="sha512-BwHfrr4c9kmRkLw6iXFdzcdWV/PGkVgiIyIWLLlTSXzWQzxuSg4DiQUCpauz/EWjgk5TYQqX/kvn9pG1NpYfqg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   (function () {
     var places = {{ $points | jsonify | safeJS }};
+    var wrap = document.getElementById("{{ $id }}-wrap");
+    var card = wrap.querySelector(".places-map-card");
+    var cardBody = wrap.querySelector(".places-map-card-body");
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var TRANSITION_MS = 450;
+    var DETAIL_ZOOM = 6;
+    var FIT_OPTIONS = { paddingTopLeft: [130, 130], paddingBottomRight: [130, 20] };
+
     var map = L.map("{{ $id }}", { scrollWheelZoom: false, worldCopyJump: true });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    var BASE_STYLE = { radius: 7, color: "#ffffff", weight: 2, fillColor: "#00a933", fillOpacity: 1 };
     var markers = places.map(function (p) {
-      return L.circleMarker([p.lat, p.lng], {
-        radius: 7,
-        color: "#ffffff",
-        weight: 2,
-        fillColor: "#00a933",
-        fillOpacity: 1
-      })
-        .bindPopup(p.html, { offset: [0, -4], autoPan: false, autoPanPadding: [20, 20] })
+      return L.circleMarker([p.lat, p.lng], BASE_STYLE)
+        .bindPopup(p.popup, { offset: [0, -4], autoPan: false })
         .addTo(map);
+    });
+    var bounds = L.featureGroup(markers).getBounds();
+
+    // Keep Leaflet's idea of the map size in step with the CSS width transition, then run `done`.
+    function followResize(done) {
+      if (reduceMotion) {
+        map.invalidateSize({ pan: false });
+        done();
+        return;
+      }
+      var start = performance.now();
+      (function frame(now) {
+        map.invalidateSize({ pan: false });
+        if (now - start < TRANSITION_MS) requestAnimationFrame(frame);
+        else done();
+      })(start);
+    }
+
+    var current = -1;
+
+    function openCard(k) {
+      var wasOpen = wrap.classList.contains("has-card");
+      current = k;
+      markers.forEach(function (m, i) {
+        m.setStyle(i === k ? { radius: 10 } : { radius: BASE_STYLE.radius });
+      });
+      cardBody.innerHTML = places[k].card;
+      card.setAttribute("aria-hidden", "false");
+      if (!wasOpen) {
+        cardBody.classList.remove("places-map-card-swap");
+      } else {
+        // Restart the fade-in when switching from one place to another.
+        cardBody.classList.remove("places-map-card-swap");
+        void cardBody.offsetWidth;
+        cardBody.classList.add("places-map-card-swap");
+      }
+      wrap.classList.add("has-card");
+      var target = markers[k].getLatLng();
+      var zoom = Math.max(map.getZoom(), DETAIL_ZOOM);
+      if (wasOpen) {
+        map.flyTo(target, zoom, { duration: reduceMotion ? 0 : 0.8 });
+      } else {
+        followResize(function () {
+          map.flyTo(target, zoom, { duration: reduceMotion ? 0 : 0.8 });
+        });
+      }
+    }
+
+    function closeCard() {
+      if (!wrap.classList.contains("has-card")) return;
+      current = -1;
+      markers.forEach(function (m) { m.setStyle({ radius: BASE_STYLE.radius }); });
+      wrap.classList.remove("has-card");
+      card.setAttribute("aria-hidden", "true");
+      followResize(function () {
+        map.flyToBounds(bounds, Object.assign({ duration: reduceMotion ? 0 : 0.8 }, FIT_OPTIONS));
+      });
+    }
+
+    wrap.querySelector(".places-map-card-close").addEventListener("click", closeCard);
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeCard();
     });
 
     // Hover opens a popup and it closes shortly after the pointer leaves both the point and
-    // the popup (so links inside it stay clickable). A click keeps it open until closed.
-    // Only a click pans the map to fit the popup: panning on hover would move the point
-    // away from the pointer.
-    markers.forEach(function (marker) {
+    // the popup (so links inside it stay clickable). A click on the point or inside the popup
+    // keeps it open until it is closed.
+    markers.forEach(function (marker, k) {
       var pinned = false;
       var timer = null;
+      var shift = null;
       function closeSoon() {
         if (pinned) return;
         clearTimeout(timer);
@@ -58,35 +135,60 @@
       function keepOpen() {
         clearTimeout(timer);
       }
+      function pin() {
+        pinned = true;
+        keepOpen();
+      }
+      // If the popup is cut off by the map edge, shift the map so it fits. The shift always
+      // moves the popup down by at least 40px, so it ends up under the pointer that opened it
+      // instead of sliding away from it. The map shifts back when the popup closes.
+      function fitPopup(el) {
+        var box = map.getContainer().getBoundingClientRect();
+        var pop = el.getBoundingClientRect();
+        var margin = 10;
+        var dx = 0;
+        if (pop.left < box.left + margin) dx = pop.left - box.left - margin;
+        else if (pop.right > box.right - margin) dx = pop.right - box.right + margin;
+        var top = box.top + margin - pop.top;
+        if (top > 0 || dx !== 0) {
+          shift = [dx, -Math.max(top, 40)];
+          map.panBy(shift, { animate: false });
+        }
+      }
       marker.on("mouseover", function () {
         keepOpen();
         if (!marker.isPopupOpen()) marker.openPopup();
       });
       marker.on("mouseout", closeSoon);
-      marker.on("click", function () {
-        var popup = marker.getPopup();
-        keepOpen();
-        if (!pinned) {
-          marker.closePopup();
-          popup.options.autoPan = true;
-          marker.openPopup();
-          popup.options.autoPan = false;
-        }
-        pinned = true;
-      });
+      marker.on("click", pin);
       marker.on("popupopen", function (e) {
         var el = e.popup.getElement();
         el.addEventListener("mouseenter", keepOpen);
         el.addEventListener("mouseleave", closeSoon);
+        el.addEventListener("click", pin);
+        // Leaflet stops click events from leaving the popup, so listen on the link itself.
+        var link = el.querySelector(".places-map-details");
+        if (link) {
+          link.addEventListener("click", function (ev) {
+            ev.preventDefault();
+            marker.closePopup();
+            openCard(k);
+          });
+        }
+        fitPopup(el);
       });
       marker.on("popupclose", function () {
         pinned = false;
         keepOpen();
+        if (shift) {
+          map.panBy([-shift[0], -shift[1]], { animate: false });
+          shift = null;
+        }
       });
     });
 
     // Leave room above and beside the outermost points so hover popups fit inside the map.
-    map.fitBounds(L.featureGroup(markers).getBounds(), { paddingTopLeft: [130, 130], paddingBottomRight: [130, 20] });
+    map.fitBounds(bounds, FIT_OPTIONS);
   })();
 </script>
 {{ end }}

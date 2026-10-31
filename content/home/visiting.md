@@ -27,13 +27,13 @@ places:
   - name: Technical University of Munich
     location: Munich, Germany
     dates: Jun 2023 – Sep 2023
-    people: Gjergji Kasneci
+    people: '[Gjergji Kasneci](https://www.professoren.tum.de/en/kasneci-gjergji)'
     lat: 48.1497
     lng: 11.5679
   - name: George Mason University
     location: Fairfax, VA, USA
     dates: Apr 2021 – Jun 2021
-    people: Carlotta Domeniconi and Hamed Sarvari
+    people: '[Carlotta Domeniconi](https://scholar.google.com/citations?user=aKkIMogAAAAJ&hl=en) and [Hamed Sarvari](https://scholar.google.com/citations?user=ybhE0WYAAAAJ&hl=en)'
     lat: 38.8298
     lng: -77.3074
   - name: Massachusetts Institute of Technology
@@ -45,12 +45,16 @@ places:
     lng: -71.0942
   - name: University of L'Aquila
     location: L'Aquila, Italy
+    dates: Apr 2023 (1 day)
+    people_label: Visited
+    people: '[Giovanni Stilo](https://giovannistilo.eu/)'
+    note: Taught a hands-on tutorial on detecting handwritten digits (MNIST) with autoencoders and transformers for the master's course Deep Neural Networks.
     lat: 42.3676
     lng: 13.3527
   - name: Heimerer College
     location: Pristina, Kosovo
     dates: May 2024 – Jun 2024
-    people: Rona Karahoda
+    people: '[Rona Karahoda](https://scholar.google.com/citations?user=FbAlBYUAAAAJ&hl=en)'
     lat: 42.6629
     lng: 21.1655
 headless: true
