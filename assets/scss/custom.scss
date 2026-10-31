@@ -35,18 +35,13 @@
   font-size: 0.85rem;
 }
 
-.compact-award-details {
-  font-size: 0.85rem;
-  margin-top: 0;
+.compact-award-desc {
+  font-size: 0.8rem;
   line-height: 1.4;
-
-  summary {
-    cursor: pointer;
-    opacity: 0.7;
-  }
+  opacity: 0.8;
 
   p {
-    margin: 0.25rem 0 0;
+    margin: 0.1rem 0 0;
   }
 }
 

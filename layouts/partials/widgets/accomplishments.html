@@ -1,4 +1,4 @@
-{{/* Compact override of the Wowchemy accomplishments widget: one row per item, description collapsed. */}}
+{{/* Compact override of the Wowchemy accomplishments widget: one row per item, description in small text. */}}
 {{ $page := .page }}
 {{ $columns := $page.Params.design.columns | default "2" }}
 {{ $date_format := $page.Params.date_format | default "Jan 2006" }}
@@ -30,10 +30,7 @@
         <a class="compact-award-org" href="{{ . }}" target="_blank" rel="noopener">{{ i18n "see_certificate" | default "See certificate" }}</a>
         {{ end }}
         {{ with .description }}
-        <details class="compact-award-details">
-          <summary>Details</summary>
-          <div>{{ . | markdownify | emojify }}</div>
-        </details>
+        <div class="compact-award-desc">{{ . | markdownify | emojify }}</div>
         {{ end }}
       </div>
     </li>

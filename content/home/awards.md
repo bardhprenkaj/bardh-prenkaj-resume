@@ -57,10 +57,10 @@ item:
     url: ''
   - certificate_url: ''
     date_end: ''
-    date_start: '2025-02-01'
-    description: '_RAZOR: Sharpening Knowledge by Cutting Bias with Unsupervised Text Rewriting_ was selected as a spotlight paper.'
-    organization: AAAI 2025
-    organization_url: 'https://aaai.org/conference/aaai/aaai-25/'
+    date_start: '2024-02-01'
+    description: '_Robust Stochastic Graph Generator for Counterfactual Explanations_ (RSGG-CE), with Mario Alfonso Prado-Romero and Giovanni Stilo, was selected as a spotlight paper.'
+    organization: AAAI 2024
+    organization_url: 'https://aaai.org/aaai-conference/aaai-24/'
     title: '🏆 Spotlight Paper'
     url: ''
   - certificate_url: ''
@@ -90,7 +90,7 @@ item:
   - certificate_url: 'https://web.uniroma1.it/trasparenza/sites/default/files/Approvazione%20atti%20BS-S%2006-2021.pdf'
     date_end: '2022-09-30'
     date_start: '2021-11-01'
-    description: 'Winner of the BS-S 6/2021 Open Competition published on September 15th 2021 (num: 1207, rep: 326, class: VII/1) on research project "000090 19 RS VELARDI - RICERCA ATENEO 2019 - MEDI PROGETTI-VELARDI (Responsabile Scientifico, VELARDI P.)"'
+    description: ''
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
     title: '🏅 Scholarship in AI & Computer Science'
@@ -98,7 +98,7 @@ item:
   - certificate_url: 'https://www.uniroma1.it/sites/default/files/field_file_allegati/graduatoria_avvio_per_web_0.pdf'
     date_end: '2021-04-30'
     date_start: '2020-05-01'
-    description: 'Winner of the Avvio alla Ricerca 2020 - Tipo I, prof. Num: AR120172A8B35EEA on the research project _"Personalized e-Learning Solutions to Improve the Efficacy of Learning Outcomes in Computer Science e-Courses"_. I devised an autonomous model to detect students prone to drop out of university in online computer science courses, and provide them with personalized feedback and learning pathways to support their academic journey. With this money (€ **1000.00** ), I bought my PC (now pretty slow 🤣🙄) and published the paper Prenkaj et al. "_Hidden Space Deep Sequential Risk Prediction on Student Trajectories_", In Future Generation Computing Systems, vol. 125, pp. 532-543, 2021.'
+    description: ''
     organization: Sapienza University of Rome
     organization_url: 'https://www.di.uniroma1.it/en'
     title: '🏅 Scholarship in AI'
