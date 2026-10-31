@@ -1,42 +1,28 @@
-{{/* Featured papers under the biography (data/featured_papers.yaml, at most 5).
-     Each row: title (link to the publication page), venue and year, and a "Preview" button.
-     The button opens a popup over a grey overlay with the arXiv PDF rendered by pdf.js
-     (loaded only when the first preview is opened), followed by the summary and
-     "Why I recommend it". */}}
+{{/* "My Top Papers" popup (data/featured_papers.yaml, at most 5 papers).
+     The button is rendered next to the "Biography" heading by layouts/partials/widgets/about.html
+     (class "top-papers-button"). It opens a popup over a grey overlay with the papers side by side:
+     for each, title and venue, the arXiv PDF rendered by pdf.js (each page drawn when it scrolls
+     into view; pdf.js loads only on first use), the summary and "Why I recommend it".
+     4 columns on wide screens, 2 on medium, 1 (stacked) on phones. */}}
 {{ $papers := first 5 (site.Data.featured_papers.papers | default slice) }}
 {{ with $papers }}
 {{ $items := slice }}
-<div class="featured-papers">
-  <div class="featured-papers-heading">Featured papers</div>
-  <ul class="list-unstyled featured-papers-list">
-    {{ range $k, $p := . }}
-      {{ $page := site.GetPage (printf "/publication/%s" $p.slug) }}
-      {{ if not $page }}{{ errorf "featured_papers: no publication page content/publication/%s" $p.slug }}{{ end }}
-      {{ $venue := $page.Params.publication_short | default $page.Params.publication | default "" | markdownify | plainify }}
-      {{ $venue = replaceRE "^In " "" $venue }}
-      {{ $year := $page.Date.Format "2006" }}
-      {{ $meta := cond (strings.Contains $venue $year) $venue (trim (printf "%s %s" $venue $year) " ") }}
-      {{ $items = $items | append (dict
-           "title" $page.Title
-           "url" $page.RelPermalink
-           "meta" $meta
-           "pdf" (printf "https://arxiv.org/pdf/%s" $p.arxiv)
-           "abs" (printf "https://arxiv.org/abs/%s" $p.arxiv)
-           "summary" ($p.summary | markdownify)
-           "why" ($p.why | markdownify)) }}
-    <li class="featured-paper">
-      <div class="featured-paper-text">
-        <a class="featured-paper-title" href="{{ $page.RelPermalink }}">{{ $page.Title }}</a>
-        <div class="featured-paper-meta">{{ $meta }}</div>
-      </div>
-      <button type="button" class="btn btn-sm featured-paper-preview" data-index="{{ $k }}">
-        <i class="far fa-file-pdf" aria-hidden="true"></i> Preview
-      </button>
-    </li>
-    {{ end }}
-  </ul>
-</div>
-
+{{ range $p := . }}
+  {{ $page := site.GetPage (printf "/publication/%s" $p.slug) }}
+  {{ if not $page }}{{ errorf "featured_papers: no publication page content/publication/%s" $p.slug }}{{ end }}
+  {{ $venue := $page.Params.publication_short | default $page.Params.publication | default "" | markdownify | plainify }}
+  {{ $venue = replaceRE "^In " "" $venue }}
+  {{ $year := $page.Date.Format "2006" }}
+  {{ $meta := cond (strings.Contains $venue $year) $venue (trim (printf "%s %s" $venue $year) " ") }}
+  {{ $items = $items | append (dict
+       "title" $page.Title
+       "url" $page.RelPermalink
+       "meta" $meta
+       "pdf" (printf "https://arxiv.org/pdf/%s" $p.arxiv)
+       "abs" (printf "https://arxiv.org/abs/%s" $p.arxiv)
+       "summary" ($p.summary | markdownify)
+       "why" ($p.why | markdownify)) }}
+{{ end }}
 <script>
   (function () {
     var papers = {{ $items | jsonify | safeJS }};
@@ -45,31 +31,40 @@
     var WORKER_SRI = "sha512-BbrZ76UNZq5BhH7LL7pn9A4TKQpQeNCHOo65/akfelcIBbcVvYWOFQKPXIrykE3qZxYjmDX573oa4Ywsc7rpTw==";
     var FADE_MS = 200;  // must match the transitions in custom.scss
 
+    function esc(s) {
+      return String(s).replace(/[&<>"]/g, function (c) {
+        return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+      });
+    }
+
     var overlay = document.createElement("div");
     overlay.className = "paper-overlay";
     var modal = document.createElement("div");
     modal.className = "paper-modal";
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
+    modal.setAttribute("aria-label", "My top papers");
     modal.innerHTML =
-      '<div class="paper-modal-head">' +
-        '<div><div class="paper-modal-title"></div><div class="paper-modal-meta"></div></div>' +
-        '<button type="button" class="paper-modal-close" aria-label="Close">×</button>' +
-      '</div>' +
-      '<div class="paper-modal-scroll">' +
-        '<div class="paper-pdf" aria-label="PDF preview"></div>' +
-        '<div class="paper-notes">' +
-          '<h4>Summary</h4><div class="paper-summary"></div>' +
-          '<h4>Why I recommend it</h4><div class="paper-why"></div>' +
-          '<div class="paper-links"></div>' +
-        '</div>' +
-      '</div>';
+      '<div class="paper-modal-head"><div class="paper-modal-title">My Top Papers</div>' +
+      '<button type="button" class="paper-modal-close" aria-label="Close">×</button></div>' +
+      '<div class="paper-modal-scroll"><div class="paper-grid">' +
+      papers.map(function (p) {
+        return '<article class="paper-col">' +
+          '<a class="paper-col-title" href="' + p.url + '">' + esc(p.title) + '</a>' +
+          '<div class="paper-col-meta">' + esc(p.meta) + '</div>' +
+          '<div class="paper-pdf" data-pdf="' + p.pdf + '" aria-label="PDF preview"></div>' +
+          '<div class="paper-notes">' +
+            '<h4>Summary</h4>' + p.summary +
+            '<h4>Why I recommend it</h4>' + p.why +
+            '<div class="paper-links"><a href="' + p.abs + '" target="_blank" rel="noopener">arXiv</a> · ' +
+            '<a href="' + p.pdf + '" target="_blank" rel="noopener">PDF</a></div>' +
+          '</div></article>';
+      }).join("") +
+      '</div></div>';
     overlay.appendChild(modal);
     document.body.appendChild(overlay);
-    var pdfBox = modal.querySelector(".paper-pdf");
-    var scroller = modal.querySelector(".paper-modal-scroll");
-    var opened = -1;
-    var loadId = 0;      // ignore renders of a paper that is no longer shown
+    var isOpen = false;
+    var loaded = false;
     var closeTimer = null;
 
     // pdf.js and its worker, both checked against their published hashes.
@@ -94,88 +89,75 @@
       return libReady;
     }
 
-    // Render each page only when it scrolls near the visible part of the popup.
-    function renderPdf(url, myLoad) {
-      pdfBox.innerHTML = '<div class="paper-pdf-status">Loading PDF…</div>';
+    // Render one paper into its box; each page is drawn when it scrolls near the box's view.
+    function renderPdf(box) {
+      var url = box.dataset.pdf;
+      box.innerHTML = '<div class="paper-pdf-status">Loading PDF…</div>';
       loadPdfJs().then(function (lib) {
         return lib.getDocument({ url: url }).promise;
       }).then(function (doc) {
-        if (myLoad !== loadId) return;
-        pdfBox.innerHTML = "";
-        var width = pdfBox.clientWidth;
-        var ratio = window.devicePixelRatio || 1;
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) {
-            if (!e.isIntersecting || e.target.dataset.done) return;
-            e.target.dataset.done = "1";
-            observer.unobserve(e.target);
-            doc.getPage(+e.target.dataset.page).then(function (page) {
-              if (myLoad !== loadId) return;
-              var base = page.getViewport({ scale: 1 });
-              var vp = page.getViewport({ scale: width / base.width * ratio });
-              var canvas = document.createElement("canvas");
-              canvas.width = vp.width;
-              canvas.height = vp.height;
-              e.target.appendChild(canvas);
-              page.render({ canvasContext: canvas.getContext("2d"), viewport: vp });
-            });
-          });
-        }, { root: scroller, rootMargin: "600px 0px" });
-        // Placeholders sized from the first page, so the scroll height is right from the start.
-        doc.getPage(1).then(function (first) {
-          if (myLoad !== loadId) return;
+        return doc.getPage(1).then(function (first) {
+          box.innerHTML = "";
+          var ratio = window.devicePixelRatio || 1;
           var v = first.getViewport({ scale: 1 });
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting || e.target.dataset.done) return;
+              e.target.dataset.done = "1";
+              observer.unobserve(e.target);
+              doc.getPage(+e.target.dataset.page).then(function (page) {
+                var base = page.getViewport({ scale: 1 });
+                var vp = page.getViewport({ scale: e.target.clientWidth / base.width * ratio });
+                var canvas = document.createElement("canvas");
+                canvas.width = vp.width;
+                canvas.height = vp.height;
+                e.target.appendChild(canvas);
+                page.render({ canvasContext: canvas.getContext("2d"), viewport: vp });
+              });
+            });
+          }, { root: box, rootMargin: "400px 0px" });
+          // Placeholders sized from the first page, so the box scrolls correctly from the start.
           for (var n = 1; n <= doc.numPages; n++) {
             var ph = document.createElement("div");
             ph.className = "paper-pdf-page";
             ph.dataset.page = n;
             ph.style.aspectRatio = v.width + " / " + v.height;
-            pdfBox.appendChild(ph);
+            box.appendChild(ph);
             observer.observe(ph);
           }
         });
       }).catch(function () {
-        if (myLoad !== loadId) return;
-        pdfBox.innerHTML = '<div class="paper-pdf-status">The preview could not be loaded. ' +
+        box.innerHTML = '<div class="paper-pdf-status">The preview could not be loaded. ' +
           '<a href="' + url + '" target="_blank" rel="noopener">Open the PDF on arXiv</a>.</div>';
       });
     }
 
-    function open(k) {
-      var p = papers[k];
-      opened = k;
-      loadId++;
+    function open() {
+      isOpen = true;
       clearTimeout(closeTimer);
-      modal.querySelector(".paper-modal-title").textContent = p.title;
-      modal.querySelector(".paper-modal-meta").textContent = p.meta;
-      modal.querySelector(".paper-summary").innerHTML = p.summary;
-      modal.querySelector(".paper-why").innerHTML = p.why;
-      modal.querySelector(".paper-links").innerHTML =
-        '<a href="' + p.url + '">Paper page</a> · ' +
-        '<a href="' + p.abs + '" target="_blank" rel="noopener">arXiv</a> · ' +
-        '<a href="' + p.pdf + '" target="_blank" rel="noopener">PDF</a>';
-      scroller.scrollTop = 0;
       overlay.classList.remove("is-closing");
       overlay.classList.add("is-open");
       document.documentElement.classList.add("paper-modal-open");
       modal.querySelector(".paper-modal-close").focus({ preventScroll: true });
-      renderPdf(p.pdf, loadId);
+      // Load the PDFs once; they stay rendered for later openings.
+      if (!loaded) {
+        loaded = true;
+        modal.querySelectorAll(".paper-pdf").forEach(renderPdf);
+      }
     }
 
     function close() {
-      if (opened < 0) return;
-      opened = -1;
-      loadId++;
+      if (!isOpen) return;
+      isOpen = false;
       overlay.classList.add("is-closing");
       document.documentElement.classList.remove("paper-modal-open");
       closeTimer = setTimeout(function () {
         overlay.classList.remove("is-open", "is-closing");
-        pdfBox.innerHTML = "";
       }, FADE_MS);
     }
 
-    document.querySelectorAll(".featured-paper-preview").forEach(function (b) {
-      b.addEventListener("click", function () { open(+b.dataset.index); });
+    document.querySelectorAll(".top-papers-button").forEach(function (b) {
+      b.addEventListener("click", open);
     });
     modal.querySelector(".paper-modal-close").addEventListener("click", close);
     overlay.addEventListener("click", function (e) { if (e.target === overlay) close(); });

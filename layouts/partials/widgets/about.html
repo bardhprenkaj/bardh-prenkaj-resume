@@ -1,5 +1,5 @@
 {{/* Override of the Wowchemy About widget: adds the places globe under the social links
-     and the featured papers under the biography. */}}
+     and a "My Top Papers" button next to the Biography heading. */}}
 {{ $ := .root }}
 {{ $page := .page }}
 
@@ -92,13 +92,20 @@
   <div class="col-12 col-lg-8">
 
     {{/* Only display widget title in explicit instances of about widget, not in author pages. */}}
-    {{ if and $page.Params.widget $page.Title }}<h1>{{ $page.Title | markdownify | emojify }}</h1>{{ end }}
+    {{ if and $page.Params.widget $page.Title }}
+    <div class="about-heading">
+      <h1>{{ $page.Title | markdownify | emojify }}</h1>
+      {{ if site.Data.featured_papers.papers }}
+      <button type="button" class="btn top-papers-button"><i class="far fa-file-pdf" aria-hidden="true"></i> My Top Papers</button>
+      {{ end }}
+    </div>
+    {{ end }}
 
     <div class="article-style">
       {{ $person_page.Content }}
     </div>
 
-    {{/* Featured papers with PDF preview (data/featured_papers.yaml). */}}
+    {{/* "My Top Papers" popup with PDF previews (data/featured_papers.yaml). */}}
     {{ partial "featured_papers.html" . }}
 
     <div class="row">

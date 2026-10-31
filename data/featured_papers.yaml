@@ -1,5 +1,5 @@
-# Featured papers shown under the biography (layouts/partials/featured_papers.html).
-# At most 5 are shown, in this order. For each paper:
+# Papers in the "My Top Papers" popup, opened from the button next to the Biography heading
+# (layouts/partials/featured_papers.html). At most 5, shown side by side in this order. For each paper:
 #   slug:    folder name in content/publication/ (title, venue and page link come from there)
 #   arxiv:   arXiv identifier; the preview renders https://arxiv.org/pdf/<arxiv>
 #   summary: what the paper does (Markdown)
