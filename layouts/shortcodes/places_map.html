@@ -1,6 +1,8 @@
 {{/* Leaflet map of the `places` list in the current page's front matter.
      Each place needs: name, location, lat, lng.
-     Optional: dates, people (Markdown), people_label (default "Worked with"), note (Markdown).
+     Optional: dates, people (Markdown), people_label (default "Worked with"),
+     logo (file name in assets/media/icons/brands/, without .svg; replaces the card title),
+     card_text (Markdown; shown only in the detail card).
      Hovering a point opens its popup; clicking keeps it open. "Check details" in a popup
      shrinks the map to the left, centers it on the place and slides in a card on the right.
      Usage: {{< places_map >}} */}}
@@ -13,9 +15,15 @@
   {{ with .people }}
     {{ $info = printf "%s<div class=\"places-map-people\">%s: %s</div>" $info ($place.people_label | default "Worked with") (. | markdownify) }}
   {{ end }}
-  {{ with .note }}{{ $info = printf "%s<div class=\"places-map-note\">%s</div>" $info (. | markdownify) }}{{ end }}
   {{ $popup := printf "<div class=\"places-map-name\">%s</div>%s<a href=\"#\" class=\"places-map-details\" data-index=\"%d\">Check details →</a>" (.name | htmlEscape) $info $k }}
-  {{ $card := printf "<h3 class=\"places-map-card-title\">%s</h3>%s" (.name | htmlEscape) $info }}
+  {{ $header := printf "<h3 class=\"places-map-card-title\">%s</h3>" (.name | htmlEscape) }}
+  {{ with .logo }}
+    {{ $logo := resources.Get (printf "media/icons/brands/%s.svg" .) }}
+    {{ if not $logo }}{{ errorf "places_map: logo not found at assets/media/icons/brands/%s.svg" . }}{{ end }}
+    {{ $header = printf "<img class=\"places-map-card-logo\" src=\"%s\" alt=\"%s\">" $logo.RelPermalink ($place.name | htmlEscape) }}
+  {{ end }}
+  {{ $card := printf "%s%s" $header $info }}
+  {{ with .card_text }}{{ $card = printf "%s<div class=\"places-map-card-text\">%s</div>" $card (. | markdownify) }}{{ end }}
   {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card) }}
 {{ end }}
 {{ with $places }}
@@ -40,6 +48,8 @@
     var wrap = document.getElementById("{{ $id }}-wrap");
     var card = wrap.querySelector(".places-map-card");
     var cardBody = wrap.querySelector(".places-map-card-body");
+    var mapEl = document.getElementById("{{ $id }}");
+    var phone = window.matchMedia("(max-width: 575px)");
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var TRANSITION_MS = 450;
     var DETAIL_ZOOM = 6;
@@ -59,7 +69,7 @@
     });
     var bounds = L.featureGroup(markers).getBounds();
 
-    // Keep Leaflet's idea of the map size in step with the CSS width transition, then run `done`.
+    // Keep Leaflet's idea of the map size in step with the CSS size transition, then run `done`.
     function followResize(done) {
       if (reduceMotion) {
         map.invalidateSize({ pan: false });
@@ -75,6 +85,51 @@
     }
 
     var current = -1;
+
+    // The map's normal height (from CSS). Re-read on resize while no card is open.
+    var baseHeight = mapEl.offsetHeight;
+
+    // Height the card text needs at the card body's current width. Read with height "auto"
+    // so neither the card's current (possibly mid-transition) height nor the map's counts.
+    function contentHeight() {
+      cardBody.style.height = "auto";
+      var h = cardBody.offsetHeight;
+      cardBody.style.height = "";
+      return h;
+    }
+
+    // Size the card for its content. On wide screens the card body gets its final width up
+    // front (so text does not reflow while the card slides in), and the map and card grow
+    // together to the height the text needs, never below the map's normal height.
+    function sizeCard() {
+      if (phone.matches) {
+        cardBody.style.width = "";
+        mapEl.style.height = "";
+        card.style.height = "";
+        card.style.maxHeight = contentHeight() + "px";
+        return;
+      }
+      card.style.maxHeight = "";
+      cardBody.style.width = (wrap.clientWidth - 16) * 0.6 + "px";
+      var height = Math.max(baseHeight, contentHeight());
+      mapEl.style.height = height + "px";
+      card.style.height = height + "px";
+    }
+
+    function resetSize() {
+      cardBody.style.width = "";
+      mapEl.style.height = "";
+      card.style.height = "";
+      card.style.maxHeight = "";
+    }
+
+    window.addEventListener("resize", function () {
+      if (current < 0) baseHeight = mapEl.offsetHeight;
+      if (current >= 0) {
+        sizeCard();
+        map.invalidateSize({ pan: false });
+      }
+    });
 
     function openCard(k) {
       var wasOpen = wrap.classList.contains("has-card");
@@ -93,15 +148,19 @@
         cardBody.classList.add("places-map-card-swap");
       }
       wrap.classList.add("has-card");
+      sizeCard();
       var target = markers[k].getLatLng();
       var zoom = Math.max(map.getZoom(), DETAIL_ZOOM);
-      if (wasOpen) {
+      followResize(function () {
+        // Grow further if the text still overflows (e.g. a web font finished loading).
+        if (!phone.matches && cardBody.scrollHeight > cardBody.clientHeight + 1) {
+          var h = card.offsetHeight + cardBody.scrollHeight - cardBody.clientHeight;
+          mapEl.style.height = h + "px";
+          card.style.height = h + "px";
+          map.invalidateSize({ pan: false });
+        }
         map.flyTo(target, zoom, { duration: reduceMotion ? 0 : 0.8 });
-      } else {
-        followResize(function () {
-          map.flyTo(target, zoom, { duration: reduceMotion ? 0 : 0.8 });
-        });
-      }
+      });
     }
 
     function closeCard() {
@@ -110,6 +169,7 @@
       markers.forEach(function (m) { m.setStyle({ radius: BASE_STYLE.radius }); });
       wrap.classList.remove("has-card");
       card.setAttribute("aria-hidden", "true");
+      resetSize();
       followResize(function () {
         map.flyToBounds(bounds, Object.assign({ duration: reduceMotion ? 0 : 0.8 }, FIT_OPTIONS));
       });
@@ -157,6 +217,9 @@
       }
       marker.on("mouseover", function () {
         keepOpen();
+        // The open card already shows this place; the map may also have flown the point under
+        // the pointer, which should not pop the popup back up.
+        if (k === current) return;
         if (!marker.isPopupOpen()) marker.openPopup();
       });
       marker.on("mouseout", closeSoon);

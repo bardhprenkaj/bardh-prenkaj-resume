@@ -105,9 +105,10 @@ $places-map-speed: 0.45s;
   height: $places-map-height;
   border-radius: 6px;
   z-index: 0;
+  transition: height $places-map-speed ease;
 }
 
-// Detail card: zero width until "Check details" is pressed, then it takes the right half.
+// Detail card: zero width until "Check details" is pressed, then it takes the right 60%.
 .places-map-card {
   position: relative;
   flex: 0 0 0%;
@@ -120,17 +121,17 @@ $places-map-speed: 0.45s;
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-  transition: flex-basis $places-map-speed ease, margin-left $places-map-speed ease,
+  transition: flex-basis $places-map-speed ease, margin-left $places-map-speed ease, height $places-map-speed ease,
     transform $places-map-speed ease, opacity 0.3s ease 0.15s;
 }
 
 .has-card {
   .places-map-pane {
-    flex-basis: calc(50% - 0.5rem);
+    flex-basis: calc(40% - 0.4rem);
   }
 
   .places-map-card {
-    flex-basis: calc(50% - 0.5rem);
+    flex-basis: calc(60% - 0.6rem);
     margin-left: 1rem;
     opacity: 1;
     transform: none;
@@ -140,8 +141,9 @@ $places-map-speed: 0.45s;
 .places-map-card-body {
   height: 100%;
   overflow-y: auto;
+  box-sizing: border-box;
   padding: 1.25rem 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   line-height: 1.5;
 
   a {
@@ -169,6 +171,25 @@ $places-map-speed: 0.45s;
   font-size: 1.15rem;
   font-weight: 600;
   margin: 0 1.5rem 0.5rem 0;
+}
+
+.places-map-card-logo {
+  display: block;
+  height: 48px;
+  width: auto;
+  margin: 0 1.5rem 0.75rem 0;
+}
+
+.places-map-card-text {
+  margin-top: 0.75rem;
+
+  p {
+    margin: 0 0 0.6rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .places-map-card-close {
@@ -228,11 +249,6 @@ $places-map-speed: 0.45s;
   }
 }
 
-.places-map-note {
-  margin-top: 0.25rem;
-  opacity: 0.85;
-}
-
 .dark .places-map .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.9);
 }
@@ -264,7 +280,6 @@ $places-map-speed: 0.45s;
 
   .has-card .places-map-card {
     flex: none;
-    max-height: 600px;
     margin-left: 0;
     margin-top: 1rem;
   }
