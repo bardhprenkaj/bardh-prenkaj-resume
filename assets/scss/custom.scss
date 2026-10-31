@@ -86,28 +86,22 @@ a:focus,
   }
 }
 
-// Places map in the Visiting Periods section (layouts/shortcodes/places_map.html)
-$places-map-height: 360px;
-$places-map-speed: 0.45s;
-
+// Places globe in the profile column (layouts/partials/places_map.html)
 .places-map-wrap {
-  display: flex;
   margin-bottom: 1.5rem;
   position: relative;
-}
 
-.places-map-pane {
-  flex: 0 0 100%;
-  min-width: 0;
-  transition: flex-basis $places-map-speed ease;
+  // While a detail bubble is open the globe stays above the grey overlay.
+  &.is-focused {
+    z-index: 1995;
+  }
 }
 
 // No box around the map: the globe sits directly on the section background.
 .places-map {
-  height: $places-map-height;
+  height: 320px;
   z-index: 0;
   background: transparent;
-  transition: height $places-map-speed ease;
 }
 
 // Visited place on the globe.
@@ -140,7 +134,7 @@ $places-map-speed: 0.45s;
   }
 }
 
-// Legend under the globe; hidden while a detail card is open.
+// Legend under the globe.
 .places-map-legend {
   position: absolute;
   left: 0;
@@ -151,66 +145,13 @@ $places-map-speed: 0.45s;
   opacity: 0.8;
 }
 
-.has-card .places-map-legend {
-  display: none;
-}
-
-// Detail card: zero width until "Check details" is pressed, then it takes the right 60%.
-.places-map-card {
-  position: relative;
-  flex: 0 0 0%;
-  min-width: 0;
-  height: $places-map-height;
-  margin-left: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateX(24px);
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-  transition: flex-basis $places-map-speed ease, margin-left $places-map-speed ease, height $places-map-speed ease,
-    transform $places-map-speed ease, opacity 0.3s ease 0.15s;
-}
-
-.has-card {
-  .places-map-pane {
-    flex-basis: calc(40% - 0.4rem);
-  }
-
-  .places-map-card {
-    flex-basis: calc(60% - 0.6rem);
-    margin-left: 1rem;
-    opacity: 1;
-    transform: none;
-  }
-}
-
+// Content of the detail bubble (logo or title, location, dates, people, text).
 .places-map-card-body {
-  height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding: 1.25rem 1.5rem;
-  font-size: 0.85rem;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  line-height: 1.55;
 
   a {
     color: $link-color;
-  }
-}
-
-.places-map-card-swap {
-  animation: places-map-card-in 0.3s ease;
-}
-
-@keyframes places-map-card-in {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-
-  to {
-    opacity: 1;
-    transform: none;
   }
 }
 
@@ -237,30 +178,6 @@ $places-map-speed: 0.45s;
   p:last-child {
     margin-bottom: 0;
   }
-}
-
-.places-map-card-close {
-  position: absolute;
-  top: 0.4rem;
-  right: 0.6rem;
-  z-index: 3; // above the card body, which can form its own layer while it animates
-  border: none;
-  background: none;
-  font-size: 1.4rem;
-  line-height: 1;
-  color: inherit;
-  opacity: 0.6;
-  cursor: pointer;
-
-  &:hover,
-  &:focus {
-    opacity: 1;
-  }
-}
-
-.dark .places-map-card {
-  background: #1f2023;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .places-map-details {
@@ -400,49 +317,6 @@ $places-map-speed: 0.45s;
   }
 }
 
-// Narrow container (phones, or the profile column): the card opens below the globe.
-// The `is-narrow` class is set by the script from the container's width.
-@mixin places-map-narrow {
-  .places-map {
-    height: 320px;
-  }
-
-  &.places-map-wrap {
-    flex-direction: column;
-  }
-
-  .places-map-pane,
-  &.has-card .places-map-pane {
-    flex: none;
-    width: 100%;
-  }
-
-  .places-map-card {
-    flex: none;
-    height: auto;
-    max-height: 0;
-    transform: translateY(-12px);
-    transition: max-height $places-map-speed ease, margin-top $places-map-speed ease,
-      transform $places-map-speed ease, opacity 0.3s ease 0.15s;
-  }
-
-  &.has-card .places-map-card {
-    flex: none;
-    margin-left: 0;
-    margin-top: 1rem;
-  }
-}
-
-.places-map-wrap.is-narrow {
-  @include places-map-narrow;
-}
-
-@media (max-width: 575px) {
-  .places-map-wrap {
-    @include places-map-narrow;
-  }
-}
-
 // Globe in the profile column, under the social links.
 .profile-globe {
   margin-top: 1rem;
@@ -455,5 +329,150 @@ $places-map-speed: 0.45s;
   .places-map-legend {
     right: 0;
     justify-content: center;
+  }
+}
+
+// Grey overlay behind the detail bubble; the globe and the bubble stay above it.
+.places-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1990;
+  background: rgba(20, 24, 31, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.2s ease;
+  }
+}
+
+// Detail bubble: a speech bubble whose tail points at the place on the globe. It sits beside
+// the place (side-right / side-left) or above / below it on narrow screens.
+.places-bubble {
+  position: absolute;
+  z-index: 2001;
+  display: none;
+  width: 460px;
+  max-width: calc(100vw - 24px);
+  color: #333;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
+
+  &.is-open {
+    display: block;
+    animation: places-bubble-in 0.25s ease-out;
+  }
+
+  &.is-closing {
+    animation: places-bubble-out 0.2s ease-in forwards;
+  }
+
+  &.side-right {
+    transform-origin: 0 50%;
+  }
+
+  &.side-left {
+    transform-origin: 100% 50%;
+  }
+
+  &.side-below {
+    transform-origin: 50% 0;
+  }
+
+  &.side-above {
+    transform-origin: 50% 100%;
+  }
+}
+
+@keyframes places-bubble-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes places-bubble-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .places-bubble.is-open,
+  .places-bubble.is-closing {
+    animation: none;
+  }
+}
+
+// Scrolls inside when the text is long, so the page does not move.
+.places-bubble-body {
+  position: relative;
+  z-index: 1;
+  max-height: unquote("min(70vh, 560px)");
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.4rem 1.6rem;
+  background: #fff;
+  border-radius: 14px;
+}
+
+.places-bubble-tail {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  transform: rotate(45deg);
+
+  .side-right & {
+    left: -9px;
+    margin-top: -10px;
+  }
+
+  .side-left & {
+    right: -9px;
+    margin-top: -10px;
+  }
+
+  .side-below & {
+    top: -9px;
+    margin-left: -10px;
+  }
+
+  .side-above & {
+    bottom: -9px;
+    margin-left: -10px;
+  }
+}
+
+.places-bubble-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  z-index: 2;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #666;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #000;
   }
 }

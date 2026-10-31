@@ -5,13 +5,13 @@
      dates, people (Markdown), people_label (default "Worked with"),
      logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
      the card title),
-     logo_height (CSS length, default 48px), card_text (Markdown; shown only in the detail card).
+     logo_height (CSS length, default 48px), card_text (Markdown; shown only in the detail bubble).
      `regions`: optional GeoJSON file in assets/. Features with
      properties.kind "visit" are filled green; "conference" ones are filled blue.
      The globe can be dragged to rotate it. Hovering a point opens its popup; clicking keeps
-     it open. "Check details" in a popup shrinks the map to the left, flies to the place and
-     slides in a card on the right. MapLibre (about 1 MB) loads only when the map is near
-     the viewport. Below 600px of width the detail card opens under the globe. */}}
+     it open. "Check details" in a popup flies to the place, dims the rest of the page and
+     opens a speech bubble whose tail points at the place; long text scrolls inside it.
+     MapLibre (about 1 MB) loads only when the map is near the viewport. */}}
 {{ $places := .places }}
 {{ $id := .id | default "places-map" }}
 {{ $points := slice }}
@@ -51,10 +51,6 @@
     <span><i class="places-map-dot places-map-dot--conference places-map-dot--static"></i>Conferences</span>
   </div>
   {{ end }}
-  <aside class="places-map-card" aria-hidden="true">
-    <button type="button" class="places-map-card-close" aria-label="Close details">×</button>
-    <div class="places-map-card-body"></div>
-  </aside>
 </div>
 <script>
   (function () {
@@ -62,16 +58,7 @@
     var regions = {{ $regions | safeJS }};
     var wrap = document.getElementById("{{ $id }}-wrap");
     var mapEl = document.getElementById("{{ $id }}");
-    var card = wrap.querySelector(".places-map-card");
-    var cardBody = wrap.querySelector(".places-map-card-body");
-    // Narrow container (phones, or a side column): the card opens below the globe.
-    var NARROW_PX = 600;
-    var phone = { get matches() { return wrap.clientWidth < NARROW_PX; } };
-    function updateNarrow() { wrap.classList.toggle("is-narrow", phone.matches); }
-    updateNarrow();
-    window.addEventListener("resize", updateNarrow);
     var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var TRANSITION_MS = 450;
     var DETAIL_ZOOM = 6;
     var OVERLAP_PX = 14;
     var GREEN = "#00a933";
@@ -145,18 +132,11 @@
       map.addControl(new maplibregl.NavigationControl({ showCompass: false }), "top-left");
       map.touchZoomRotate.disableRotation();
 
-      // Dark mode: dim and desaturate the map tiles (the regions and points keep their colors).
-      function applyTheme() {
-        var dark = document.body.classList.contains("dark");
-        map.setPaintProperty("osm", "raster-brightness-max", dark ? 0.6 : 1);
-        map.setPaintProperty("osm", "raster-saturation", dark ? -0.3 : 0);
-      }
-
       map.on("load", function () {
         if (regions) {
           map.addSource("regions", { type: "geojson", data: regions });
           // Borders are coarse (1:50m data): fade them out between zoom 3.5 and 5, so they
-          // show on the globe but not in the city view of a detail card.
+          // show on the globe but not in the city view of the detail bubble.
           var fade = function (opacity) {
             return ["interpolate", ["linear"], ["zoom"], 3.5, opacity, 5, 0];
           };
@@ -173,11 +153,9 @@
                          filter: ["==", ["get", "kind"], "conference"],
                          paint: { "line-color": BLUE, "line-opacity": fade(0.85), "line-width": 1.5 } });
         }
-        applyTheme();
         // MapLibre opens the compact credit at first; start with it collapsed.
         var attrib = mapEl.querySelector(".maplibregl-ctrl-attrib");
         if (attrib) attrib.classList.remove("maplibregl-compact-show");
-        new MutationObserver(applyTheme).observe(document.body, { attributes: true, attributeFilter: ["class"] });
       });
 
       var markers = places.map(function (p) {
@@ -188,106 +166,112 @@
           .addTo(map);
       });
 
-      // ---- Detail card ----------------------------------------------------------------
+      // ---- Detail bubble --------------------------------------------------------------
+      // "Check details" flies to the place, dims the page with a grey overlay (the globe stays
+      // above it) and opens a speech bubble whose tail points at the place. The bubble is
+      // attached to <body>, follows the place while the globe moves, and scrolls inside when
+      // its text is long. It opens beside the place on wide screens and above or below it on
+      // narrow ones. ×, a click on the overlay or Escape closes it and flies back to the globe.
 
       var current = -1;
-      var baseHeight = mapEl.offsetHeight;
-
-      // Height the card text needs at the card body's current width, read with height
-      // "auto" so the card's current (possibly mid-transition) height does not count.
-      function contentHeight() {
-        cardBody.style.height = "auto";
-        var h = cardBody.offsetHeight;
-        cardBody.style.height = "";
-        return h;
-      }
-
-      // Wide screens: the card body gets its final width up front (no reflow while the card
-      // slides in) and the map and card grow together to the height the text needs.
-      // Phones: the card opens below the map at the height its text needs.
-      function sizeCard() {
-        if (phone.matches) {
-          cardBody.style.width = "";
-          mapEl.style.height = "";
-          card.style.height = "";
-          card.style.maxHeight = contentHeight() + "px";
-          return;
-        }
-        card.style.maxHeight = "";
-        cardBody.style.width = (wrap.clientWidth - 16) * 0.6 + "px";
-        var height = Math.max(baseHeight, contentHeight());
-        mapEl.style.height = height + "px";
-        card.style.height = height + "px";
-      }
-
-      function resetSize() {
-        cardBody.style.width = "";
-        mapEl.style.height = "";
-        card.style.height = "";
-        card.style.maxHeight = "";
-      }
-
-      window.addEventListener("resize", function () {
-        if (current < 0) baseHeight = mapEl.offsetHeight;
-        else sizeCard();
-      });
-
-      // Keep the map's canvas in step with the CSS size transition, then run `done`.
-      function followResize(done) {
-        var start = performance.now();
-        (function frame(now) {
-          map.resize();
-          if (!reduceMotion && now - start < TRANSITION_MS) requestAnimationFrame(frame);
-          else done();
-        })(start);
-      }
+      var overlay = document.createElement("div");
+      overlay.className = "places-overlay";
+      document.body.appendChild(overlay);
+      var bubble = document.createElement("div");
+      bubble.className = "places-bubble";
+      bubble.setAttribute("role", "dialog");
+      bubble.setAttribute("aria-modal", "true");
+      bubble.innerHTML = '<button type="button" class="places-bubble-close" aria-label="Close details">×</button>' +
+                         '<div class="places-bubble-body places-map-card-body"></div><div class="places-bubble-tail"></div>';
+      document.body.appendChild(bubble);
+      var bubbleBody = bubble.querySelector(".places-bubble-body");
+      var bubbleTail = bubble.querySelector(".places-bubble-tail");
+      var BUBBLE_GAP = 18;     // px between the place and the bubble's tail
+      var BUBBLE_MARGIN = 12;  // px kept free at the window edges
+      var FADE_MS = 200;       // must match the overlay/bubble transitions in custom.scss
+      var bubbleTimer = null;
 
       function fly(options) {
         map.flyTo(Object.assign({ duration: reduceMotion ? 0 : 1800, essential: true }, options));
       }
 
-      function openCard(k) {
-        var wasOpen = wrap.classList.contains("has-card");
+      function placeBubble() {
+        if (current < 0 || !bubble.classList.contains("is-open")) return;
+        var box = mapEl.getBoundingClientRect();
+        var pt = map.project(markers[current].getLngLat());
+        var x = box.left + pt.x;            // viewport coordinates of the place
+        var y = box.top + pt.y;
+        var vw = document.documentElement.clientWidth;
+        var vh = window.innerHeight;
+        var w = bubble.offsetWidth;
+        var h = bubble.offsetHeight;
+        var side, left, top;
+        if (vw >= 720 && x + BUBBLE_GAP + w <= vw - BUBBLE_MARGIN) side = "right";
+        else if (vw >= 720 && x - BUBBLE_GAP - w >= BUBBLE_MARGIN) side = "left";
+        else if (y + BUBBLE_GAP + h <= vh - BUBBLE_MARGIN || y < vh / 2) side = "below";
+        else side = "above";
+        if (side === "right" || side === "left") {
+          left = side === "right" ? x + BUBBLE_GAP : x - BUBBLE_GAP - w;
+          top = Math.min(Math.max(y - h / 2, BUBBLE_MARGIN), Math.max(vh - BUBBLE_MARGIN - h, BUBBLE_MARGIN));
+          bubbleTail.style.left = "";
+          bubbleTail.style.top = Math.min(Math.max(y - top, 22), h - 22) + "px";
+        } else {
+          left = Math.min(Math.max(x - w / 2, BUBBLE_MARGIN), vw - w - BUBBLE_MARGIN);
+          top = side === "below" ? y + BUBBLE_GAP : y - BUBBLE_GAP - h;
+          bubbleTail.style.top = "";
+          bubbleTail.style.left = Math.min(Math.max(x - left, 22), w - 22) + "px";
+        }
+        bubble.className = bubble.className.replace(/\bside-\w+/g, "").trim() + " side-" + side;
+        bubble.style.left = left + window.pageXOffset + "px";
+        bubble.style.top = top + window.pageYOffset + "px";
+      }
+
+      function openDetails(k) {
         current = k;
         markers.forEach(function (m, i) {
           m.getElement().classList.toggle("is-selected", i === k);
         });
-        cardBody.innerHTML = places[k].card;
-        card.setAttribute("aria-hidden", "false");
-        cardBody.classList.remove("places-map-card-swap");
-        if (wasOpen) {
-          // Restart the fade-in when switching from one place to another.
-          void cardBody.offsetWidth;
-          cardBody.classList.add("places-map-card-swap");
-        }
-        wrap.classList.add("has-card");
-        sizeCard();
-        followResize(function () {
-          // Grow further if the text still overflows (e.g. a web font finished loading).
-          if (!phone.matches && cardBody.scrollHeight > cardBody.clientHeight + 1) {
-            var h = card.offsetHeight + cardBody.scrollHeight - cardBody.clientHeight;
-            mapEl.style.height = h + "px";
-            card.style.height = h + "px";
-            map.resize();
-          }
-          fly({ center: [places[k].lng, places[k].lat], zoom: Math.max(map.getZoom(), DETAIL_ZOOM) });
-        });
+        clearTimeout(bubbleTimer);
+        bubble.classList.remove("is-open", "is-closing");
+        wrap.classList.add("is-focused");
+        overlay.classList.add("is-open");
+        bubbleBody.innerHTML = places[k].card;
+        bubbleBody.scrollTop = 0;
+        var show = function () {
+          if (current !== k || bubble.classList.contains("is-open")) return;
+          void bubble.offsetWidth;   // restart the opening animation
+          bubble.classList.add("is-open");
+          placeBubble();
+          bubble.querySelector(".places-bubble-close").focus({ preventScroll: true });
+        };
+        // Open the bubble once the globe has arrived at the place.
+        map.once("moveend", show);
+        fly({ center: [places[k].lng, places[k].lat], zoom: Math.max(map.getZoom(), DETAIL_ZOOM) });
+        if (reduceMotion) show();
       }
 
-      function closeCard() {
-        if (!wrap.classList.contains("has-card")) return;
+      function closeDetails() {
+        if (current < 0) return;
         current = -1;
         markers.forEach(function (m) { m.getElement().classList.remove("is-selected"); });
-        wrap.classList.remove("has-card");
-        card.setAttribute("aria-hidden", "true");
-        resetSize();
-        followResize(function () { fly(HOME); });
+        bubble.classList.add("is-closing");
+        overlay.classList.remove("is-open");
+        clearTimeout(bubbleTimer);
+        bubbleTimer = setTimeout(function () {
+          bubble.classList.remove("is-open", "is-closing");
+          wrap.classList.remove("is-focused");
+        }, reduceMotion ? 0 : FADE_MS);
+        fly(HOME);
       }
 
-      wrap.querySelector(".places-map-card-close").addEventListener("click", closeCard);
+      bubble.querySelector(".places-bubble-close").addEventListener("click", closeDetails);
+      overlay.addEventListener("click", closeDetails);
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeCard();
+        if (e.key === "Escape") closeDetails();
       });
+      map.on("move", placeBubble);
+      window.addEventListener("scroll", placeBubble, { passive: true });
+      window.addEventListener("resize", placeBubble);
 
       // ---- Popups ---------------------------------------------------------------------
       // Hovering a point opens its popup; it closes shortly after the pointer leaves both the
@@ -394,7 +378,7 @@
         if (link) {
           ev.preventDefault();
           hidePopup();
-          openCard(+link.dataset.index);
+          openDetails(+link.dataset.index);
           return;
         }
         if (ev.target.closest(".places-popup-close")) {

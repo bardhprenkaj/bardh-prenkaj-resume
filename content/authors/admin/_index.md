@@ -24,9 +24,6 @@ social:
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/prenkaj-bardh/
-organizations:
-  - name: Technical University of Munich
-    url: https://www.gov.sot.tum.de/rds/overview/
 education:
   courses:
     - course: PhD in Computer Science
