@@ -679,6 +679,12 @@ a:focus,
 }
 
 
+.paper-modal-hint {
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+
 .paper-modal-close {
   flex: none;
   border: none;
@@ -725,20 +731,15 @@ a:focus,
   min-width: 0;
 }
 
-// Line up title, venue, PDF and notes across the papers of one row, whatever the title length.
+// Line up venue, snapshot and notes across the papers of one row.
 @supports (grid-template-rows: subgrid) {
   .paper-col {
     display: grid;
-    grid-row: span 4;
+    grid-row: span 3;
     grid-template-rows: subgrid;
     row-gap: 0;
     align-content: start;
   }
-}
-
-.paper-col-title {
-  font-weight: 600;
-  line-height: 1.35;
 }
 
 .paper-col-meta {

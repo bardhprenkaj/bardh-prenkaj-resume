@@ -1,9 +1,9 @@
 {{/* "My Top Papers" popup (data/featured_papers.yaml, at most 5 papers).
      The button is rendered next to the "Biography" heading by layouts/partials/widgets/about.html
      (class "top-papers-button"). It opens a popup over a grey overlay with the papers side by side:
-     for each, title and venue, a zoomed snapshot of the top of the first PDF page rendered by
-     pdf.js (pdf.js loads only on first use; the snapshot links to the full PDF), the summary
-     and "Why I recommend it".
+     for each, venue, a zoomed snapshot of the top of the first PDF page rendered by
+     pdf.js (pdf.js loads only on first use; the snapshot links to the full PDF),
+     "Why I recommend it" and a link to the paper page.
      4 columns on wide screens, 2 on medium, 1 (stacked) on phones. */}}
 {{ $papers := first 5 (site.Data.featured_papers.papers | default slice) }}
 {{ with $papers }}
@@ -20,8 +20,6 @@
        "url" $page.RelPermalink
        "meta" $meta
        "pdf" (printf "https://arxiv.org/pdf/%s" $p.arxiv)
-       "abs" (printf "https://arxiv.org/abs/%s" $p.arxiv)
-       "summary" ($p.summary | markdownify)
        "why" ($p.why | markdownify)) }}
 {{ end }}
 <script>
@@ -46,19 +44,17 @@
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-label", "My top papers");
     modal.innerHTML =
-      '<div class="paper-modal-head"><div class="paper-modal-title">My Top Papers</div>' +
+      '<div class="paper-modal-head"><div class="paper-modal-title">My Top Papers ' +
+      '<span class="paper-modal-hint">(click to see arXiv)</span></div>' +
       '<button type="button" class="paper-modal-close" aria-label="Close">×</button></div>' +
       '<div class="paper-modal-scroll"><div class="paper-grid">' +
       papers.map(function (p) {
-        return '<article class="paper-col">' +
-          '<a class="paper-col-title" href="' + p.url + '">' + esc(p.title) + '</a>' +
+        return '<article class="paper-col" aria-label="' + esc(p.title) + '">' +
           '<div class="paper-col-meta">' + esc(p.meta) + '</div>' +
           '<div class="paper-pdf" data-pdf="' + p.pdf + '" aria-label="First page of the paper"></div>' +
           '<div class="paper-notes">' +
-            '<h4>Summary</h4>' + p.summary +
             '<h4>Why I recommend it</h4>' + p.why +
-            '<div class="paper-links"><a href="' + p.abs + '" target="_blank" rel="noopener">arXiv</a> · ' +
-            '<a href="' + p.pdf + '" target="_blank" rel="noopener">PDF</a></div>' +
+            '<div class="paper-links"><a href="' + p.url + '">Paper page</a></div>' +
           '</div></article>';
       }).join("") +
       '</div></div>';
