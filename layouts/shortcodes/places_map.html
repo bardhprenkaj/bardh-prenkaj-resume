@@ -1,7 +1,19 @@
 {{/* Leaflet map of the `places` list in the current page's front matter.
-     Each place needs: name, location, lat, lng. Usage: {{< places_map >}} */}}
+     Each place needs: name, location, lat, lng.
+     Optional: dates, people (Markdown), people_label (default "Worked with").
+     Hovering a point opens its popup; clicking keeps it open. Usage: {{< places_map >}} */}}
 {{ $places := .Page.Params.places }}
 {{ $id := printf "places-map-%d" .Ordinal }}
+{{ $points := slice }}
+{{ range $place := $places }}
+  {{ $html := printf "<div class=\"places-map-name\">%s</div><div class=\"places-map-meta\">%s</div>" (.name | htmlEscape) (.location | htmlEscape) }}
+  {{ with .dates }}{{ $html = printf "%s<div class=\"places-map-meta\">%s</div>" $html (. | htmlEscape) }}{{ end }}
+  {{ with .people }}
+    {{ $people := . | markdownify }}
+    {{ $html = printf "%s<div class=\"places-map-people\">%s: %s</div>" $html ($place.people_label | default "Worked with") $people }}
+  {{ end }}
+  {{ $points = $points | append (dict "lat" .lat "lng" .lng "html" $html) }}
+{{ end }}
 {{ with $places }}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
       integrity="sha512-Zcn6bjR/8RZbLEpLIeOwNtzREBAJnUKESxces60Mpoj+2okopSAcSUIUOseddDm0cxnGQzxIR7vJgsLZbdLE3w=="
@@ -12,7 +24,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
   (function () {
-    var places = {{ . | jsonify | safeJS }};
+    var places = {{ $points | jsonify | safeJS }};
     var map = L.map("{{ $id }}", { scrollWheelZoom: false, worldCopyJump: true });
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
@@ -27,11 +39,54 @@
         fillColor: "#00a933",
         fillOpacity: 1
       })
-        .bindTooltip("<strong>" + p.name + "</strong><br>" + p.location, { direction: "top", offset: [0, -6] })
+        .bindPopup(p.html, { offset: [0, -4], autoPan: false, autoPanPadding: [20, 20] })
         .addTo(map);
     });
 
-    map.fitBounds(L.featureGroup(markers).getBounds(), { padding: [30, 30] });
+    // Hover opens a popup and it closes shortly after the pointer leaves both the point and
+    // the popup (so links inside it stay clickable). A click keeps it open until closed.
+    // Only a click pans the map to fit the popup: panning on hover would move the point
+    // away from the pointer.
+    markers.forEach(function (marker) {
+      var pinned = false;
+      var timer = null;
+      function closeSoon() {
+        if (pinned) return;
+        clearTimeout(timer);
+        timer = setTimeout(function () { marker.closePopup(); }, 300);
+      }
+      function keepOpen() {
+        clearTimeout(timer);
+      }
+      marker.on("mouseover", function () {
+        keepOpen();
+        if (!marker.isPopupOpen()) marker.openPopup();
+      });
+      marker.on("mouseout", closeSoon);
+      marker.on("click", function () {
+        var popup = marker.getPopup();
+        keepOpen();
+        if (!pinned) {
+          marker.closePopup();
+          popup.options.autoPan = true;
+          marker.openPopup();
+          popup.options.autoPan = false;
+        }
+        pinned = true;
+      });
+      marker.on("popupopen", function (e) {
+        var el = e.popup.getElement();
+        el.addEventListener("mouseenter", keepOpen);
+        el.addEventListener("mouseleave", closeSoon);
+      });
+      marker.on("popupclose", function () {
+        pinned = false;
+        keepOpen();
+      });
+    });
+
+    // Leave room above and beside the outermost points so hover popups fit inside the map.
+    map.fitBounds(L.featureGroup(markers).getBounds(), { paddingTopLeft: [130, 130], paddingBottomRight: [130, 20] });
   })();
 </script>
 {{ end }}

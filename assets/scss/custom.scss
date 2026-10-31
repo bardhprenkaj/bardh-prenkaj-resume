@@ -94,6 +94,29 @@ a:focus,
   z-index: 0;
 }
 
+.places-map .leaflet-popup-content {
+  margin: 10px 14px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.places-map-name {
+  font-weight: 600;
+}
+
+.places-map-meta {
+  opacity: 0.75;
+}
+
+.places-map-people {
+  margin-top: 0.25rem;
+
+  p {
+    display: inline;
+    margin: 0;
+  }
+}
+
 .dark .places-map .leaflet-tile-pane {
   filter: invert(1) hue-rotate(180deg) brightness(0.9);
 }

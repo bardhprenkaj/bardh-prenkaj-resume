@@ -26,14 +26,21 @@ widget_id: visiting_periods
 places:
   - name: Technical University of Munich
     location: Munich, Germany
+    dates: Jun 2023 – Sep 2023
+    people: Gjergji Kasneci
     lat: 48.1497
     lng: 11.5679
   - name: George Mason University
     location: Fairfax, VA, USA
+    dates: Apr 2021 – Jun 2021
+    people: Carlotta Domeniconi and Hamed Sarvari
     lat: 38.8298
     lng: -77.3074
   - name: Massachusetts Institute of Technology
     location: Cambridge, MA, USA
+    dates: Jan 2026
+    people_label: Visited
+    people: '[Antonio Norelli](https://noranta4.com)'
     lat: 42.3601
     lng: -71.0942
   - name: University of L'Aquila
@@ -42,6 +49,8 @@ places:
     lng: 13.3527
   - name: Heimerer College
     location: Pristina, Kosovo
+    dates: May 2024 – Jun 2024
+    people: Rona Karahoda
     lat: 42.6629
     lng: 21.1655
 headless: true
