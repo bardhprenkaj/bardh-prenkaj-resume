@@ -51,10 +51,10 @@ item:
     url: ''
   - certificate_url: ''
     date_end: ''
-    date_start: '2025-08-01'
+    date_start: '2024-08-01'
     description: ''
-    organization: KDD 2025
-    organization_url: 'https://kdd2025.kdd.org/'
+    organization: KDD 2024
+    organization_url: 'https://kdd2024.kdd.org/'
     title: '🏆 Outstanding Reviewer Award'
     url: ''
   - certificate_url: ''

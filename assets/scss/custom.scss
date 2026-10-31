@@ -134,13 +134,42 @@ a:focus,
   }
 }
 
+// Badge instead of a point: blue star (spotlight paper) or trophy (reviewer award).
+// Drawn above plain points, which can share the same place.
+.places-map-dot.places-map-badge {
+  z-index: 2;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+
+  &.is-selected {
+    width: 30px;
+    height: 30px;
+  }
+
+  svg {
+    display: block;
+  }
+}
+
+.places-map-badge--static {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 0.35rem;
+  vertical-align: -2px;
+}
+
 // Legend under the globe.
 .places-map-legend {
-  position: absolute;
-  left: 0;
-  bottom: -1.6rem;
+  margin-top: 0.5rem;
   display: flex;
-  gap: 1.25rem;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
   font-size: 0.8rem;
   opacity: 0.8;
 }
@@ -322,12 +351,7 @@ a:focus,
   margin-top: 1rem;
   text-align: left;
 
-  .places-map-wrap {
-    margin-bottom: 2.5rem;
-  }
-
   .places-map-legend {
-    right: 0;
     justify-content: center;
   }
 }

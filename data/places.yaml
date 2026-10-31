@@ -1,6 +1,7 @@
 # Places on the globe in the profile column of the home page
 # (rendered by layouts/partials/places_map.html from layouts/partials/widgets/about.html).
-# Each place: name, location, lat, lng; optional kind (visit|conference), dates, people,
+# Each place: name, location, lat, lng; optional kind (visit|conference), badge (star: spotlight
+# paper; trophy: reviewer award), dates, people,
 # people_label, logo, logo_height, card_text. See the partial for details.
 places:
   - name: Technical University of Munich
@@ -71,6 +72,7 @@ places:
   # Conferences attended in person (blue points; their country, or US/Canadian state, is filled blue).
   - name: ICML 2026
     kind: conference
+    badge: trophy   # Golden Reviewer Award
     location: COEX Convention & Exhibition Center, Seoul, South Korea
     lat: 37.5116
     lng: 127.0595
@@ -131,12 +133,15 @@ places:
       - [RAZOR: Sharpening Knowledge by Cutting Bias with Unsupervised Text Rewriting](/publication/yang-2025-shortcut/)
   - name: KDD 2024
     kind: conference
+    badge: trophy   # Outstanding Reviewer Award
     location: Centre de Convencions Internacional de Barcelona (CCIB), Barcelona, Spain
     lat: 41.4106
     lng: 2.2214
     dates: Aug 2024
     logo: conf-kdd2024.jpg
     card_text: |-
+      🏆 Received the Outstanding Reviewer Award.
+
       Presented:
 
       - [Unifying Evolution, Explanation, and Discernment: A Generative Approach for Dynamic Graph Counterfactuals](/publication/prenkaj-2024-gracie/)
@@ -146,6 +151,7 @@ places:
       - [Discovering Drift Phenomena in Evolving Landscape (DELTA)](https://aiimlab.org/events/KDD_2024_Discovering_Drift_Phenomena_in_Evolving_Landscape.html)
   - name: AAAI 2024
     kind: conference
+    badge: star     # spotlight paper
     location: Vancouver Convention Centre, Vancouver, Canada
     lat: 49.2888
     lng: -123.1111

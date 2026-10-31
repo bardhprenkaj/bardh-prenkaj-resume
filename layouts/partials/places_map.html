@@ -2,6 +2,7 @@
      Call: partial "places_map.html" (dict "places" LIST "regions" "data/FILE.geojson" "id" "NAME")
      Each place needs: name, location, lat, lng.
      Optional: kind ("visit", the default, green point; or "conference", blue point),
+     badge ("star": blue star for a spotlight paper; "trophy": trophy for a reviewer award),
      dates, people (Markdown), people_label (default "Worked with"),
      logo (file in assets/media/icons/brands/: a name without extension means .svg; replaces
      the card title),
@@ -32,7 +33,7 @@
   {{ end }}
   {{ $card := printf "%s%s" $header $info }}
   {{ with .card_text }}{{ $card = printf "%s<div class=\"places-map-card-text\">%s</div>" $card (. | markdownify) }}{{ end }}
-  {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card "kind" (.kind | default "visit")) }}
+  {{ $points = $points | append (dict "lat" .lat "lng" .lng "popup" $popup "card" $card "kind" (.kind | default "visit") "badge" (.badge | default "")) }}
 {{ end }}
 {{ $regions := "null" }}
 {{ with .regions }}
@@ -49,6 +50,8 @@
   <div class="places-map-legend" aria-hidden="true">
     <span><i class="places-map-dot places-map-dot--static"></i>Visiting periods</span>
     <span><i class="places-map-dot places-map-dot--conference places-map-dot--static"></i>Conferences</span>
+    {{ if where . "badge" "star" }}<span><i class="places-map-badge places-map-badge--static">{{ partial "places_map_icon.html" "star" }}</i>Spotlight paper</span>{{ end }}
+    {{ if where . "badge" "trophy" }}<span><i class="places-map-badge places-map-badge--static">{{ partial "places_map_icon.html" "trophy" }}</i>Reviewer award</span>{{ end }}
   </div>
   {{ end }}
 </div>
@@ -62,6 +65,10 @@
     var DETAIL_ZOOM = 6;
     var OVERLAP_PX = 14;
     var GREEN = "#00a933";
+    var ICONS = {
+      star: {{ partial "places_map_icon.html" "star" | jsonify | safeJS }},
+      trophy: {{ partial "places_map_icon.html" "trophy" | jsonify | safeJS }}
+    };
     var BLUE = "#1a5fd0";
     var LIB = "https://cdnjs.cloudflare.com/ajax/libs/maplibre-gl/5.24.0/";
 
@@ -160,7 +167,13 @@
 
       var markers = places.map(function (p) {
         var el = document.createElement("div");
-        el.className = "places-map-dot" + (p.kind === "conference" ? " places-map-dot--conference" : "");
+        if (ICONS[p.badge]) {
+          // Spotlight paper (star) or reviewer award (trophy) instead of a plain point.
+          el.className = "places-map-dot places-map-badge places-map-badge--" + p.badge;
+          el.innerHTML = ICONS[p.badge];
+        } else {
+          el.className = "places-map-dot" + (p.kind === "conference" ? " places-map-dot--conference" : "");
+        }
         return new maplibregl.Marker({ element: el, opacityWhenCovered: "0" })
           .setLngLat([p.lng, p.lat])
           .addTo(map);
