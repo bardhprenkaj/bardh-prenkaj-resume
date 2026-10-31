@@ -1,3 +1,21 @@
+// Site-wide link color. Same selectors as the Wowchemy "minimal" theme rules
+// that set link colors, so specificity (and which elements are affected) is unchanged.
+$link-color: #00a933;
+
+a,
+a:hover,
+a:focus,
+.article-metadata a:hover,
+#TableOfContents li a:hover,
+.toc-top li a:hover,
+.docs-sidebar .docs-toc-item.active a,
+.docs-sidebar .docs-toc-item a.active,
+.home-section.light a,
+.dark a,
+.home-section.dark a {
+  color: $link-color;
+}
+
 // Compact Honors & Awards list (layouts/partials/widgets/accomplishments.html)
 .compact-awards {
   margin: 0;
