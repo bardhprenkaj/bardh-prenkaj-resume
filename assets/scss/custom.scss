@@ -501,3 +501,93 @@ a:focus,
     color: #000;
   }
 }
+
+// Positions section (layouts/partials/widgets/experience.html): a clean list instead of cards.
+.positions {
+  margin: 0;
+}
+
+.position {
+  display: flex;
+  gap: 1.1rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(127, 127, 127, 0.18);
+
+  &:first-child {
+    padding-top: 0.25rem;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.position-logo {
+  flex: 0 0 44px;
+
+  img {
+    display: block;
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+  }
+}
+
+.position-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.position-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.position-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.position-dates {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.position-org {
+  font-size: 0.92rem;
+  opacity: 0.85;
+}
+
+.position-desc {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.8;
+
+  p {
+    margin: 0 0 0.35rem;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .position-logo {
+    flex-basis: 32px;
+
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  .position-dates {
+    width: 100%;
+  }
+}

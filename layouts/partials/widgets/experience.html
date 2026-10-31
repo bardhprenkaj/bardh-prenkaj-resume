@@ -1,0 +1,44 @@
+{{/* Clean override of the Wowchemy experience widget: one row per position, no cards.
+     Row: logo | title, company · location, description (small) | dates.
+     Positions are listed in the order of the `experience` list in the section's front matter. */}}
+{{ $page := .page }}
+{{ $columns := $page.Params.design.columns | default "2" }}
+{{ $date_format := $page.Params.date_format | default "Jan 2006" }}
+
+<div class="col-12 {{if eq $columns "2"}}col-lg-8{{end}}">
+  {{ with $page.Content }}{{ . }}{{ end }}
+
+  {{ with $page.Params.experience }}
+  <ul class="positions list-unstyled">
+    {{ range . }}
+    <li class="position">
+      <div class="position-logo">
+        {{ with .company_logo }}
+          {{ $logo := resources.Get (printf "media/icons/brands/%s.svg" .) }}
+          {{ if not $logo }}{{ errorf "experience: logo not found at assets/media/icons/brands/%s.svg" . }}{{ end }}
+          <img src="{{ $logo.RelPermalink }}" alt="" loading="lazy">
+        {{ end }}
+      </div>
+      <div class="position-main">
+        <div class="position-head">
+          <span class="position-title">{{ .title | markdownify | emojify }}</span>
+          <span class="position-dates">
+            {{ (time .date_start) | time.Format $date_format }} –
+            {{ with .date_end }}{{ (time .) | time.Format $date_format }}{{ else }}{{ i18n "present" | default "Present" }}{{ end }}
+          </span>
+        </div>
+        <div class="position-org">
+          {{- with .company_url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end -}}
+          {{- .company | markdownify | emojify -}}
+          {{- with .company_url }}</a>{{ end -}}
+          {{- with .location }}<span class="middot-divider"></span>{{ . }}{{ end -}}
+        </div>
+        {{ with .description }}
+        <div class="position-desc">{{ . | markdownify | emojify }}</div>
+        {{ end }}
+      </div>
+    </li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>
